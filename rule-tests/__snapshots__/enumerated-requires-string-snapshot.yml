@@ -1,0 +1,106 @@
+id: enumerated-requires-string
+snapshots:
+  ? |
+    class Order {
+        @Enumerated
+        private Status status;
+    }
+  : labels:
+    - source: |-
+        @Enumerated
+            private Status status;
+      style: primary
+      start: 18
+      end: 56
+    - source: Enumerated
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@Enumerated'
+      style: secondary
+      start: 18
+      end: 29
+    - source: |-
+        @Enumerated
+            private
+      style: secondary
+      start: 18
+      end: 41
+  ? |
+    class Order {
+        @Enumerated()
+        private Status status;
+    }
+  : labels:
+    - source: |-
+        @Enumerated()
+            private Status status;
+      style: primary
+      start: 18
+      end: 58
+    - source: Enumerated
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@Enumerated()'
+      style: secondary
+      start: 18
+      end: 31
+    - source: |-
+        @Enumerated()
+            private
+      style: secondary
+      start: 18
+      end: 43
+  ? |
+    class Order {
+        @Enumerated(EnumType.ORDINAL)
+        private Status status;
+    }
+  : labels:
+    - source: |-
+        @Enumerated(EnumType.ORDINAL)
+            private Status status;
+      style: primary
+      start: 18
+      end: 74
+    - source: Enumerated
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@Enumerated(EnumType.ORDINAL)'
+      style: secondary
+      start: 18
+      end: 47
+    - source: |-
+        @Enumerated(EnumType.ORDINAL)
+            private
+      style: secondary
+      start: 18
+      end: 59
+  ? |
+    class Order {
+        @Enumerated(value = EnumType.ORDINAL)
+        private Status status;
+    }
+  : labels:
+    - source: |-
+        @Enumerated(value = EnumType.ORDINAL)
+            private Status status;
+      style: primary
+      start: 18
+      end: 82
+    - source: Enumerated
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@Enumerated(value = EnumType.ORDINAL)'
+      style: secondary
+      start: 18
+      end: 55
+    - source: |-
+        @Enumerated(value = EnumType.ORDINAL)
+            private
+      style: secondary
+      start: 18
+      end: 67

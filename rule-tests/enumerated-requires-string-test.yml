@@ -1,0 +1,37 @@
+id: enumerated-requires-string
+valid:
+  - |
+    class Order {
+        @Enumerated(EnumType.STRING)
+        private Status status;
+    }
+  - |
+    class Order {
+        @Enumerated(value = EnumType.STRING)
+        private Status status;
+    }
+  - |
+    class Order {
+        private Status status;
+    }
+invalid:
+  - |
+    class Order {
+        @Enumerated
+        private Status status;
+    }
+  - |
+    class Order {
+        @Enumerated()
+        private Status status;
+    }
+  - |
+    class Order {
+        @Enumerated(EnumType.ORDINAL)
+        private Status status;
+    }
+  - |
+    class Order {
+        @Enumerated(value = EnumType.ORDINAL)
+        private Status status;
+    }
