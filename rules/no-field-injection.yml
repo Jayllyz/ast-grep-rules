@@ -1,0 +1,27 @@
+id: no-field-injection
+language: java
+severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+message: >-
+  Field injection (@Autowired/@Inject directly on a field) hides required
+  dependencies, forces the framework's proxying to construct the object,
+  and makes the class impossible to instantiate in a plain unit test.
+  Inject via the constructor instead.
+rule:
+  kind: field_declaration
+  has:
+    kind: modifiers
+    has:
+      any:
+        - kind: marker_annotation
+          has:
+            field: name
+            regex: "^(Autowired|Inject)$"
+        - kind: annotation
+          has:
+            field: name
+            regex: "^(Autowired|Inject)$"

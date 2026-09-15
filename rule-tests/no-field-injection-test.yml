@@ -1,0 +1,35 @@
+id: no-field-injection
+valid:
+  - |
+    class FooService {
+        private final BarService bar;
+
+        FooService(BarService bar) {
+            this.bar = bar;
+        }
+    }
+  - |
+    class FooService {
+        private final BarService bar;
+
+        @Autowired
+        FooService(BarService bar) {
+            this.bar = bar;
+        }
+    }
+invalid:
+  - |
+    class FooService {
+        @Autowired
+        private BarService bar;
+    }
+  - |
+    class FooService {
+        @Inject
+        private BarService bar;
+    }
+  - |
+    class FooService {
+        @Autowired(required = false)
+        private BarService bar;
+    }

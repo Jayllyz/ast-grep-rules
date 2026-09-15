@@ -1,0 +1,80 @@
+id: no-field-injection
+snapshots:
+  ? |
+    class FooService {
+        @Autowired
+        private BarService bar;
+    }
+  : labels:
+    - source: |-
+        @Autowired
+            private BarService bar;
+      style: primary
+      start: 23
+      end: 61
+    - source: Autowired
+      style: secondary
+      start: 24
+      end: 33
+    - source: '@Autowired'
+      style: secondary
+      start: 23
+      end: 33
+    - source: |-
+        @Autowired
+            private
+      style: secondary
+      start: 23
+      end: 45
+  ? |
+    class FooService {
+        @Autowired(required = false)
+        private BarService bar;
+    }
+  : labels:
+    - source: |-
+        @Autowired(required = false)
+            private BarService bar;
+      style: primary
+      start: 23
+      end: 79
+    - source: Autowired
+      style: secondary
+      start: 24
+      end: 33
+    - source: '@Autowired(required = false)'
+      style: secondary
+      start: 23
+      end: 51
+    - source: |-
+        @Autowired(required = false)
+            private
+      style: secondary
+      start: 23
+      end: 63
+  ? |
+    class FooService {
+        @Inject
+        private BarService bar;
+    }
+  : labels:
+    - source: |-
+        @Inject
+            private BarService bar;
+      style: primary
+      start: 23
+      end: 58
+    - source: Inject
+      style: secondary
+      start: 24
+      end: 30
+    - source: '@Inject'
+      style: secondary
+      start: 23
+      end: 30
+    - source: |-
+        @Inject
+            private
+      style: secondary
+      start: 23
+      end: 42
