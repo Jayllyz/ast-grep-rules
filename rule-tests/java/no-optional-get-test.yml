@@ -18,6 +18,19 @@ valid:
             String s = map.get("key");
         }
     }
+  - |
+    class Foo {
+        void bar(CompletableFuture<String> future) {
+            String s = future.get();
+        }
+    }
+  - |
+    class Foo {
+        void bar(AtomicInteger counter, Supplier<String> supplier) {
+            int n = counter.get();
+            String s = supplier.get();
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -31,5 +44,24 @@ invalid:
             if (opt.get().isEmpty()) {
                 return;
             }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<String> names) {
+            String first = names.stream().findFirst().get();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            String s = Optional.of("x").get();
+        }
+    }
+  - |
+    class Foo {
+        private Optional<String> nameOpt;
+        String bar() {
+            return nameOpt.get();
         }
     }

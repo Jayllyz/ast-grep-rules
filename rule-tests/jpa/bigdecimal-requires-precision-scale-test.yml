@@ -1,35 +1,57 @@
 id: bigdecimal-requires-precision-scale
 valid:
   - |
+    @Entity
     class Order {
         @Column(name = "amount", precision = 12, scale = 2)
         private BigDecimal amount;
     }
   - |
+    @Entity
     class Order {
         @Column(precision = 19, scale = 4)
         private BigDecimal total;
     }
   - |
+    @Entity
     class Order {
         private Integer count;
     }
+  - |
+    class Calculator {
+        private BigDecimal amount;
+    }
+  - |
+    @Entity
+    class Order {
+        private static final BigDecimal ONE = new BigDecimal("1");
+    }
+  - |
+    @MappedSuperclass
+    class Base {
+        @Column(precision = 12, scale = 2)
+        private BigDecimal amount;
+    }
 invalid:
   - |
+    @Entity
     class Order {
         private BigDecimal amount;
     }
   - |
+    @Entity
     class Order {
         @Column(name = "amount")
         private BigDecimal amount;
     }
   - |
+    @Entity
     class Order {
         @Column(name = "amount", precision = 12)
         private BigDecimal amount;
     }
   - |
+    @Entity
     class Order {
         @Column(name = "amount", scale = 2)
         private BigDecimal amount;

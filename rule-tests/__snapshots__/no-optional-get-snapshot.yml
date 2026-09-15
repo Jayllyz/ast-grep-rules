@@ -2,6 +2,40 @@ id: no-optional-get
 snapshots:
   ? |
     class Foo {
+        private Optional<String> nameOpt;
+        String bar() {
+            return nameOpt.get();
+        }
+    }
+  : labels:
+    - source: nameOpt.get()
+      style: primary
+      start: 84
+      end: 97
+  ? |
+    class Foo {
+        void bar() {
+            String s = Optional.of("x").get();
+        }
+    }
+  : labels:
+    - source: Optional.of("x").get()
+      style: primary
+      start: 48
+      end: 70
+  ? |
+    class Foo {
+        void bar(List<String> names) {
+            String first = names.stream().findFirst().get();
+        }
+    }
+  : labels:
+    - source: names.stream().findFirst().get()
+      style: primary
+      start: 70
+      end: 102
+  ? |
+    class Foo {
         void bar(Optional<String> opt) {
             String s = opt.get();
         }

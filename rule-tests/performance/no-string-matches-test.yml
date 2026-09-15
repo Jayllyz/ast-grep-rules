@@ -18,6 +18,24 @@ valid:
             return PATTERN.matcher(s).replaceAll("x");
         }
     }
+  - |
+    class Foo {
+        boolean bar(CharMatcher matcher, char c) {
+            return matcher.matches(c);
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(Validator validator, String value) {
+            return validator.matches(value);
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s, String regex) {
+            return s.replaceAll(regex, "");
+        }
+    }
 invalid:
   - |
     class Foo {

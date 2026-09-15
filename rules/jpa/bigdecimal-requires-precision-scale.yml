@@ -1,11 +1,20 @@
 id: bigdecimal-requires-precision-scale
 language: java
 severity: error
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   BigDecimal field is missing @Column(precision = ..., scale = ...).
   Without explicit precision and scale matching the Postgres numeric(p,s)
   column, Hibernate falls back to a default scale that can silently round
-  values differently than the database.
+  values differently than the database. (Only checked on persistent
+  @Entity/@MappedSuperclass/@Embeddable fields.)
 metadata:
   category: jpa
 rule:
@@ -14,6 +23,22 @@ rule:
     - has:
         field: type
         regex: "^BigDecimal$"
+    - not:
+        has:
+          kind: modifiers
+          regex: "\\bstatic\\b"
+    - inside:
+        kind: class_declaration
+        stopBy: end
+        has:
+          kind: modifiers
+          has:
+            any:
+              - kind: marker_annotation
+              - kind: annotation
+            has:
+              field: name
+              regex: "^(Entity|MappedSuperclass|Embeddable)$"
     - not:
         has:
           kind: modifiers

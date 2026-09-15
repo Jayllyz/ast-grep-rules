@@ -18,6 +18,12 @@ valid:
             return count > 0;
         }
     }
+  - |
+    class Foo {
+        boolean bar(KafkaConsumer consumer) {
+            return consumer.count() > 0;
+        }
+    }
 invalid:
   - |
     class Foo {

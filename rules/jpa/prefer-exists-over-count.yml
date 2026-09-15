@@ -1,10 +1,19 @@
 id: prefer-exists-over-count
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   Using count(...) > 0 to test for existence runs a full COUNT(*) query
   that scans every matching row. Use exists(...) or an existsBy...
-  derived query instead; it stops at the first row.
+  derived query instead; it stops at the first row. (Only flags calls on
+  a repository-shaped receiver.)
 metadata:
   category: jpa
 rule:
@@ -15,12 +24,6 @@ rule:
     - pattern: $C.$M() > 0
     - pattern: $C.$M() != 0
     - pattern: $C.$M() >= 1
-    - pattern: $M($A) > 0
-    - pattern: $M($A) != 0
-    - pattern: $M($A) >= 1
-    - pattern: $M() > 0
-    - pattern: $M() != 0
-    - pattern: $M() >= 1
     - pattern: 0 < $C.$M($A)
     - pattern: 0 != $C.$M($A)
     - pattern: 1 <= $C.$M($A)
@@ -30,3 +33,5 @@ rule:
 constraints:
   M:
     regex: "^count(By.*)?$"
+  C:
+    regex: "(?i).*(repository|repo|dao)$"

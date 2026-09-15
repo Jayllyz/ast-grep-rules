@@ -21,6 +21,22 @@ valid:
             orders.forEach(repository::save);
         }
     }
+  - |
+    class Foo {
+        void bar(List<Entry> entries) {
+            for (Entry entry : entries) {
+                map.merge(entry.key(), entry.value());
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Order> orders) {
+            for (Order order : orders) {
+                orderCache.put(order.id(), order);
+            }
+        }
+    }
 invalid:
   - |
     class Foo {

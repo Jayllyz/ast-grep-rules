@@ -27,6 +27,42 @@ valid:
         // noinspection unchecked
         void raw() {}
     }
+  - |
+    class Foo {
+        /** Returns the login name. */
+        String getLogin() {
+            return login;
+        }
+    }
+  - |
+    class Foo {
+        // Iterate over the labels in reverse order (from top level domain to the left).
+        for (String label : labels) {
+            process(label);
+        }
+    }
+  - |
+    class Foo {
+        // Returns the cached value when present, otherwise recomputes it.
+        long value() {
+            return 0;
+        }
+    }
+  - |
+    class Foo {
+        // add a random number to avoid collisions with OrPredicate
+        int salt = random();
+    }
+  - |
+    class Foo {
+        // Remove the group from the map as it is empty.
+        groups.remove(group);
+    }
+  - |
+    class Foo {
+        // update the cached data based on the incoming request
+        cache.update(request);
+    }
 invalid:
   - |
     class Foo {
@@ -42,11 +78,6 @@ invalid:
     class Foo {
         // Set the name to the user's name
         this.name = user.name();
-    }
-  - |
-    class Foo {
-        /** Validates the input. */
-        void validate(String s) {}
     }
   - |
     class Foo {

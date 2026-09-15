@@ -23,6 +23,30 @@ valid:
             return orderRepository.findByUser(user);
         }
     }
+  - |
+    class Foo {
+        void bar(List<String> ips) {
+            for (String ip : ips) {
+                InetAddress.getByName(ip);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<String> strings) {
+            for (String s : strings) {
+                s.getBytes(UTF_8);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orders.findByStatus(id);
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -36,7 +60,7 @@ invalid:
     class Foo {
         void bar(List<Long> ids) {
             for (Long id : ids) {
-                orders.findByStatus(id);
+                orderRepository.findByStatus(id);
             }
         }
     }

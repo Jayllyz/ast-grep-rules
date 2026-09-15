@@ -1,6 +1,14 @@
 id: no-save-in-loop
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   Saving one entity per loop iteration issues an INSERT/UPDATE per row.
   Batch the writes with saveAll(...) or enable JDBC batching, otherwise
@@ -20,3 +28,6 @@ rule:
       - kind: while_statement
       - kind: do_statement
     stopBy: end
+constraints:
+  R:
+    regex: "(?i)(.*(repository|repo|dao|entitymanager)$|(^|\\.)em$)"

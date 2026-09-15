@@ -1,14 +1,40 @@
 id: no-new-string
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
-  new String(...) eagerly copies its argument, and new String("...") is a
-  pointless duplicate of an interned literal. Use the literal/argument
-  directly, or String.valueOf() when a conversion is actually needed.
+  new String("...") creates a second copy of an already-interned literal,
+  so == comparisons silently break and a duplicate is allocated. Use the
+  literal directly. (Decoding constructors like new String(bytes, UTF_8)
+  are not flagged.)
 metadata:
   category: java
 rule:
   kind: object_creation_expression
-  has:
-    field: type
-    regex: "(^|\\.)String$"
+  all:
+    - has:
+        field: type
+        regex: "(^|\\.)String$"
+    - has:
+        field: arguments
+        kind: argument_list
+        all:
+          - has:
+              kind: string_literal
+          - not:
+              has:
+                any:
+                  - kind: identifier
+                  - kind: field_access
+                  - kind: method_invocation
+                  - kind: binary_expression
+                  - kind: array_access
+                  - kind: object_creation_expression
+                  - kind: array_creation_expression

@@ -15,6 +15,10 @@ snapshots:
       style: secondary
       start: 59
       end: 69
+    - source: ex
+      style: secondary
+      start: 72
+      end: 74
     - source: '"failed: " + ex.getMessage()'
       style: secondary
       start: 59
@@ -38,6 +42,10 @@ snapshots:
       style: secondary
       start: 59
       end: 67
+    - source: value
+      style: secondary
+      start: 70
+      end: 75
     - source: '"value=" + value'
       style: secondary
       start: 59
@@ -61,6 +69,10 @@ snapshots:
       style: secondary
       start: 58
       end: 66
+    - source: count
+      style: secondary
+      start: 69
+      end: 74
     - source: '"count=" + count'
       style: secondary
       start: 58
@@ -84,6 +96,10 @@ snapshots:
       style: secondary
       start: 58
       end: 62
+    - source: x
+      style: secondary
+      start: 65
+      end: 66
     - source: '"x=" + x + " y=" + y'
       style: secondary
       start: 58
@@ -107,6 +123,10 @@ snapshots:
       style: secondary
       start: 54
       end: 59
+    - source: id
+      style: secondary
+      start: 62
+      end: 64
     - source: '"id=" + id'
       style: secondary
       start: 54

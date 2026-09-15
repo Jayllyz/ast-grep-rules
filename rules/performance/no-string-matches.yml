@@ -5,7 +5,8 @@ message: >-
   String.matches/replaceAll/replaceFirst/split compile the regex on every
   call. In a hot path, hoist the pattern into a static final Pattern and
   reuse it: PATTERN.matcher(s).matches() or PATTERN.split(s). (Heuristic:
-  flags calls by name, so it may fire on a non-String receiver.)
+  only flags calls whose regex argument is a string literal, so non-String
+  receivers like CharMatcher.matches(...) are not reported.)
 metadata:
   category: performance
 rule:
@@ -14,3 +15,8 @@ rule:
     - pattern: $S.replaceAll($A, $B)
     - pattern: $S.replaceFirst($A, $B)
     - pattern: $S.split($R)
+constraints:
+  R:
+    kind: string_literal
+  A:
+    kind: string_literal

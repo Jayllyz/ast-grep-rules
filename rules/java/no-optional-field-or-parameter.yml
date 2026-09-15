@@ -1,6 +1,14 @@
 id: no-optional-field-or-parameter
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   Optional should only be used as a method return type, not as a field or
   parameter type. It isn't Serializable, and using it here just pushes an
@@ -11,12 +19,20 @@ message: >-
 metadata:
   category: java
 rule:
-  pattern:
-    context: "Optional<$TYPE> x;"
-    selector: generic_type
-  inside:
-    any:
-      - kind: field_declaration
-      - kind: formal_parameter
-    stopBy: end
+  all:
+    - pattern:
+        context: "Optional<$TYPE> x;"
+        selector: generic_type
+    - inside:
+        any:
+          - kind: field_declaration
+          - kind: formal_parameter
+        stopBy: end
+    - not:
+        inside:
+          kind: class_declaration
+          stopBy: end
+          has:
+            field: name
+            regex: "^(Optional|Present|Absent)$"
 fix: "$TYPE"

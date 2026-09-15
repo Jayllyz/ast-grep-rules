@@ -1,6 +1,14 @@
 id: obvious-comment
 language: java
 severity: hint
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   Obvious comment — remove it, the code should speak for itself. Comments
   should explain WHY or document non-obvious constraints, not restate WHAT.
@@ -9,7 +17,17 @@ metadata:
   category: java
 rule:
   any:
-    - kind: line_comment
-      regex: "(?i)^//\\s*(?:initialize|create|set\\s?up|handle|process|check\\s+(?:if|whether)|validate|update|return|gets?|store|add|increment|decrement|define|declare|assign|call|invoke|loop\\s+(?:through|over)|iterate\\s+(?:through|over)|import|export|render|fetch|send|remove|delete|destroy|free|reset|clear|toggle|convert|parse|format|calculate|compute|extract|merge|sort|filter|map|transform|append|prepend|push|pop|insert|set\\s+(?:the|\\w+\\s+to)|allocate|malloc|realloc)\\w*"
-    - kind: block_comment
-      regex: "(?i)^/\\*+\\s*(?:initialize|create|set\\s?up|handle|process|check\\s+(?:if|whether)|validate|update|return|gets?|store|add|increment|decrement|define|declare|assign|call|invoke|loop\\s+(?:through|over)|iterate\\s+(?:through|over)|import|export|render|fetch|send|remove|delete|destroy|free|reset|clear|toggle|convert|parse|format|calculate|compute|extract|merge|sort|filter|map|transform|append|prepend|push|pop|insert|set\\s+(?:the|\\w+\\s+to)|allocate|malloc|realloc)\\w*"
+    - all:
+        - kind: line_comment
+        - regex: "(?i)^//\\s*(?:initialize|create|set\\s?up|handle|process|check\\s+(?:if|whether)|validate|update|return|gets?|store|add|increment|decrement|define|declare|assign|call|invoke|loop\\s+(?:through|over)|iterate\\s+(?:through|over)|import|export|render|fetch|send|remove|delete|destroy|free|reset|clear|toggle|convert|parse|format|calculate|compute|extract|merge|sort|filter|map|transform|append|prepend|push|pop|insert|set\\s+(?:the|\\w+\\s+to)|allocate|malloc|realloc)\\b"
+        - not:
+            regex: "(?i).*\\b(to avoid|to prevent|to ensure|in order to|based on|because|since|as it|so that|if\\b.*\\bis\\b|when\\b.*\\bis\\b)"
+        - regex: "^.{0,60}$"
+    - all:
+        - kind: block_comment
+        - not:
+            regex: "^/\\*\\*"
+        - regex: "(?i)^/\\*+\\s*(?:initialize|create|set\\s?up|handle|process|check\\s+(?:if|whether)|validate|update|return|gets?|store|add|increment|decrement|define|declare|assign|call|invoke|loop\\s+(?:through|over)|iterate\\s+(?:through|over)|import|export|render|fetch|send|remove|delete|destroy|free|reset|clear|toggle|convert|parse|format|calculate|compute|extract|merge|sort|filter|map|transform|append|prepend|push|pop|insert|set\\s+(?:the|\\w+\\s+to)|allocate|malloc|realloc)\\b"
+        - not:
+            regex: "(?i).*\\b(to avoid|to prevent|to ensure|in order to|based on|because|since|as it|so that)"
+        - regex: "^.{0,80}$"

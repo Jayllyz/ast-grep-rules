@@ -15,6 +15,14 @@ snapshots:
       style: secondary
       start: 52
       end: 58
+    - source: '"hello"'
+      style: secondary
+      start: 59
+      end: 66
+    - source: ("hello")
+      style: secondary
+      start: 58
+      end: 67
   ? |
     class Foo {
         void bar() {
@@ -30,6 +38,14 @@ snapshots:
       style: secondary
       start: 52
       end: 68
+    - source: '"hello"'
+      style: secondary
+      start: 69
+      end: 76
+    - source: ("hello")
+      style: secondary
+      start: 68
+      end: 77
   ? |
     class Foo {
         void bar(byte[] bytes) {

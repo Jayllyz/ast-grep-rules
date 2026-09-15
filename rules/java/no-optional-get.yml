@@ -1,11 +1,26 @@
 id: no-optional-get
 language: java
 severity: hint
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   Optional.get() throws NoSuchElementException when empty and says nothing
   about why. Prefer orElseThrow(...) to name the failure, or orElse(...)
-  for a default. (Heuristic: flags any no-argument get() call.)
+  for a default. (Heuristic: only flags receivers whose name suggests an
+  Optional, or an Optional-returning stream terminal like findFirst().get().)
 metadata:
   category: java
 rule:
   pattern: $OPT.get()
+constraints:
+  OPT:
+    any:
+      - regex: "(?i).*(optional|opt|maybe)$"
+      - regex: "\\.(findFirst|findAny|reduce|max|min|or)\\(\\)$"
+      - regex: "^Optional\\..*$"

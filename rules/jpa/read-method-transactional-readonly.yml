@@ -1,6 +1,14 @@
 id: read-method-transactional-readonly
 language: java
 severity: hint
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
 message: >-
   A read-style @Transactional method without readOnly = true still pays for
   dirty checking and flush bookkeeping. Set readOnly = true so the provider

@@ -5,7 +5,8 @@ message: >-
   Concatenating arguments into a log message builds the string on every
   call, even when that log level is disabled. Use the parameterized form
   log.debug("value={}", value) so the framework skips formatting entirely
-  when the level is off.
+  when the level is off. (Concatenations of string literals only are
+  compile-time constants and are not flagged.)
 metadata:
   category: performance
 rule:
@@ -19,7 +20,22 @@ rule:
     field: arguments
     has:
       kind: binary_expression
-      has:
-        kind: string_literal
-        stopBy: end
+      all:
+        - has:
+            kind: string_literal
+            stopBy: end
+        - any:
+            - has:
+                kind: identifier
+                stopBy: end
+            - has:
+                kind: method_invocation
+                stopBy: end
+            - has:
+                kind: field_access
+                stopBy: end
+            - has:
+                kind: array_access
+                stopBy: end
+      stopBy: end
     stopBy: end

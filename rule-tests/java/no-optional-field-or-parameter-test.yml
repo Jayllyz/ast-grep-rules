@@ -16,6 +16,17 @@ valid:
             Optional<String> local = Optional.empty();
         }
     }
+  - |
+    final class Present<T> {
+        private final Optional<T> reference;
+        Present(Optional<T> reference) {
+            this.reference = reference;
+        }
+    }
+  - |
+    final class Absent<T> {
+        static final Absent<Object> INSTANCE = new Absent<>();
+    }
 invalid:
   - |
     class Foo {

@@ -60,6 +60,34 @@ snapshots:
     class Foo {
         void bar(List<Long> ids) {
             for (Long id : ids) {
+                orderRepository.findByStatus(id);
+            }
+        }
+    }
+  : labels:
+    - source: orderRepository.findByStatus(id)
+      style: primary
+      start: 85
+      end: 117
+    - source: findByStatus
+      style: secondary
+      start: 101
+      end: 113
+    - source: |-
+        for (Long id : ids) {
+                    orderRepository.findByStatus(id);
+                }
+      style: secondary
+      start: 51
+      end: 128
+    - source: orderRepository
+      style: secondary
+      start: 85
+      end: 100
+  ? |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
                 orders.findByStatus(id);
             }
         }

@@ -30,6 +30,20 @@ valid:
             System.out.println("value=" + value);
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            log.warn("{} Skipping check. "
+                + "Set the flag to enable it.");
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            log.error("misconfigured: "
+                + "it should not run with this profile");
+        }
+    }
 invalid:
   - |
     class Foo {
