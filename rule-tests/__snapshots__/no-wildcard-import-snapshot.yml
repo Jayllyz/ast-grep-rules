@@ -1,0 +1,26 @@
+id: no-wildcard-import
+snapshots:
+  ? |
+    import java.util.*;
+    class Foo {}
+  : labels:
+    - source: import java.util.*;
+      style: primary
+      start: 0
+      end: 19
+    - source: '*'
+      style: secondary
+      start: 17
+      end: 18
+  ? |
+    import static java.util.Collections.*;
+    class Foo {}
+  : labels:
+    - source: import static java.util.Collections.*;
+      style: primary
+      start: 0
+      end: 38
+    - source: '*'
+      style: secondary
+      start: 36
+      end: 37

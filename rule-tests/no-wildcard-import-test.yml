@@ -1,0 +1,16 @@
+id: no-wildcard-import
+valid:
+  - |
+    import java.util.List;
+    class Foo {}
+  - |
+    import java.util.List;
+    import java.util.Map;
+    class Foo {}
+invalid:
+  - |
+    import java.util.*;
+    class Foo {}
+  - |
+    import static java.util.Collections.*;
+    class Foo {}
