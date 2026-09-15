@@ -5,10 +5,14 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
   - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   BigDecimal field is missing @Column(precision = ..., scale = ...).
   Without explicit precision and scale matching the Postgres numeric(p,s)

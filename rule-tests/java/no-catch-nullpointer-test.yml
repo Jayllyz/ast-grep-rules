@@ -20,6 +20,15 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (NullPointerException expected) {
+            }
+        }
+    }
 invalid:
   - |
     class Foo {

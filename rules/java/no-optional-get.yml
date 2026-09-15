@@ -5,10 +5,14 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
   - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Optional.get() throws NoSuchElementException when empty and says nothing
   about why. Prefer orElseThrow(...) to name the failure, or orElse(...)

@@ -5,10 +5,14 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
   - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Using count(...) > 0 to test for existence runs a full COUNT(*) query
   that scans every matching row. Use exists(...) or an existsBy...

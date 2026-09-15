@@ -5,10 +5,14 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
   - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Saving one entity per loop iteration issues an INSERT/UPDATE per row.
   Batch the writes with saveAll(...) or enable JDBC batching, otherwise

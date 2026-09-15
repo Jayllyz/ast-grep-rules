@@ -5,6 +5,7 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
   - "**/jmh-benchmarks/**"
   - "**/*testlib*/**"
   - "**/*Test.java"
@@ -15,14 +16,22 @@ ignores:
 message: >-
   Catching NullPointerException hides the defect that produced the null and
   can leave partially updated state behind. Find and fix the null source,
-  or validate before dereferencing, rather than handling the NPE.
+  or validate before dereferencing, rather than handling the NPE. (A catch
+  parameter named expected/ignored/ok/tolerated is treated as intentional.)
 metadata:
   category: java
 rule:
   kind: catch_clause
-  has:
-    kind: catch_formal_parameter
-    has:
-      kind: type_identifier
-      regex: "(^|\\.)NullPointerException$"
-      stopBy: end
+  all:
+    - has:
+        kind: catch_formal_parameter
+        has:
+          kind: type_identifier
+          regex: "(^|\\.)NullPointerException$"
+          stopBy: end
+    - not:
+        has:
+          kind: catch_formal_parameter
+          has:
+            field: name
+            regex: "(?i)^(expected|ignored|ignore|ok|tolerated)$"

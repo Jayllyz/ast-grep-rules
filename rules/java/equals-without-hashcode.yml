@@ -5,6 +5,7 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
   - "**/jmh-benchmarks/**"
   - "**/*testlib*/**"
   - "**/*Test.java"

@@ -5,10 +5,14 @@ ignores:
   - "**/src/test/**"
   - "**/src/testFixtures/**"
   - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
   - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   A read-style @Transactional method without readOnly = true still pays for
   dirty checking and flush bookkeeping. Set readOnly = true so the provider

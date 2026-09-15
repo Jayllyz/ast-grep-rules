@@ -1,22 +1,12 @@
 id: no-finalize-method
 language: java
 severity: warning
-ignores:
-  - "**/src/test/**"
-  - "**/src/testFixtures/**"
-  - "**/src/tests/**"
-  - "**/jmh-benchmarks/**"
-  - "**/*testlib*/**"
-  - "**/*Test.java"
-  - "**/*Tests.java"
-  - "**/*IT.java"
-  - "**/*ITCase.java"
-  - "**/*Benchmark.java"
 message: >-
   Object.finalize() is deprecated for removal: it may run long after the
   object is unreachable, or never at all, and exceptions thrown from it
   are ignored. Move cleanup to an explicit close(), try-with-resources or
-  a Cleaner.
+  a Cleaner. (A method that opts in to the removal warning via
+  @SuppressWarnings({"removal", "Finalize"|"deprecation"}) is left alone.)
 metadata:
   category: java
 rule:
@@ -32,3 +22,14 @@ rule:
             any:
               - kind: formal_parameter
               - kind: spread_parameter
+    - not:
+        has:
+          kind: modifiers
+          has:
+            kind: annotation
+            has:
+              field: arguments
+              has:
+                kind: string_literal
+                regex: "Finalize|deprecation|removal"
+                stopBy: end

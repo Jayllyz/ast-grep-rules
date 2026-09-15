@@ -15,6 +15,14 @@ valid:
         void finalize(String... args) {
         }
     }
+  - |
+    class Foo {
+        @SuppressWarnings({"removal", "Finalize"})
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+        }
+    }
 invalid:
   - |
     class Foo {

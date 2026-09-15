@@ -35,6 +35,24 @@ valid:
             } catch (NullPointerException expected) {}
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (NullPointerException optional) {}
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+                // best-effort cleanup; nothing actionable here
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
