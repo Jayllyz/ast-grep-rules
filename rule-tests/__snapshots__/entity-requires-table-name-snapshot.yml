@@ -2,6 +2,70 @@ id: entity-requires-table-name
 snapshots:
   ? |
     @Entity
+    @Table()
+    class EmptyTableAnnotation {
+        @Id
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Entity
+        @Table()
+        class EmptyTableAnnotation {
+            @Id
+            private Long id;
+        }
+      style: primary
+      start: 0
+      end: 76
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        @Table()
+      style: secondary
+      start: 0
+      end: 16
+  ? |
+    @Entity
+    @Table(schema = "public")
+    class TableMissingName {
+        @Id
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Entity
+        @Table(schema = "public")
+        class TableMissingName {
+            @Id
+            private Long id;
+        }
+      style: primary
+      start: 0
+      end: 89
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        @Table(schema = "public")
+      style: secondary
+      start: 0
+      end: 33
+  ? |
+    @Entity
     class MissingTableName {
         @Id
         private Long id;

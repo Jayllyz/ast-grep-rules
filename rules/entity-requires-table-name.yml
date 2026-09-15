@@ -21,6 +21,14 @@ rule:
           kind: modifiers
           has:
             kind: annotation
-            has:
-              field: name
-              regex: "^Table$"
+            all:
+              - has:
+                  field: name
+                  regex: "^Table$"
+              - has:
+                  field: arguments
+                  has:
+                    kind: element_value_pair
+                    has:
+                      field: key
+                      regex: "^name$"

@@ -18,3 +18,17 @@ invalid:
         @Id
         private Long id;
     }
+  - |
+    @Entity
+    @Table()
+    class EmptyTableAnnotation {
+        @Id
+        private Long id;
+    }
+  - |
+    @Entity
+    @Table(schema = "public")
+    class TableMissingName {
+        @Id
+        private Long id;
+    }
