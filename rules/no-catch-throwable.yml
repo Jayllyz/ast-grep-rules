@@ -10,4 +10,4 @@ rule:
   kind: catch_formal_parameter
   has:
     kind: catch_type
-    regex: "^(Throwable|Error)$"
+    regex: "\\b(Throwable|Error)\\b"

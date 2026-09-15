@@ -22,6 +22,32 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        Runnable bar() {
+            try {
+                return pick();
+            } finally {
+                Runnable r = () -> {
+                    return;
+                };
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } finally {
+                cleanup(new Runnable() {
+                    public void run() {
+                        return;
+                    }
+                });
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -53,6 +79,20 @@ invalid:
             } finally {
                 if (flag) {
                     return;
+                }
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(boolean flag) {
+            try {
+                compute();
+            } finally {
+                while (flag) {
+                    if (flag) {
+                        return;
+                    }
                 }
             }
         }

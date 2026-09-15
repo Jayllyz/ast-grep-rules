@@ -16,11 +16,61 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (!(x instanceof Bar)) {
+                Bar b = (Bar) x;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x, Object y) {
+            if (x instanceof Bar) {
+                Baz c = (Baz) y;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar b) {
+                Baz c = (Baz) x;
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
         void bar(Object x) {
             if (x instanceof Bar) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar) {
+                ((Bar) x).run();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar && x != null) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x != null && x instanceof Bar) {
                 Bar b = (Bar) x;
                 b.run();
             }

@@ -12,6 +12,11 @@ valid:
     }
   - |
     class Order {
+        @Enumerated(jakarta.persistence.EnumType.STRING)
+        private Status status;
+    }
+  - |
+    class Order {
         private Status status;
     }
 invalid:
@@ -33,5 +38,10 @@ invalid:
   - |
     class Order {
         @Enumerated(value = EnumType.ORDINAL)
+        private Status status;
+    }
+  - |
+    class Order {
+        @Enumerated(jakarta.persistence.EnumType.ORDINAL)
         private Status status;
     }

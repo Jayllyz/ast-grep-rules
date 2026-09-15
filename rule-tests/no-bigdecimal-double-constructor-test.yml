@@ -15,3 +15,11 @@ invalid:
     class Foo {
         BigDecimal b = new BigDecimal(0.1f);
     }
+  - |
+    class Foo {
+        BigDecimal c = new BigDecimal(0.1d);
+    }
+  - |
+    class Foo {
+        BigDecimal d = new java.math.BigDecimal(0.1);
+    }

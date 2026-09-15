@@ -15,6 +15,19 @@ snapshots:
       end: 39
   ? |
     class Foo {
+        Character c = new Character('a');
+    }
+  : labels:
+    - source: new Character('a')
+      style: primary
+      start: 30
+      end: 48
+    - source: Character
+      style: secondary
+      start: 34
+      end: 43
+  ? |
+    class Foo {
         Double d = new Double(1.5);
     }
   : labels:
@@ -39,6 +52,19 @@ snapshots:
       style: secondary
       start: 32
       end: 39
+  ? |
+    class Foo {
+        Integer a = new java.lang.Integer(5);
+    }
+  : labels:
+    - source: new java.lang.Integer(5)
+      style: primary
+      start: 28
+      end: 52
+    - source: java.lang.Integer
+      style: secondary
+      start: 32
+      end: 49
   ? |
     class Foo {
         Long c = new Long(5L);

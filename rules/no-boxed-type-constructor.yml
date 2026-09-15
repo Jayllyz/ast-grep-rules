@@ -10,4 +10,4 @@ rule:
   kind: object_creation_expression
   has:
     field: type
-    regex: "^(Integer|Long|Short|Byte|Double|Float|Boolean|Character)$"
+    regex: "(^|\\.)(Integer|Long|Short|Byte|Double|Float|Boolean|Character)$"

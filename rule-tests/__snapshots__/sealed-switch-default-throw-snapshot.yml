@@ -61,6 +61,60 @@ snapshots:
         String handle(Shape shape) {
             return switch (shape) {
                 case Circle c -> "circle";
+                default -> throw new AssertionError("Unexpected value");
+            };
+        }
+    }
+  : labels:
+    - source: default -> throw new AssertionError("Unexpected value");
+      style: primary
+      start: 128
+      end: 184
+    - source: default
+      style: secondary
+      start: 128
+      end: 135
+    - source: AssertionError
+      style: secondary
+      start: 149
+      end: 163
+    - source: new AssertionError("Unexpected value")
+      style: secondary
+      start: 145
+      end: 183
+    - source: throw new AssertionError("Unexpected value");
+      style: secondary
+      start: 139
+      end: 184
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: case Circle c
+      style: secondary
+      start: 89
+      end: 102
+    - source: case Circle c -> "circle";
+      style: secondary
+      start: 89
+      end: 115
+    - source: |-
+        {
+                    case Circle c -> "circle";
+                    default -> throw new AssertionError("Unexpected value");
+                }
+      style: secondary
+      start: 75
+      end: 194
+  ? |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
                 default -> throw new UnsupportedOperationException("Unexpected value");
             };
         }

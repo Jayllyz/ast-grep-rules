@@ -14,3 +14,6 @@ invalid:
   - |
     import static java.util.Collections.*;
     class Foo {}
+  - |
+    import static org.junit.jupiter.api.Assertions.*;
+    class Foo {}

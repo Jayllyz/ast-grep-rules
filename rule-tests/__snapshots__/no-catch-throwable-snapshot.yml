@@ -24,6 +24,44 @@ snapshots:
         void bar() {
             try {
                 compute();
+            } catch (Error | RuntimeException e) {
+                handle(e);
+            }
+        }
+    }
+  : labels:
+    - source: Error | RuntimeException e
+      style: primary
+      start: 83
+      end: 109
+    - source: Error | RuntimeException
+      style: secondary
+      start: 83
+      end: 107
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (RuntimeException | Error e) {
+                handle(e);
+            }
+        }
+    }
+  : labels:
+    - source: RuntimeException | Error e
+      style: primary
+      start: 83
+      end: 109
+    - source: RuntimeException | Error
+      style: secondary
+      start: 83
+      end: 107
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                compute();
             } catch (Throwable t) {
                 handle(t);
             }

@@ -6,6 +6,12 @@ valid:
             return items.stream().map(String::trim).toList();
         }
     }
+  - |
+    class Foo {
+        List<String> good() {
+            return items.stream().collect(Collectors.toUnmodifiableList());
+        }
+    }
 invalid:
   - |
     class Foo {

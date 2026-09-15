@@ -16,6 +16,10 @@ valid:
     class Foo {
         String a = new String("x");
     }
+  - |
+    class Foo {
+        Integer a = Integer.parseInt("5");
+    }
 invalid:
   - |
     class Foo {
@@ -32,4 +36,12 @@ invalid:
   - |
     class Foo {
         Double d = new Double(1.5);
+    }
+  - |
+    class Foo {
+        Character c = new Character('a');
+    }
+  - |
+    class Foo {
+        Integer a = new java.lang.Integer(5);
     }

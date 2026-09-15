@@ -10,6 +10,13 @@ valid:
         @Query(value = "select * from orders where id = ?1", nativeQuery = true)
         Order findOne(Long id);
     }
+  - |
+    interface OrderRepository {
+        String FIND_ACTIVE = "select o from Order o where o.status = 'ACTIVE'";
+
+        @Query(value = FIND_ACTIVE, nativeQuery = true)
+        List<Order> findActive();
+    }
 invalid:
   - |
     interface OrderRepository {
@@ -20,4 +27,9 @@ invalid:
     interface OrderRepository {
         @Query(value = "select * from orders where status = '" + status + "'", nativeQuery = true)
         List<Order> find(String status);
+    }
+  - |
+    interface OrderRepository {
+        @Query("select o from Order o where o." + FIELD + " = :value order by o." + ORDER)
+        List<Order> find(String field, String order);
     }

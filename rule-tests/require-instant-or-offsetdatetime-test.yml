@@ -12,6 +12,12 @@ valid:
     class Order {
         private String updatedDateRange;
     }
+  - |
+    class Order {
+        private LocalDate businessDay;
+        private ZonedDateTime scheduledAt;
+        private Instant createdAt;
+    }
 invalid:
   - |
     class Order {

@@ -8,6 +8,13 @@ valid:
         private Long id;
     }
   - |
+    @Entity
+    @Table(name = "orders", schema = "public")
+    class GoodEntityWithSchema {
+        @Id
+        private Long id;
+    }
+  - |
     class PlainClass {
         private Long id;
     }
@@ -29,6 +36,13 @@ invalid:
     @Entity
     @Table(schema = "public")
     class TableMissingName {
+        @Id
+        private Long id;
+    }
+  - |
+    @Entity
+    @Table
+    class BareTableAnnotation {
         @Id
         private Long id;
     }

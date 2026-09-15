@@ -17,6 +17,29 @@ valid:
             this.bar = bar;
         }
     }
+  - |
+    class FooService {
+        private final BarService bar;
+
+        @Inject
+        FooService(BarService bar) {
+            this.bar = bar;
+        }
+    }
+  - |
+    class FooService {
+        private BarService bar;
+
+        @Autowired
+        void setBar(BarService bar) {
+            this.bar = bar;
+        }
+    }
+  - |
+    class FooService {
+        @Value("${foo.bar}")
+        private String bar;
+    }
 invalid:
   - |
     class FooService {

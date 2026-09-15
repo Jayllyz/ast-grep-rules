@@ -9,6 +9,12 @@ valid:
   - |
     class Order {
         @ManyToOne
+        @JoinColumn(name = "customer_id", nullable = false)
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @ManyToOne
         private Customer customer;
     }
 invalid:
@@ -22,5 +28,11 @@ invalid:
     class Order {
         @ManyToOne
         @JoinColumn(nullable = false)
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @ManyToOne
+        @JoinColumn(unique = true)
         private Customer customer;
     }

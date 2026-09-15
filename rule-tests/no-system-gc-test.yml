@@ -6,6 +6,12 @@ valid:
             long t = System.currentTimeMillis();
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            int cpus = Runtime.getRuntime().availableProcessors();
+        }
+    }
 invalid:
   - |
     class Foo {

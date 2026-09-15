@@ -17,6 +17,12 @@ valid:
         @EqualsAndHashCode.Include
         private Long id;
     }
+  - |
+    @Entity
+    @EqualsAndHashCode(of = "id")
+    class Order {
+        private Long id;
+    }
 invalid:
   - |
     @Entity
@@ -31,5 +37,10 @@ invalid:
   - |
     @Entity
     @EqualsAndHashCode
+    class Order {
+    }
+  - |
+    @Entity
+    @Data(staticConstructor = "of")
     class Order {
     }

@@ -20,6 +20,12 @@ valid:
     record Point(int x, int y) {
         public static int counter = 0;
     }
+  - |
+    class Foo {
+        protected int counter;
+        int packagePrivate;
+        public static final int LIMIT = 10;
+    }
 invalid:
   - |
     class Foo {
@@ -28,4 +34,12 @@ invalid:
   - |
     class Foo {
         public static int shared;
+    }
+  - |
+    class Foo {
+        public volatile boolean running;
+    }
+  - |
+    class Foo {
+        public transient String cached;
     }

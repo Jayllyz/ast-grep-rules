@@ -24,3 +24,15 @@ snapshots:
       style: secondary
       start: 36
       end: 37
+  ? |
+    import static org.junit.jupiter.api.Assertions.*;
+    class Foo {}
+  : labels:
+    - source: import static org.junit.jupiter.api.Assertions.*;
+      style: primary
+      start: 0
+      end: 49
+    - source: '*'
+      style: secondary
+      start: 47
+      end: 48

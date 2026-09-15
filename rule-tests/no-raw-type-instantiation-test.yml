@@ -8,6 +8,13 @@ valid:
             Map<String, String> c = new HashMap<String, String>();
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            StringBuilder sb = new StringBuilder();
+            Object o = new Object();
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -25,5 +32,20 @@ invalid:
     class Foo {
         void bar() {
             Set<String> s = new java.util.HashSet();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Object a = new LinkedList();
+            Object b = new LinkedHashMap();
+            Object c = new TreeMap();
+            Object d = new LinkedHashSet();
+            Object e = new TreeSet();
+            Object f = new ArrayDeque();
+            Object g = new PriorityQueue();
+            Object h = new ConcurrentHashMap();
+            Object i = new CopyOnWriteArrayList();
+            Object j = new java.util.ArrayList();
         }
     }

@@ -20,6 +20,13 @@ valid:
         @Id
         private Long id;
     }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "order_seq")
+        private Long id;
+    }
 invalid:
   - |
     @Entity
@@ -40,5 +47,19 @@ invalid:
     class Order {
         @Id
         @GeneratedValue(generator = "order_seq")
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO, generator = "order_seq")
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue()
         private Long id;
     }

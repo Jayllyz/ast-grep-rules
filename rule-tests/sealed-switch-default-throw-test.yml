@@ -18,6 +18,25 @@ valid:
             };
         }
     }
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                case Square s -> "square";
+                default -> "unknown";
+            };
+        }
+    }
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                default -> throw new RuntimeException("Unexpected value");
+            };
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -35,6 +54,15 @@ invalid:
             return switch (shape) {
                 case Circle c -> "circle";
                 default -> throw new UnsupportedOperationException("Unexpected value");
+            };
+        }
+    }
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                default -> throw new AssertionError("Unexpected value");
             };
         }
     }

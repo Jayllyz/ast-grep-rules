@@ -34,6 +34,36 @@ snapshots:
     @Entity
     class Order {
         @Id
+        @GeneratedValue()
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue()
+            private Long id;
+      style: primary
+      start: 26
+      end: 72
+    - source: GeneratedValue
+      style: secondary
+      start: 35
+      end: 49
+    - source: '@GeneratedValue()'
+      style: secondary
+      start: 34
+      end: 51
+    - source: |-
+        @Id
+            @GeneratedValue()
+            private
+      style: secondary
+      start: 26
+      end: 63
+  ? |
+    @Entity
+    class Order {
+        @Id
         @GeneratedValue(generator = "order_seq")
         private Long id;
     }
@@ -114,3 +144,57 @@ snapshots:
       style: secondary
       start: 26
       end: 93
+  ? |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO, generator = "order_seq")
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.AUTO, generator = "order_seq")
+            private Long id;
+      style: primary
+      start: 26
+      end: 127
+    - source: GeneratedValue
+      style: secondary
+      start: 35
+      end: 49
+    - source: strategy
+      style: secondary
+      start: 50
+      end: 58
+    - source: GenerationType
+      style: secondary
+      start: 61
+      end: 75
+    - source: AUTO
+      style: secondary
+      start: 76
+      end: 80
+    - source: GenerationType.AUTO
+      style: secondary
+      start: 61
+      end: 80
+    - source: strategy = GenerationType.AUTO
+      style: secondary
+      start: 50
+      end: 80
+    - source: strategy = GenerationType.AUTO
+      style: secondary
+      start: 50
+      end: 80
+    - source: '@GeneratedValue(strategy = GenerationType.AUTO, generator = "order_seq")'
+      style: secondary
+      start: 34
+      end: 106
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.AUTO, generator = "order_seq")
+            private
+      style: secondary
+      start: 26
+      end: 118

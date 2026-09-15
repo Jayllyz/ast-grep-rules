@@ -22,6 +22,12 @@ valid:
             return Optional.empty();
         }
     }
+  - |
+    interface CustomerRepository {
+        default Optional<Customer> queryById(Long id) {
+            return Optional.empty();
+        }
+    }
 invalid:
   - |
     interface CustomerRepository {
@@ -34,4 +40,16 @@ invalid:
   - |
     interface CustomerRepository {
         List<Customer> findById(Long id);
+    }
+  - |
+    interface CustomerRepository {
+        Customer readById(Long id);
+    }
+  - |
+    interface CustomerRepository {
+        Customer queryById(Long id);
+    }
+  - |
+    interface CustomerRepository {
+        Customer[] findById(Long id);
     }

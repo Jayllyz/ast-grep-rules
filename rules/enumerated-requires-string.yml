@@ -30,7 +30,7 @@ rule:
                         all:
                           - has:
                               field: object
-                              regex: "^EnumType$"
+                              regex: "(^|\\.)EnumType$"
                           - has:
                               field: field
                               regex: "^STRING$"
@@ -41,7 +41,7 @@ rule:
                           all:
                             - has:
                                 field: object
-                                regex: "^EnumType$"
+                                regex: "(^|\\.)EnumType$"
                             - has:
                                 field: field
                                 regex: "^STRING$"

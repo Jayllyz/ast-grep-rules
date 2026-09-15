@@ -33,6 +33,30 @@ snapshots:
   ? |
     class Foo {
         void bar() {
+            Object a = new LinkedList();
+            Object b = new LinkedHashMap();
+            Object c = new TreeMap();
+            Object d = new LinkedHashSet();
+            Object e = new TreeSet();
+            Object f = new ArrayDeque();
+            Object g = new PriorityQueue();
+            Object h = new ConcurrentHashMap();
+            Object i = new CopyOnWriteArrayList();
+            Object j = new java.util.ArrayList();
+        }
+    }
+  : labels:
+    - source: new LinkedList()
+      style: primary
+      start: 48
+      end: 64
+    - source: LinkedList
+      style: secondary
+      start: 52
+      end: 62
+  ? |
+    class Foo {
+        void bar() {
             Set<String> s = new java.util.HashSet();
         }
     }

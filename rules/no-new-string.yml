@@ -9,4 +9,4 @@ rule:
   kind: object_creation_expression
   has:
     field: type
-    regex: "^String$"
+    regex: "(^|\\.)String$"

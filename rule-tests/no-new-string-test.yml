@@ -31,3 +31,15 @@ invalid:
             String s = new String(bytes);
         }
     }
+  - |
+    class Foo {
+        void bar(byte[] bytes) {
+            String s = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            String s = new java.lang.String("hello");
+        }
+    }

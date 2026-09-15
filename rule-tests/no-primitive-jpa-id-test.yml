@@ -17,6 +17,12 @@ valid:
     class Order {
         private long count;
     }
+  - |
+    @Entity
+    class Order {
+        @Id
+        private String id;
+    }
 invalid:
   - |
     @Entity
@@ -29,4 +35,17 @@ invalid:
     class Order {
         @Id
         private int id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        private short id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private long id;
     }

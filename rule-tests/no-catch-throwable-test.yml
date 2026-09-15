@@ -20,6 +20,16 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (java.io.IOException | java.sql.SQLException e) {
+                handle(e);
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -37,6 +47,26 @@ invalid:
             try {
                 compute();
             } catch (Error e) {
+                handle(e);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (RuntimeException | Error e) {
+                handle(e);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Error | RuntimeException e) {
                 handle(e);
             }
         }

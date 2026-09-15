@@ -28,6 +28,45 @@ snapshots:
       end: 51
   ? |
     interface CustomerRepository {
+        Customer queryById(Long id);
+    }
+  : labels:
+    - source: Customer queryById(Long id);
+      style: primary
+      start: 35
+      end: 63
+    - source: queryById
+      style: secondary
+      start: 44
+      end: 53
+  ? |
+    interface CustomerRepository {
+        Customer readById(Long id);
+    }
+  : labels:
+    - source: Customer readById(Long id);
+      style: primary
+      start: 35
+      end: 62
+    - source: readById
+      style: secondary
+      start: 44
+      end: 52
+  ? |
+    interface CustomerRepository {
+        Customer[] findById(Long id);
+    }
+  : labels:
+    - source: Customer[] findById(Long id);
+      style: primary
+      start: 35
+      end: 64
+    - source: findById
+      style: secondary
+      start: 46
+      end: 54
+  ? |
+    interface CustomerRepository {
         List<Customer> findById(Long id);
     }
   : labels:

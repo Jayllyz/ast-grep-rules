@@ -2,6 +2,38 @@ id: entity-requires-table-name
 snapshots:
   ? |
     @Entity
+    @Table
+    class BareTableAnnotation {
+        @Id
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Entity
+        @Table
+        class BareTableAnnotation {
+            @Id
+            private Long id;
+        }
+      style: primary
+      start: 0
+      end: 73
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        @Table
+      style: secondary
+      start: 0
+      end: 14
+  ? |
+    @Entity
     @Table()
     class EmptyTableAnnotation {
         @Id

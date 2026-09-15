@@ -16,4 +16,6 @@ rule:
         field: parameters
         not:
           has:
-            kind: formal_parameter
+            any:
+              - kind: formal_parameter
+              - kind: spread_parameter

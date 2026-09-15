@@ -12,7 +12,12 @@ rule:
         field: condition
         has:
           kind: instanceof_expression
+          stopBy: end
           all:
+            - not:
+                inside:
+                  kind: unary_expression
+                  stopBy: end
             - not:
                 has:
                   field: name

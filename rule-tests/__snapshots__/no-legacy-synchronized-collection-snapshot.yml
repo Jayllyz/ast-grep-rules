@@ -18,6 +18,21 @@ snapshots:
   ? |
     class Foo {
         void bar() {
+            List<String> list = new Vector<String>();
+        }
+    }
+  : labels:
+    - source: new Vector<String>()
+      style: primary
+      start: 57
+      end: 77
+    - source: Vector<String>
+      style: secondary
+      start: 61
+      end: 75
+  ? |
+    class Foo {
+        void bar() {
             Map<String, String> map = new java.util.Hashtable<>();
         }
     }
@@ -45,3 +60,18 @@ snapshots:
       style: secondary
       start: 63
       end: 70
+  ? |
+    class Foo {
+        void bar() {
+            Stack<String> stack = new java.util.Stack<>();
+        }
+    }
+  : labels:
+    - source: new java.util.Stack<>()
+      style: primary
+      start: 59
+      end: 82
+    - source: java.util.Stack<>
+      style: secondary
+      start: 63
+      end: 80

@@ -54,3 +54,57 @@ snapshots:
       style: secondary
       start: 10
       end: 43
+  ? |
+    class Foo {
+        public transient String cached;
+    }
+  : labels:
+    - source: public transient String cached;
+      style: primary
+      start: 16
+      end: 47
+    - source: public transient
+      style: secondary
+      start: 16
+      end: 32
+    - source: |-
+        class Foo {
+            public transient String cached;
+        }
+      style: secondary
+      start: 0
+      end: 49
+    - source: |-
+        {
+            public transient String cached;
+        }
+      style: secondary
+      start: 10
+      end: 49
+  ? |
+    class Foo {
+        public volatile boolean running;
+    }
+  : labels:
+    - source: public volatile boolean running;
+      style: primary
+      start: 16
+      end: 48
+    - source: public volatile
+      style: secondary
+      start: 16
+      end: 31
+    - source: |-
+        class Foo {
+            public volatile boolean running;
+        }
+      style: secondary
+      start: 0
+      end: 50
+    - source: |-
+        {
+            public volatile boolean running;
+        }
+      style: secondary
+      start: 10
+      end: 50

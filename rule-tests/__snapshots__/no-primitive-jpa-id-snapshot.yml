@@ -4,6 +4,40 @@ snapshots:
     @Entity
     class Order {
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private long id;
+      style: primary
+      start: 26
+      end: 106
+    - source: Id
+      style: secondary
+      start: 27
+      end: 29
+    - source: '@Id'
+      style: secondary
+      start: 26
+      end: 29
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private
+      style: secondary
+      start: 26
+      end: 97
+    - source: long
+      style: secondary
+      start: 98
+      end: 102
+  ? |
+    @Entity
+    class Order {
+        @Id
         private int id;
     }
   : labels:
@@ -62,3 +96,34 @@ snapshots:
       style: secondary
       start: 42
       end: 46
+  ? |
+    @Entity
+    class Order {
+        @Id
+        private short id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            private short id;
+      style: primary
+      start: 26
+      end: 51
+    - source: Id
+      style: secondary
+      start: 27
+      end: 29
+    - source: '@Id'
+      style: secondary
+      start: 26
+      end: 29
+    - source: |-
+        @Id
+            private
+      style: secondary
+      start: 26
+      end: 41
+    - source: short
+      style: secondary
+      start: 42
+      end: 47

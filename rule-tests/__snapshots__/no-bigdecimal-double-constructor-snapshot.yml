@@ -42,3 +42,45 @@ snapshots:
       style: secondary
       start: 46
       end: 50
+  ? |
+    class Foo {
+        BigDecimal c = new BigDecimal(0.1d);
+    }
+  : labels:
+    - source: new BigDecimal(0.1d)
+      style: primary
+      start: 31
+      end: 51
+    - source: BigDecimal
+      style: secondary
+      start: 35
+      end: 45
+    - source: 0.1d
+      style: secondary
+      start: 46
+      end: 50
+    - source: 0.1d
+      style: secondary
+      start: 46
+      end: 50
+  ? |
+    class Foo {
+        BigDecimal d = new java.math.BigDecimal(0.1);
+    }
+  : labels:
+    - source: new java.math.BigDecimal(0.1)
+      style: primary
+      start: 31
+      end: 60
+    - source: java.math.BigDecimal
+      style: secondary
+      start: 35
+      end: 55
+    - source: '0.1'
+      style: secondary
+      start: 56
+      end: 59
+    - source: '0.1'
+      style: secondary
+      start: 56
+      end: 59

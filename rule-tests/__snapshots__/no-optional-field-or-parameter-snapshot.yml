@@ -34,3 +34,20 @@ snapshots:
       style: secondary
       start: 25
       end: 46
+  ? |
+    class Foo {
+        void bar(String first, @Nullable Optional<String> name) {}
+    }
+  : fixed: |
+      class Foo {
+          void bar(String first, @Nullable String name) {}
+      }
+    labels:
+    - source: Optional<String>
+      style: primary
+      start: 49
+      end: 65
+    - source: '@Nullable Optional<String> name'
+      style: secondary
+      start: 39
+      end: 70

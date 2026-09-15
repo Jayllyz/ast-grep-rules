@@ -2,21 +2,27 @@ id: postgres-identifier-case
 language: java
 severity: error
 message: >-
-  "$NAME" mixes upper and lower case. Postgres folds unquoted identifiers
+  $NAME mixes upper and lower case. Postgres folds unquoted identifiers
   to lowercase, so this literal name will not match the actual database
   identifier unless every SQL reference to it is double-quoted. Use a
   lowercase snake_case name instead (e.g. "created_at").
 rule:
-  any:
-    - pattern:
-        context: 'class A { @Table(name = $NAME) class B {} }'
-        selector: annotation
-    - pattern:
-        context: 'class A { @Column(name = $NAME) int x; }'
-        selector: annotation
-    - pattern:
-        context: 'class A { @JoinColumn(name = $NAME) int x; }'
-        selector: annotation
+  kind: annotation
+  all:
+    - has:
+        field: name
+        regex: "^(Table|Column|JoinColumn)$"
+    - has:
+        field: arguments
+        has:
+          kind: element_value_pair
+          all:
+            - has:
+                field: key
+                regex: "^name$"
+            - has:
+                field: value
+                pattern: $NAME
 constraints:
   NAME:
     regex: '"[^"]*[a-z][^"]*[A-Z][^"]*"|"[^"]*[A-Z][^"]*[a-z][^"]*"'

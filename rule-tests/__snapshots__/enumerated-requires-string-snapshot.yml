@@ -80,6 +80,32 @@ snapshots:
       end: 59
   ? |
     class Order {
+        @Enumerated(jakarta.persistence.EnumType.ORDINAL)
+        private Status status;
+    }
+  : labels:
+    - source: |-
+        @Enumerated(jakarta.persistence.EnumType.ORDINAL)
+            private Status status;
+      style: primary
+      start: 18
+      end: 94
+    - source: Enumerated
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@Enumerated(jakarta.persistence.EnumType.ORDINAL)'
+      style: secondary
+      start: 18
+      end: 67
+    - source: |-
+        @Enumerated(jakarta.persistence.EnumType.ORDINAL)
+            private
+      style: secondary
+      start: 18
+      end: 79
+  ? |
+    class Order {
         @Enumerated(value = EnumType.ORDINAL)
         private Status status;
     }

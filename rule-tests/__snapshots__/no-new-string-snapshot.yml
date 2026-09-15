@@ -17,6 +17,21 @@ snapshots:
       end: 58
   ? |
     class Foo {
+        void bar() {
+            String s = new java.lang.String("hello");
+        }
+    }
+  : labels:
+    - source: new java.lang.String("hello")
+      style: primary
+      start: 48
+      end: 77
+    - source: java.lang.String
+      style: secondary
+      start: 52
+      end: 68
+  ? |
+    class Foo {
         void bar(byte[] bytes) {
             String s = new String(bytes);
         }
@@ -26,6 +41,21 @@ snapshots:
       style: primary
       start: 60
       end: 77
+    - source: String
+      style: secondary
+      start: 64
+      end: 70
+  ? |
+    class Foo {
+        void bar(byte[] bytes) {
+            String s = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+        }
+    }
+  : labels:
+    - source: new String(bytes, java.nio.charset.StandardCharsets.UTF_8)
+      style: primary
+      start: 60
+      end: 118
     - source: String
       style: secondary
       start: 64

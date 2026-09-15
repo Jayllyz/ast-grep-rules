@@ -2,6 +2,28 @@ id: no-query-string-concatenation
 snapshots:
   ? |
     interface OrderRepository {
+        @Query("select o from Order o where o." + FIELD + " = :value order by o." + ORDER)
+        List<Order> find(String field, String order);
+    }
+  : labels:
+    - source: '@Query("select o from Order o where o." + FIELD + " = :value order by o." + ORDER)'
+      style: primary
+      start: 32
+      end: 114
+    - source: Query
+      style: secondary
+      start: 33
+      end: 38
+    - source: '"select o from Order o where o." + FIELD + " = :value order by o." + ORDER'
+      style: secondary
+      start: 39
+      end: 113
+    - source: '"select o from Order o where o." + FIELD + " = :value order by o." + ORDER'
+      style: secondary
+      start: 39
+      end: 113
+  ? |
+    interface OrderRepository {
         @Query("select o from Order o where o.status = " + STATUS)
         List<Order> find();
     }

@@ -10,6 +10,12 @@ valid:
     class Foo {
         private String name;
     }
+  - |
+    class Foo {
+        void bar() {
+            Optional<String> local = Optional.empty();
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -18,4 +24,8 @@ invalid:
   - |
     class Foo {
         void bar(Optional<String> name) {}
+    }
+  - |
+    class Foo {
+        void bar(String first, @Nullable Optional<String> name) {}
     }

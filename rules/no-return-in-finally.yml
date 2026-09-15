@@ -14,3 +14,9 @@ rule:
         - kind: return_statement
         - kind: throw_statement
       stopBy: end
+      not:
+        inside:
+          any:
+            - kind: lambda_expression
+            - kind: object_creation_expression
+          stopBy: end

@@ -103,3 +103,46 @@ snapshots:
       style: secondary
       start: 88
       end: 169
+  ? |
+    class Foo {
+        void bar(boolean flag) {
+            try {
+                compute();
+            } finally {
+                while (flag) {
+                    if (flag) {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        try {
+                    compute();
+                } finally {
+                    while (flag) {
+                        if (flag) {
+                            return;
+                        }
+                    }
+                }
+      style: primary
+      start: 49
+      end: 222
+    - source: return;
+      style: secondary
+      start: 173
+      end: 180
+    - source: |-
+        finally {
+                    while (flag) {
+                        if (flag) {
+                            return;
+                        }
+                    }
+                }
+      style: secondary
+      start: 88
+      end: 222

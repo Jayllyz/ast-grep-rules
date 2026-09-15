@@ -3,6 +3,154 @@ snapshots:
   ? |
     class Foo {
         void bar(Object x) {
+            if (x != null && x instanceof Bar) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        if (x != null && x instanceof Bar) {
+                    Bar b = (Bar) x;
+                    b.run();
+                }
+      style: primary
+      start: 45
+      end: 141
+    - source: x
+      style: secondary
+      start: 62
+      end: 63
+    - source: Bar
+      style: secondary
+      start: 75
+      end: 78
+    - source: x instanceof Bar
+      style: secondary
+      start: 62
+      end: 78
+    - source: x instanceof Bar
+      style: secondary
+      start: 62
+      end: 78
+    - source: Bar
+      style: secondary
+      start: 103
+      end: 106
+    - source: x
+      style: secondary
+      start: 108
+      end: 109
+    - source: (Bar) x
+      style: secondary
+      start: 102
+      end: 109
+    - source: (Bar) x
+      style: secondary
+      start: 102
+      end: 109
+  ? |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar && x != null) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        if (x instanceof Bar && x != null) {
+                    Bar b = (Bar) x;
+                    b.run();
+                }
+      style: primary
+      start: 45
+      end: 141
+    - source: x
+      style: secondary
+      start: 49
+      end: 50
+    - source: Bar
+      style: secondary
+      start: 62
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: Bar
+      style: secondary
+      start: 103
+      end: 106
+    - source: x
+      style: secondary
+      start: 108
+      end: 109
+    - source: (Bar) x
+      style: secondary
+      start: 102
+      end: 109
+    - source: (Bar) x
+      style: secondary
+      start: 102
+      end: 109
+  ? |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar) {
+                ((Bar) x).run();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        if (x instanceof Bar) {
+                    ((Bar) x).run();
+                }
+      style: primary
+      start: 45
+      end: 107
+    - source: x
+      style: secondary
+      start: 49
+      end: 50
+    - source: Bar
+      style: secondary
+      start: 62
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: Bar
+      style: secondary
+      start: 83
+      end: 86
+    - source: x
+      style: secondary
+      start: 88
+      end: 89
+    - source: (Bar) x
+      style: secondary
+      start: 82
+      end: 89
+    - source: (Bar) x
+      style: secondary
+      start: 82
+      end: 89
+  ? |
+    class Foo {
+        void bar(Object x) {
             if (x instanceof Bar) {
                 Bar b = (Bar) x;
                 b.run();

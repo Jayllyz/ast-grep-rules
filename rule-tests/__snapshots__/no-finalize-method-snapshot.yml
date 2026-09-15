@@ -44,3 +44,23 @@ snapshots:
       style: secondary
       start: 39
       end: 41
+  ? |
+    class Foo {
+        public void finalize() {
+        }
+    }
+  : labels:
+    - source: |-
+        public void finalize() {
+            }
+      style: primary
+      start: 16
+      end: 46
+    - source: finalize
+      style: secondary
+      start: 28
+      end: 36
+    - source: ()
+      style: secondary
+      start: 36
+      end: 38
