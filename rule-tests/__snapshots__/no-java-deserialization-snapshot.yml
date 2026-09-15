@@ -1,0 +1,61 @@
+id: no-java-deserialization
+snapshots:
+  ? |
+    class Foo extends ObjectInputStream {
+        Object bar() throws Exception {
+            return readObject();
+        }
+    }
+  : labels:
+    - source: readObject()
+      style: primary
+      start: 89
+      end: 101
+  ? |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return ois.readObject();
+        }
+    }
+  : labels:
+    - source: ois.readObject()
+      style: primary
+      start: 136
+      end: 152
+  ? |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return ois.readUnshared();
+        }
+    }
+  : labels:
+    - source: ois.readUnshared()
+      style: primary
+      start: 136
+      end: 154
+  ? |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            return new ObjectInputStream(in).readObject();
+        }
+    }
+  : labels:
+    - source: new ObjectInputStream(in).readObject()
+      style: primary
+      start: 77
+      end: 115
+  ? |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            try (ObjectInputStream ois = new ObjectInputStream(in)) {
+                return ois.readObject();
+            }
+        }
+    }
+  : labels:
+    - source: ois.readObject()
+      style: primary
+      start: 147
+      end: 163

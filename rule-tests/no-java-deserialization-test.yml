@@ -1,0 +1,54 @@
+id: no-java-deserialization
+valid:
+  - |
+    class Foo {
+        void bar(Object value, OutputStream out) throws IOException {
+            new ObjectOutputStream(out).writeObject(value);
+        }
+    }
+  - |
+    class Foo {
+        int bar(DataInputStream in) throws IOException {
+            return in.readInt();
+        }
+    }
+  - |
+    class Foo implements Serializable {
+        private void readObject(ObjectInputStream in) {
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            return new ObjectInputStream(in).readObject();
+        }
+    }
+  - |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return ois.readObject();
+        }
+    }
+  - |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            try (ObjectInputStream ois = new ObjectInputStream(in)) {
+                return ois.readObject();
+            }
+        }
+    }
+  - |
+    class Foo {
+        Object bar(InputStream in) throws Exception {
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return ois.readUnshared();
+        }
+    }
+  - |
+    class Foo extends ObjectInputStream {
+        Object bar() throws Exception {
+            return readObject();
+        }
+    }

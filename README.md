@@ -45,6 +45,7 @@ See [`rules/`](rules) for the full rule definitions.
 - [`no-nplus1-call-in-loop`](rules/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
 - [`prefer-exists-over-count`](rules/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
 - [`prefer-entryset-over-keyset`](rules/prefer-entryset-over-keyset.yml): no `keySet()` + `get(key)`, iterate `entrySet()` instead.
+- [`no-java-deserialization`](rules/no-java-deserialization.yml): no `ObjectInputStream.readObject()`/`readUnshared()` on untrusted bytes, a remote-code-execution vector.
 
 ## Using these rules in another repo
 
