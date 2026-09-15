@@ -1,0 +1,60 @@
+id: obvious-comment
+valid:
+  - |
+    class Foo {
+        // The retry count must account for clock skew, hence the +1.
+        int retries = MAX_RETRIES + 1;
+        // TODO: revisit once the cache layer lands.
+        int cache = 0;
+    }
+  - |
+    class Foo {
+        /**
+         * Returns the account balance. Overdrafts are represented as negative
+         * values, so callers must not assume this is non-negative.
+         */
+        long balance() {
+            return -1;
+        }
+    }
+  - |
+    class Foo {
+        /* SAFETY: the array is copied defensively before publication. */
+        void publish(byte[] data) {}
+    }
+  - |
+    class Foo {
+        // noinspection unchecked
+        void raw() {}
+    }
+invalid:
+  - |
+    class Foo {
+        // initialize the counter
+        int counter = 0;
+    }
+  - |
+    class Foo {
+        // Increment the counter
+        counter++;
+    }
+  - |
+    class Foo {
+        // Set the name to the user's name
+        this.name = user.name();
+    }
+  - |
+    class Foo {
+        /** Validates the input. */
+        void validate(String s) {}
+    }
+  - |
+    class Foo {
+        // get the current user
+        User u = repo.current();
+    }
+  - |
+    class Foo {
+        /* create a new connection */
+        Connection c = open();
+    }

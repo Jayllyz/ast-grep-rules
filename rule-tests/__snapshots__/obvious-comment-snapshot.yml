@@ -1,0 +1,62 @@
+id: obvious-comment
+snapshots:
+  ? |
+    class Foo {
+        /* create a new connection */
+        Connection c = open();
+    }
+  : labels:
+    - source: /* create a new connection */
+      style: primary
+      start: 16
+      end: 45
+  ? |
+    class Foo {
+        /** Validates the input. */
+        void validate(String s) {}
+    }
+  : labels:
+    - source: /** Validates the input. */
+      style: primary
+      start: 16
+      end: 43
+  ? |
+    class Foo {
+        // Increment the counter
+        counter++;
+    }
+  : labels:
+    - source: // Increment the counter
+      style: primary
+      start: 16
+      end: 40
+  ? |
+    class Foo {
+        // Set the name to the user's name
+        this.name = user.name();
+    }
+  : labels:
+    - source: // Set the name to the user's name
+      style: primary
+      start: 16
+      end: 50
+  ? |
+    class Foo {
+        // get the current user
+        User u = repo.current();
+    }
+  : labels:
+    - source: // get the current user
+      style: primary
+      start: 16
+      end: 39
+  ? |
+    class Foo {
+        // initialize the counter
+        int counter = 0;
+    }
+  : labels:
+    - source: // initialize the counter
+      style: primary
+      start: 16
+      end: 41

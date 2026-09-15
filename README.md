@@ -41,6 +41,7 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 
 ### Java hygiene & correctness
 
+- [`obvious-comment`](rules/java/obvious-comment.yml): no comments that restate what the code already says (`// increment the counter`).
 - [`no-empty-catch-block`](rules/java/no-empty-catch-block.yml): no silently swallowed exceptions.
 - [`no-catch-throwable`](rules/java/no-catch-throwable.yml): don't catch `Throwable`/`Error`.
 - [`no-return-in-finally`](rules/java/no-return-in-finally.yml): no `return`/`throw` inside a `finally` block.
