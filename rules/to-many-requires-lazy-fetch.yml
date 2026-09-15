@@ -1,0 +1,42 @@
+id: to-many-requires-lazy-fetch
+language: java
+severity: error
+message: >-
+  @OneToMany/@ManyToMany is missing an explicit fetch = FetchType.LAZY.
+  Relying on the implicit default invites the classic N+1 trap: it's easy
+  to confuse with @ManyToOne/@OneToOne, whose spec default is actually
+  EAGER, so an explicit LAZY here makes the fetch strategy unambiguous.
+rule:
+  kind: field_declaration
+  has:
+    kind: modifiers
+    has:
+      any:
+        - kind: marker_annotation
+          has:
+            field: name
+            regex: "^(OneToMany|ManyToMany)$"
+        - kind: annotation
+          all:
+            - has:
+                field: name
+                regex: "^(OneToMany|ManyToMany)$"
+            - not:
+                has:
+                  field: arguments
+                  has:
+                    kind: element_value_pair
+                    all:
+                      - has:
+                          field: key
+                          regex: "^fetch$"
+                      - has:
+                          field: value
+                          kind: field_access
+                          all:
+                            - has:
+                                field: object
+                                regex: "^FetchType$"
+                            - has:
+                                field: field
+                                regex: "^LAZY$"

@@ -1,0 +1,38 @@
+id: to-many-requires-lazy-fetch
+valid:
+  - |
+    class Order {
+        @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+        private List<Item> items;
+    }
+  - |
+    class Order {
+        @ManyToMany(fetch = FetchType.LAZY)
+        private List<Tag> tags;
+    }
+  - |
+    class Order {
+        @ManyToOne
+        private Customer customer;
+    }
+invalid:
+  - |
+    class Order {
+        @OneToMany(mappedBy = "order")
+        private List<Item> items;
+    }
+  - |
+    class Order {
+        @OneToMany
+        private List<Item> items;
+    }
+  - |
+    class Order {
+        @ManyToMany
+        private List<Tag> tags;
+    }
+  - |
+    class Order {
+        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+        private List<Item> items;
+    }

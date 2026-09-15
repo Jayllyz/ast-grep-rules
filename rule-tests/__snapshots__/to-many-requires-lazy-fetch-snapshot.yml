@@ -1,0 +1,106 @@
+id: to-many-requires-lazy-fetch
+snapshots:
+  ? |
+    class Order {
+        @ManyToMany
+        private List<Tag> tags;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany
+            private List<Tag> tags;
+      style: primary
+      start: 18
+      end: 57
+    - source: ManyToMany
+      style: secondary
+      start: 19
+      end: 29
+    - source: '@ManyToMany'
+      style: secondary
+      start: 18
+      end: 29
+    - source: |-
+        @ManyToMany
+            private
+      style: secondary
+      start: 18
+      end: 41
+  ? |
+    class Order {
+        @OneToMany
+        private List<Item> items;
+    }
+  : labels:
+    - source: |-
+        @OneToMany
+            private List<Item> items;
+      style: primary
+      start: 18
+      end: 58
+    - source: OneToMany
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@OneToMany'
+      style: secondary
+      start: 18
+      end: 28
+    - source: |-
+        @OneToMany
+            private
+      style: secondary
+      start: 18
+      end: 40
+  ? |
+    class Order {
+        @OneToMany(mappedBy = "order")
+        private List<Item> items;
+    }
+  : labels:
+    - source: |-
+        @OneToMany(mappedBy = "order")
+            private List<Item> items;
+      style: primary
+      start: 18
+      end: 78
+    - source: OneToMany
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@OneToMany(mappedBy = "order")'
+      style: secondary
+      start: 18
+      end: 48
+    - source: |-
+        @OneToMany(mappedBy = "order")
+            private
+      style: secondary
+      start: 18
+      end: 60
+  ? |
+    class Order {
+        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+        private List<Item> items;
+    }
+  : labels:
+    - source: |-
+        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+            private List<Item> items;
+      style: primary
+      start: 18
+      end: 103
+    - source: OneToMany
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@OneToMany(mappedBy = "order", fetch = FetchType.EAGER)'
+      style: secondary
+      start: 18
+      end: 73
+    - source: |-
+        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+            private
+      style: secondary
+      start: 18
+      end: 85
