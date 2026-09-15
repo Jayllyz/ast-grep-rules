@@ -9,6 +9,7 @@ A collection of [ast-grep](https://ast-grep.github.io/) rules for enforcing JPA 
 - **bigdecimal-requires-precision-scale** — flags `BigDecimal` fields missing `@Column(precision = ..., scale = ...)`, since Hibernate otherwise falls back to a default scale that can round differently than the Postgres `numeric(p,s)` column.
 - **enumerated-requires-string** — flags `@Enumerated` without `EnumType.STRING`, since the default `EnumType.ORDINAL` persists the declaration order as an integer and silently corrupts data if enum constants are ever reordered, inserted, or removed.
 - **to-many-requires-lazy-fetch** — flags `@OneToMany`/`@ManyToMany` without an explicit `fetch = FetchType.LAZY`, to avoid confusion with `@ManyToOne`/`@OneToOne`, whose spec default is EAGER and a classic N+1 trap.
+- **require-instant-or-offsetdatetime** — flags fields typed `java.util.Date` or `LocalDateTime`, both timezone-naive, in favor of `Instant`/`OffsetDateTime`, since mixing naive datetimes with Postgres `timestamptz` is a common source of timezone bugs.
 
 ## Using these rules in another repo
 

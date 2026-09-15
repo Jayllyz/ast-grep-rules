@@ -1,0 +1,31 @@
+id: require-instant-or-offsetdatetime
+valid:
+  - |
+    class Order {
+        private Instant createdAt;
+    }
+  - |
+    class Order {
+        private OffsetDateTime placedAt;
+    }
+  - |
+    class Order {
+        private String updatedDateRange;
+    }
+invalid:
+  - |
+    class Order {
+        private Date createdAt;
+    }
+  - |
+    class Order {
+        private java.util.Date createdAt;
+    }
+  - |
+    class Order {
+        private LocalDateTime placedAt;
+    }
+  - |
+    class Order {
+        private java.time.LocalDateTime placedAt;
+    }

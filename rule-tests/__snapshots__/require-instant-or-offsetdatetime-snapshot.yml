@@ -1,0 +1,54 @@
+id: require-instant-or-offsetdatetime
+snapshots:
+  ? |
+    class Order {
+        private Date createdAt;
+    }
+  : labels:
+    - source: private Date createdAt;
+      style: primary
+      start: 18
+      end: 41
+    - source: Date
+      style: secondary
+      start: 26
+      end: 30
+  ? |
+    class Order {
+        private LocalDateTime placedAt;
+    }
+  : labels:
+    - source: private LocalDateTime placedAt;
+      style: primary
+      start: 18
+      end: 49
+    - source: LocalDateTime
+      style: secondary
+      start: 26
+      end: 39
+  ? |
+    class Order {
+        private java.time.LocalDateTime placedAt;
+    }
+  : labels:
+    - source: private java.time.LocalDateTime placedAt;
+      style: primary
+      start: 18
+      end: 59
+    - source: java.time.LocalDateTime
+      style: secondary
+      start: 26
+      end: 49
+  ? |
+    class Order {
+        private java.util.Date createdAt;
+    }
+  : labels:
+    - source: private java.util.Date createdAt;
+      style: primary
+      start: 18
+      end: 51
+    - source: java.util.Date
+      style: secondary
+      start: 26
+      end: 40
