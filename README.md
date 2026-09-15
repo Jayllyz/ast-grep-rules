@@ -18,6 +18,11 @@ See [`rules/`](rules) for the full rule definitions.
 - [`no-optional-field-or-parameter`](rules/no-optional-field-or-parameter.yml): `Optional` should only be used as a return type.
 - [`no-boxed-type-constructor`](rules/no-boxed-type-constructor.yml): no `new Integer(...)`/`new Boolean(...)`/etc., use `valueOf()` or autoboxing.
 - [`no-debug-print`](rules/no-debug-print.yml): no `System.out/err.println`/`printStackTrace()` outside test code, route through a logger instead.
+- [`no-wildcard-import`](rules/no-wildcard-import.yml): no `import java.util.*;`, import the specific types used.
+- [`no-public-mutable-field`](rules/no-public-mutable-field.yml): no public non-final fields on classes, encapsulate with an accessor.
+- [`no-field-injection`](rules/no-field-injection.yml): no `@Autowired`/`@Inject` directly on a field, use constructor injection.
+- [`sealed-switch-default-throw`](rules/sealed-switch-default-throw.yml): a pattern-matching `switch` with a throwing `default` usually means the type should be sealed.
+- [`instanceof-pattern-variable`](rules/instanceof-pattern-variable.yml): use `if (x instanceof Foo f)` instead of a separate `instanceof` check plus cast.
 
 ## Using these rules in another repo
 
