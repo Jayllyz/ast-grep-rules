@@ -1,0 +1,30 @@
+id: prefer-exists-over-count
+language: java
+severity: warning
+message: >-
+  Using count(...) > 0 to test for existence runs a full COUNT(*) query
+  that scans every matching row. Use exists(...) or an existsBy...
+  derived query instead; it stops at the first row.
+rule:
+  any:
+    - pattern: $C.$M($A) > 0
+    - pattern: $C.$M($A) != 0
+    - pattern: $C.$M($A) >= 1
+    - pattern: $C.$M() > 0
+    - pattern: $C.$M() != 0
+    - pattern: $C.$M() >= 1
+    - pattern: $M($A) > 0
+    - pattern: $M($A) != 0
+    - pattern: $M($A) >= 1
+    - pattern: $M() > 0
+    - pattern: $M() != 0
+    - pattern: $M() >= 1
+    - pattern: 0 < $C.$M($A)
+    - pattern: 0 != $C.$M($A)
+    - pattern: 1 <= $C.$M($A)
+    - pattern: 0 < $C.$M()
+    - pattern: 0 != $C.$M()
+    - pattern: 1 <= $C.$M()
+constraints:
+  M:
+    regex: "^count(By.*)?$"

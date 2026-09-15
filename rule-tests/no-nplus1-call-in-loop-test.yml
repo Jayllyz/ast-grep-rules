@@ -1,0 +1,59 @@
+id: no-nplus1-call-in-loop
+valid:
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            List<Order> orders = orderRepository.findAllById(ids);
+            for (Order order : orders) {
+                process(order);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                inMemory.get(id);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(User user) {
+            return orderRepository.findByUser(user);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orderRepository.findById(id);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orders.findByStatus(id);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orderRepository.findAll();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Long> ids) {
+            int i = 0;
+            while (i < ids.size()) {
+                orderDao.getById(ids.get(i++));
+            }
+        }
+    }

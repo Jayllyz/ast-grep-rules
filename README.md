@@ -1,6 +1,6 @@
 # ast-grep-rules
 
-A collection of [ast-grep](https://ast-grep.github.io/) rules for Java: JPA/Postgres entity conventions plus general Java hygiene.
+A collection of [ast-grep](https://ast-grep.github.io/) rules for Java: JPA/Postgres entity conventions, general Java hygiene, and a few performance gotchas.
 
 ## Rules
 
@@ -40,6 +40,11 @@ See [`rules/`](rules) for the full rule definitions.
 - [`no-finalize-method`](rules/no-finalize-method.yml): no `Object.finalize()` overrides.
 - [`no-raw-type-instantiation`](rules/no-raw-type-instantiation.yml): no raw `new ArrayList()`/`HashMap()`/etc.
 - [`no-bigdecimal-double-constructor`](rules/no-bigdecimal-double-constructor.yml): no `new BigDecimal(double)`, use `valueOf` or the `String` ctor.
+- [`no-string-matches`](rules/no-string-matches.yml): no `String.matches`/`replaceAll`/`replaceFirst`/`split`, reuse a precompiled `Pattern`.
+- [`no-save-in-loop`](rules/no-save-in-loop.yml): no `save`/`saveAndFlush`/`persist`/`merge` per loop iteration, batch with `saveAll`.
+- [`no-nplus1-call-in-loop`](rules/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
+- [`prefer-exists-over-count`](rules/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
+- [`prefer-entryset-over-keyset`](rules/prefer-entryset-over-keyset.yml): no `keySet()` + `get(key)`, iterate `entrySet()` instead.
 
 ## Using these rules in another repo
 

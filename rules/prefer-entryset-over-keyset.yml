@@ -1,0 +1,19 @@
+id: prefer-entryset-over-keyset
+language: java
+severity: hint
+message: >-
+  Iterating keySet() and then calling get(key) does a second hash lookup
+  per entry and re-fetches what traversal already had. Iterate entrySet()
+  (or use forEach) to avoid the extra lookups.
+rule:
+  pattern: $MAP.keySet()
+  inside:
+    any:
+      - kind: enhanced_for_statement
+      - kind: for_statement
+      - kind: while_statement
+      - kind: do_statement
+    stopBy: end
+    has:
+      pattern: $MAP.get($A)
+      stopBy: end

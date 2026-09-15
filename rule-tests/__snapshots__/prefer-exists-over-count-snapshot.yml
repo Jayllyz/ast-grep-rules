@@ -1,0 +1,57 @@
+id: prefer-exists-over-count
+snapshots:
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return 1 <= repo.countByActiveTrue();
+        }
+    }
+  : labels:
+    - source: 1 <= repo.countByActiveTrue()
+      style: primary
+      start: 67
+      end: 96
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.count() > 0;
+        }
+    }
+  : labels:
+    - source: repo.count() > 0
+      style: primary
+      start: 67
+      end: 83
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.count() >= 1;
+        }
+    }
+  : labels:
+    - source: repo.count() >= 1
+      style: primary
+      start: 67
+      end: 84
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo, String status) {
+            return 0 < repo.count(status);
+        }
+    }
+  : labels:
+    - source: 0 < repo.count(status)
+      style: primary
+      start: 82
+      end: 104
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo, String status) {
+            return repo.countByStatus(status) != 0;
+        }
+    }
+  : labels:
+    - source: repo.countByStatus(status) != 0
+      style: primary
+      start: 82
+      end: 113

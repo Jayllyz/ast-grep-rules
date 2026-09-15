@@ -1,0 +1,51 @@
+id: prefer-exists-over-count
+valid:
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo, String status) {
+            return repo.existsByStatus(status);
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.count() == 1;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(int count) {
+            return count > 0;
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.count() > 0;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.count() >= 1;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo, String status) {
+            return repo.countByStatus(status) != 0;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo, String status) {
+            return 0 < repo.count(status);
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return 1 <= repo.countByActiveTrue();
+        }
+    }

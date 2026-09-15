@@ -1,0 +1,115 @@
+id: no-nplus1-call-in-loop
+snapshots:
+  ? |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orderRepository.findAll();
+            }
+        }
+    }
+  : labels:
+    - source: orderRepository.findAll()
+      style: primary
+      start: 85
+      end: 110
+    - source: findAll
+      style: secondary
+      start: 101
+      end: 108
+    - source: |-
+        for (Long id : ids) {
+                    orderRepository.findAll();
+                }
+      style: secondary
+      start: 51
+      end: 121
+    - source: orderRepository
+      style: secondary
+      start: 85
+      end: 100
+  ? |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orderRepository.findById(id);
+            }
+        }
+    }
+  : labels:
+    - source: orderRepository.findById(id)
+      style: primary
+      start: 85
+      end: 113
+    - source: findById
+      style: secondary
+      start: 101
+      end: 109
+    - source: |-
+        for (Long id : ids) {
+                    orderRepository.findById(id);
+                }
+      style: secondary
+      start: 51
+      end: 124
+    - source: orderRepository
+      style: secondary
+      start: 85
+      end: 100
+  ? |
+    class Foo {
+        void bar(List<Long> ids) {
+            for (Long id : ids) {
+                orders.findByStatus(id);
+            }
+        }
+    }
+  : labels:
+    - source: orders.findByStatus(id)
+      style: primary
+      start: 85
+      end: 108
+    - source: findByStatus
+      style: secondary
+      start: 92
+      end: 104
+    - source: |-
+        for (Long id : ids) {
+                    orders.findByStatus(id);
+                }
+      style: secondary
+      start: 51
+      end: 119
+    - source: findByStatus
+      style: secondary
+      start: 92
+      end: 104
+  ? |
+    class Foo {
+        void bar(List<Long> ids) {
+            int i = 0;
+            while (i < ids.size()) {
+                orderDao.getById(ids.get(i++));
+            }
+        }
+    }
+  : labels:
+    - source: orderDao.getById(ids.get(i++))
+      style: primary
+      start: 107
+      end: 137
+    - source: getById
+      style: secondary
+      start: 116
+      end: 123
+    - source: |-
+        while (i < ids.size()) {
+                    orderDao.getById(ids.get(i++));
+                }
+      style: secondary
+      start: 70
+      end: 148
+    - source: orderDao
+      style: secondary
+      start: 107
+      end: 115

@@ -1,0 +1,45 @@
+id: no-string-matches
+valid:
+  - |
+    class Foo {
+        boolean bar(String s) {
+            return PATTERN.matcher(s).matches();
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.replace("old", "new");
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return PATTERN.matcher(s).replaceAll("x");
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        boolean bar(String s) {
+            return s.matches("[0-9]+");
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.replaceAll("[0-9]+", "");
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.replaceFirst("[0-9]+", "");
+        }
+    }
+  - |
+    class Foo {
+        String[] bar(String s) {
+            return s.split(",");
+        }
+    }

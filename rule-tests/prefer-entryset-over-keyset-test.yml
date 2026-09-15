@@ -1,0 +1,53 @@
+id: prefer-entryset-over-keyset
+valid:
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (String key : map.keySet()) {
+                use(key);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                use(entry.getValue());
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map, Map<String, Integer> other) {
+            for (String key : map.keySet()) {
+                use(other.get(key));
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            Set<String> keys = map.keySet();
+            use(map.get("x"));
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (String key : map.keySet()) {
+                use(map.get(key));
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (String key : map.keySet()) {
+                if (key.isEmpty()) {
+                    continue;
+                }
+                use(map.get(key));
+            }
+        }
+    }

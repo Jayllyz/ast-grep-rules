@@ -1,0 +1,83 @@
+id: no-save-in-loop
+snapshots:
+  ? |
+    class Foo {
+        void bar(List<Order> orders) {
+            for (Order order : orders) {
+                entityManager.persist(order);
+            }
+        }
+    }
+  : labels:
+    - source: entityManager.persist(order)
+      style: primary
+      start: 96
+      end: 124
+    - source: |-
+        for (Order order : orders) {
+                    entityManager.persist(order);
+                }
+      style: secondary
+      start: 55
+      end: 135
+  ? |
+    class Foo {
+        void bar(List<Order> orders) {
+            for (Order order : orders) {
+                repository.save(order);
+            }
+        }
+    }
+  : labels:
+    - source: repository.save(order)
+      style: primary
+      start: 96
+      end: 118
+    - source: |-
+        for (Order order : orders) {
+                    repository.save(order);
+                }
+      style: secondary
+      start: 55
+      end: 129
+  ? |
+    class Foo {
+        void bar(List<Order> orders) {
+            for (int i = 0; i < orders.size(); i++) {
+                repository.saveAndFlush(orders.get(i));
+            }
+        }
+    }
+  : labels:
+    - source: repository.saveAndFlush(orders.get(i))
+      style: primary
+      start: 109
+      end: 147
+    - source: |-
+        for (int i = 0; i < orders.size(); i++) {
+                    repository.saveAndFlush(orders.get(i));
+                }
+      style: secondary
+      start: 55
+      end: 158
+  ? |
+    class Foo {
+        void bar(List<Order> orders) {
+            int i = 0;
+            while (i < orders.size()) {
+                entityManager.merge(orders.get(i++));
+            }
+        }
+    }
+  : labels:
+    - source: entityManager.merge(orders.get(i++))
+      style: primary
+      start: 114
+      end: 150
+    - source: |-
+        while (i < orders.size()) {
+                    entityManager.merge(orders.get(i++));
+                }
+      style: secondary
+      start: 74
+      end: 161

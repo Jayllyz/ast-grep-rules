@@ -1,0 +1,46 @@
+id: no-string-matches
+snapshots:
+  ? |
+    class Foo {
+        String bar(String s) {
+            return s.replaceAll("[0-9]+", "");
+        }
+    }
+  : labels:
+    - source: s.replaceAll("[0-9]+", "")
+      style: primary
+      start: 54
+      end: 80
+  ? |
+    class Foo {
+        String bar(String s) {
+            return s.replaceFirst("[0-9]+", "");
+        }
+    }
+  : labels:
+    - source: s.replaceFirst("[0-9]+", "")
+      style: primary
+      start: 54
+      end: 82
+  ? |
+    class Foo {
+        String[] bar(String s) {
+            return s.split(",");
+        }
+    }
+  : labels:
+    - source: s.split(",")
+      style: primary
+      start: 56
+      end: 68
+  ? |
+    class Foo {
+        boolean bar(String s) {
+            return s.matches("[0-9]+");
+        }
+    }
+  : labels:
+    - source: s.matches("[0-9]+")
+      style: primary
+      start: 55
+      end: 74

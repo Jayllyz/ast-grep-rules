@@ -1,0 +1,56 @@
+id: prefer-entryset-over-keyset
+snapshots:
+  ? |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (String key : map.keySet()) {
+                if (key.isEmpty()) {
+                    continue;
+                }
+                use(map.get(key));
+            }
+        }
+    }
+  : labels:
+    - source: map.keySet()
+      style: primary
+      start: 79
+      end: 91
+    - source: map.get(key)
+      style: secondary
+      start: 184
+      end: 196
+    - source: |-
+        for (String key : map.keySet()) {
+                    if (key.isEmpty()) {
+                        continue;
+                    }
+                    use(map.get(key));
+                }
+      style: secondary
+      start: 61
+      end: 208
+  ? |
+    class Foo {
+        void bar(Map<String, Integer> map) {
+            for (String key : map.keySet()) {
+                use(map.get(key));
+            }
+        }
+    }
+  : labels:
+    - source: map.keySet()
+      style: primary
+      start: 79
+      end: 91
+    - source: map.get(key)
+      style: secondary
+      start: 111
+      end: 123
+    - source: |-
+        for (String key : map.keySet()) {
+                    use(map.get(key));
+                }
+      style: secondary
+      start: 61
+      end: 135
