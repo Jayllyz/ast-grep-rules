@@ -8,17 +8,18 @@ valid:
             thread.interrupt();
         }
     }
+  - |
+    class Foo {
+        void bar(Worker worker, Task task) {
+            worker.stop();
+            task.stop();
+        }
+    }
 invalid:
   - |
     class Foo {
         void bar(Thread thread) {
             thread.stop();
-        }
-    }
-  - |
-    class Foo {
-        void bar(Worker worker) {
-            worker.suspend();
         }
     }
   - |
@@ -31,5 +32,11 @@ invalid:
     class Foo {
         void bar(Thread myThread) {
             myThread.stop();
+        }
+    }
+  - |
+    class Foo {
+        void bar(Thread workerThread) {
+            workerThread.suspend();
         }
     }

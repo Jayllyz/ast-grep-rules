@@ -1,6 +1,17 @@
 id: no-public-mutable-field
 language: java
 severity: error
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Public non-final field breaks encapsulation: any caller can mutate it
   directly, bypassing invariants, validation, or change notification the

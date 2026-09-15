@@ -14,5 +14,5 @@ rule:
     - pattern: $T.resume()
   has:
     field: object
-    regex: "(?i).*(thread|worker).*$"
+    regex: "(?i).*thread$"
     stopBy: end

@@ -25,6 +25,28 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar(CharSequence sequence) {
+            if (sequence.length() == 0) {
+                return;
+            }
+            if (sequence.length() > 0) {
+                return;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(String s) {
+            if (s.length() != 0) {
+                return;
+            }
+            if (0 != s.length()) {
+                return;
+            }
+        }
+    }
 invalid:
   - |
     class Foo {
@@ -38,14 +60,6 @@ invalid:
     class Foo {
         void bar(List<String> list) {
             if (list.size() > 0) {
-                return;
-            }
-        }
-    }
-  - |
-    class Foo {
-        void bar(String s) {
-            if (s.length() != 0) {
                 return;
             }
         }
@@ -76,24 +90,8 @@ invalid:
     }
   - |
     class Foo {
-        void bar(String s) {
-            if (s.length() > 0) {
-                return;
-            }
-        }
-    }
-  - |
-    class Foo {
         void bar(List<String> list) {
             if (0 != list.size()) {
-                return;
-            }
-        }
-    }
-  - |
-    class Foo {
-        void bar(String s) {
-            if (0 != s.length()) {
                 return;
             }
         }

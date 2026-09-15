@@ -1,15 +1,32 @@
 id: no-catch-throwable
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Catching Throwable (or Error) also swallows JVM-level failures like
   OutOfMemoryError and StackOverflowError, which shouldn't be handled as
   ordinary exceptions. Catch the specific checked/runtime exceptions, or
-  Exception at an outermost boundary.
+  Exception at an outermost boundary. (A catch parameter named
+  expected/ignored/ok is treated as intentional.)
 metadata:
   category: java
 rule:
   kind: catch_formal_parameter
-  has:
-    kind: catch_type
-    regex: "\\b(Throwable|Error)\\b"
+  all:
+    - has:
+        kind: catch_type
+        regex: "\\b(Throwable|Error)\\b"
+    - not:
+        has:
+          field: name
+          regex: "(?i)^(expected|ignored|ignore|ok|tolerated)$"

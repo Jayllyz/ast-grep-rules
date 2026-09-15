@@ -1,6 +1,17 @@
 id: no-locale-sensitive-case
 language: java
 severity: hint
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   toLowerCase()/toUpperCase() without a Locale use the JVM default, so
   results vary by machine (in Turkish, "I".toLowerCase() is a dotless "ı").

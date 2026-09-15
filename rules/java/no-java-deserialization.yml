@@ -1,6 +1,17 @@
 id: no-java-deserialization
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   ObjectInputStream.readObject()/readUnshared() reconstructs whatever classes
   the stream names and runs their deserialization hooks. On attacker-controlled

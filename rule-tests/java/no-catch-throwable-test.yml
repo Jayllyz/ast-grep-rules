@@ -30,6 +30,15 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Throwable expected) {
+            }
+        }
+    }
 invalid:
   - |
     class Foo {

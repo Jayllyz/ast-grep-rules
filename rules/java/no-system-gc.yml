@@ -1,6 +1,17 @@
 id: no-system-gc
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   System.gc() is only a suggestion to the JVM, so it guarantees nothing
   and can cause long, unpredictable pauses. Reaching for it usually

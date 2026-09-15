@@ -1,6 +1,17 @@
 id: no-finalize-method
 language: java
 severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Object.finalize() is deprecated for removal: it may run long after the
   object is unreachable, or never at all, and exceptions thrown from it

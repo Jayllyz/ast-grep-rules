@@ -10,6 +10,31 @@ valid:
             }
         }
     }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (UnsupportedOperationException ok) {
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (ClassCastException tolerated) {}
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (NullPointerException expected) {}
+        }
+    }
 invalid:
   - |
     class Foo {

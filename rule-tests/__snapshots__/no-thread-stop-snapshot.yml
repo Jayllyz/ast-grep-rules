@@ -11,10 +11,10 @@ snapshots:
       style: primary
       start: 37
       end: 68
-    - source: Thread.currentThread()
+    - source: Thread
       style: secondary
       start: 37
-      end: 59
+      end: 43
   ? |
     class Foo {
         void bar(Thread myThread) {
@@ -45,6 +45,21 @@ snapshots:
       style: secondary
       start: 50
       end: 56
+  ? |
+    class Foo {
+        void bar(Thread workerThread) {
+            workerThread.suspend();
+        }
+    }
+  : labels:
+    - source: workerThread.suspend()
+      style: primary
+      start: 56
+      end: 78
+    - source: workerThread
+      style: secondary
+      start: 56
+      end: 68
   ? |
     class Foo {
         void bar(Worker worker) {

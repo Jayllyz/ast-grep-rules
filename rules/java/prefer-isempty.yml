@@ -3,8 +3,10 @@ language: java
 severity: hint
 message: >-
   Test for an empty String/collection with isEmpty() instead of
-  size()/length()/equals(""). It reads better and avoids nil-vs-empty
-  mixups when a field later switches between String and a collection.
+  size() or equals(""). It reads better and avoids nil-vs-empty mixups
+  when a field later switches between String and a collection. (length()
+  is not flagged: a CharSequence has no isEmpty() before Java 15, so the
+  rewrite is not always valid.)
 metadata:
   category: java
 rule:
@@ -12,12 +14,7 @@ rule:
     - pattern: "$X.size() == 0"
     - pattern: "$X.size() != 0"
     - pattern: "$X.size() > 0"
-    - pattern: "$X.length() == 0"
-    - pattern: "$X.length() != 0"
-    - pattern: "$X.length() > 0"
     - pattern: "0 == $X.size()"
     - pattern: "0 != $X.size()"
-    - pattern: "0 == $X.length()"
-    - pattern: "0 != $X.length()"
     - pattern: '$X.equals("")'
     - pattern: '"".equals($X)'

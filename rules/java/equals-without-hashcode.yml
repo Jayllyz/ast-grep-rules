@@ -1,6 +1,17 @@
 id: equals-without-hashcode
 language: java
 severity: error
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   This class overrides equals() but not hashCode(), breaking the
   equals/hashCode contract: equal instances will usually get different hash

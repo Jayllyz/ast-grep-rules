@@ -24,13 +24,25 @@ valid:
             return opt.orElseThrow();
         }
     }
-invalid:
   - |
     class Foo {
         String bar(Optional<String> opt) {
             return opt.orElse(computeDefault());
         }
     }
+  - |
+    class Foo {
+        OptionalInt bar(Optional<String> opt) {
+            return opt.orElse(OptionalInt.empty());
+        }
+    }
+  - |
+    class Foo {
+        long bar(Optional<Long> opt) {
+            return opt.orElse(clock.milliseconds());
+        }
+    }
+invalid:
   - |
     class Foo {
         List<String> bar(Optional<List<String>> opt) {
@@ -40,6 +52,12 @@ invalid:
   - |
     class Foo {
         String bar(Optional<String> opt) {
-            return opt.orElse(builder.build());
+            return opt.orElse(new String("default"));
+        }
+    }
+  - |
+    class Foo {
+        Map<String, String> bar(Optional<Map<String, String>> opt) {
+            return opt.orElse(new HashMap<>());
         }
     }

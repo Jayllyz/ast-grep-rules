@@ -15,6 +15,29 @@ snapshots:
       style: secondary
       start: 89
       end: 106
+    - source: new ArrayList<>()
+      style: secondary
+      start: 89
+      end: 106
+  ? |
+    class Foo {
+        Map<String, String> bar(Optional<Map<String, String>> opt) {
+            return opt.orElse(new HashMap<>());
+        }
+    }
+  : labels:
+    - source: opt.orElse(new HashMap<>())
+      style: primary
+      start: 92
+      end: 119
+    - source: new HashMap<>()
+      style: secondary
+      start: 103
+      end: 118
+    - source: new HashMap<>()
+      style: secondary
+      start: 103
+      end: 118
   ? |
     class Foo {
         String bar(Optional<String> opt) {
@@ -45,3 +68,22 @@ snapshots:
       style: secondary
       start: 77
       end: 93
+  ? |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse(new String("default"));
+        }
+    }
+  : labels:
+    - source: opt.orElse(new String("default"))
+      style: primary
+      start: 66
+      end: 99
+    - source: new String("default")
+      style: secondary
+      start: 77
+      end: 98
+    - source: new String("default")
+      style: secondary
+      start: 77
+      end: 98

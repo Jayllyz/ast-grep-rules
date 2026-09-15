@@ -3,18 +3,36 @@ language: java
 severity: error
 ignores:
   - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
   - "**/*Test.java"
   - "**/*Tests.java"
   - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
 message: >-
   Don't print or dump a stack trace directly to stdout/stderr. It goes
   through a logger (SLF4J/etc.) in production, not raw System.out/err, so
   println and printStackTrace output gets lost instead of ending up in
-  the logs. Allowed only in test code.
+  the logs. Allowed only in test code and in a class with a main() entry
+  point (a CLI tool's stdout is the interface).
 metadata:
   category: java
 rule:
-  any:
-    - pattern: System.out.println($$$)
-    - pattern: System.err.println($$$)
-    - pattern: $EXC.printStackTrace()
+  all:
+    - any:
+        - pattern: System.out.println($$$)
+        - pattern: System.err.println($$$)
+        - pattern: $EXC.printStackTrace()
+    - not:
+        inside:
+          kind: class_declaration
+          stopBy: end
+          has:
+            kind: method_declaration
+            stopBy: end
+            has:
+              field: name
+              regex: "^main$"

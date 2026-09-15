@@ -3,14 +3,22 @@ language: java
 severity: error
 message: >-
   Empty catch block silently swallows the exception. At minimum log it,
-  or explain in a comment why it is safe to ignore.
+  or explain in a comment why it is safe to ignore. (A catch parameter
+  named ignore/ignored/expected/ok/tolerated is treated as intentional.)
 metadata:
   category: java
 rule:
   kind: catch_clause
-  has:
-    field: body
-    kind: block
-    not:
-      has:
-        pattern: $X
+  all:
+    - has:
+        field: body
+        kind: block
+        not:
+          has:
+            pattern: $X
+    - not:
+        has:
+          kind: catch_formal_parameter
+          has:
+            field: name
+            regex: "(?i)^(ignore|ignored|expected|ok|tolerated|allow|allowlist|suppressed|_)$"
