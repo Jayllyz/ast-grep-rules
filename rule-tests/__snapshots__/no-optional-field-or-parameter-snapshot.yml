@@ -4,33 +4,33 @@ snapshots:
     class Foo {
         private Optional<String> name;
     }
-  : labels:
-    - source: private Optional<String> name;
-      style: primary
-      start: 16
-      end: 46
-    - source: Optional
-      style: secondary
-      start: 24
-      end: 32
+  : fixed: |
+      class Foo {
+          private String name;
+      }
+    labels:
     - source: Optional<String>
-      style: secondary
+      style: primary
       start: 24
       end: 40
+    - source: private Optional<String> name;
+      style: secondary
+      start: 16
+      end: 46
   ? |
     class Foo {
         void bar(Optional<String> name) {}
     }
-  : labels:
-    - source: Optional<String> name
+  : fixed: |
+      class Foo {
+          void bar(String name) {}
+      }
+    labels:
+    - source: Optional<String>
       style: primary
       start: 25
-      end: 46
-    - source: Optional
-      style: secondary
-      start: 25
-      end: 33
-    - source: Optional<String>
-      style: secondary
-      start: 25
       end: 41
+    - source: Optional<String> name
+      style: secondary
+      start: 25
+      end: 46
