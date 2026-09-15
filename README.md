@@ -73,6 +73,35 @@ git diff --staged --name-only --diff-filter=ACM -- '*.java' | xargs -r ast-grep 
 
 `--diff-filter=ACM` skips deleted/renamed files so `ast-grep` isn't asked to scan a path that no longer exists, and `xargs -r` avoids running `ast-grep` at all when nothing staged matches.
 
+## Pre-commit hook with Lefthook
+
+[Lefthook](https://github.com/evilmartians/lefthook) can run the rules on staged files automatically before each commit.
+
+1. Install Lefthook (see the [Lefthook docs](https://lefthook.dev/installation.html) for other install methods):
+
+   ```bash
+   npm install -D lefthook
+   # or: brew install lefthook / go install github.com/evilmartians/lefthook@latest
+   ```
+
+2. Add a `lefthook.yml` at your project root:
+
+   ```yaml
+   pre-commit:
+     commands:
+       ast-grep:
+         glob: "*.java"
+         run: ast-grep scan --config sgconfig.yml {staged_files}
+   ```
+
+3. Install the git hooks:
+
+   ```bash
+   lefthook install
+   ```
+
+Now `git commit` runs `ast-grep` against only the staged `.java` files, and the commit is blocked if any `error`-severity rule fires.
+
 ## Testing rules in this repo
 
 Rule tests live in `rule-tests/` and are run with:
