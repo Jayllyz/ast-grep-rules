@@ -1,0 +1,24 @@
+id: collectors-tolist-to-stream-tolist
+snapshots:
+  ? |
+    class Foo {
+        List<String> bad() {
+            return items.stream().collect(java.util.stream.Collectors.toList());
+        }
+    }
+  : labels:
+    - source: items.stream().collect(java.util.stream.Collectors.toList())
+      style: primary
+      start: 52
+      end: 112
+  ? |
+    class Foo {
+        List<String> bad() {
+            return items.stream().map(String::trim).collect(Collectors.toList());
+        }
+    }
+  : labels:
+    - source: items.stream().map(String::trim).collect(Collectors.toList())
+      style: primary
+      start: 52
+      end: 113
