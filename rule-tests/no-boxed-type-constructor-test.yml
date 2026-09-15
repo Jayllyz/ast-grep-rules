@@ -1,0 +1,35 @@
+id: no-boxed-type-constructor
+valid:
+  - |
+    class Foo {
+        Integer a = Integer.valueOf(5);
+    }
+  - |
+    class Foo {
+        Integer a = 5;
+    }
+  - |
+    class Foo {
+        Object a = new Object();
+    }
+  - |
+    class Foo {
+        String a = new String("x");
+    }
+invalid:
+  - |
+    class Foo {
+        Integer a = new Integer(5);
+    }
+  - |
+    class Foo {
+        Boolean b = new Boolean(true);
+    }
+  - |
+    class Foo {
+        Long c = new Long(5L);
+    }
+  - |
+    class Foo {
+        Double d = new Double(1.5);
+    }

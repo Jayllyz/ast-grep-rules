@@ -16,6 +16,7 @@ See [`rules/`](rules) for the full rule definitions.
 - [`no-empty-catch-block`](rules/no-empty-catch-block.yml) — no silently swallowed exceptions.
 - [`collectors-tolist-to-stream-tolist`](rules/collectors-tolist-to-stream-tolist.yml) — use `Stream.toList()` instead of `.collect(Collectors.toList())`.
 - [`no-optional-field-or-parameter`](rules/no-optional-field-or-parameter.yml) — `Optional` should only be used as a return type.
+- [`no-boxed-type-constructor`](rules/no-boxed-type-constructor.yml) — no `new Integer(...)`/`new Boolean(...)`/etc., use `valueOf()` or autoboxing.
 
 ## Using these rules in another repo
 

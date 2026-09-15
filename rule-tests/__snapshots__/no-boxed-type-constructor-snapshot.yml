@@ -1,0 +1,54 @@
+id: no-boxed-type-constructor
+snapshots:
+  ? |
+    class Foo {
+        Boolean b = new Boolean(true);
+    }
+  : labels:
+    - source: new Boolean(true)
+      style: primary
+      start: 28
+      end: 45
+    - source: Boolean
+      style: secondary
+      start: 32
+      end: 39
+  ? |
+    class Foo {
+        Double d = new Double(1.5);
+    }
+  : labels:
+    - source: new Double(1.5)
+      style: primary
+      start: 27
+      end: 42
+    - source: Double
+      style: secondary
+      start: 31
+      end: 37
+  ? |
+    class Foo {
+        Integer a = new Integer(5);
+    }
+  : labels:
+    - source: new Integer(5)
+      style: primary
+      start: 28
+      end: 42
+    - source: Integer
+      style: secondary
+      start: 32
+      end: 39
+  ? |
+    class Foo {
+        Long c = new Long(5L);
+    }
+  : labels:
+    - source: new Long(5L)
+      style: primary
+      start: 25
+      end: 37
+    - source: Long
+      style: secondary
+      start: 29
+      end: 33

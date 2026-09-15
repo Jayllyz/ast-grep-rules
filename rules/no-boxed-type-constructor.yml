@@ -1,0 +1,13 @@
+id: no-boxed-type-constructor
+language: java
+severity: warning
+message: >-
+  Don't instantiate boxed primitives with new. It always allocates a
+  fresh object, bypassing the JVM's cached/interned values (e.g. Integer
+  caches -128..127) that valueOf() or plain autoboxing reuse. These
+  constructors have been deprecated for removal since Java 9.
+rule:
+  kind: object_creation_expression
+  has:
+    field: type
+    regex: "^(Integer|Long|Short|Byte|Double|Float|Boolean|Character)$"
