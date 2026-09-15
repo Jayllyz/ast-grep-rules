@@ -1,0 +1,36 @@
+id: postgres-identifier-case
+valid:
+  - |
+    @Entity
+    @Table(name = "orders")
+    class GoodEntity {
+        @Column(name = "created_at")
+        private String createdAt;
+    }
+  - |
+    @Entity
+    @Table(name = "orders")
+    class AllLower {
+        @JoinColumn(name = "account_id")
+        private Long accountId;
+    }
+invalid:
+  - |
+    @Entity
+    @Table(name = "userAccounts")
+    class BadTableName {
+        @Id
+        private Long id;
+    }
+  - |
+    @Entity
+    class BadColumnName {
+        @Column(name = "firstName")
+        private String firstName;
+    }
+  - |
+    @Entity
+    class BadJoinColumnName {
+        @JoinColumn(name = "accountId")
+        private Long accountId;
+    }

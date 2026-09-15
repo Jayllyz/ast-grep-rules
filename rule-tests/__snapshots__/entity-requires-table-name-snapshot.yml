@@ -1,0 +1,30 @@
+id: entity-requires-table-name
+snapshots:
+  ? |
+    @Entity
+    class MissingTableName {
+        @Id
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Entity
+        class MissingTableName {
+            @Id
+            private Long id;
+        }
+      style: primary
+      start: 0
+      end: 63
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7

@@ -1,0 +1,36 @@
+id: postgres-identifier-case
+snapshots:
+  ? |
+    @Entity
+    @Table(name = "userAccounts")
+    class BadTableName {
+        @Id
+        private Long id;
+    }
+  : labels:
+    - source: '@Table(name = "userAccounts")'
+      style: primary
+      start: 8
+      end: 37
+  ? |
+    @Entity
+    class BadColumnName {
+        @Column(name = "firstName")
+        private String firstName;
+    }
+  : labels:
+    - source: '@Column(name = "firstName")'
+      style: primary
+      start: 34
+      end: 61
+  ? |
+    @Entity
+    class BadJoinColumnName {
+        @JoinColumn(name = "accountId")
+        private Long accountId;
+    }
+  : labels:
+    - source: '@JoinColumn(name = "accountId")'
+      style: primary
+      start: 38
+      end: 69

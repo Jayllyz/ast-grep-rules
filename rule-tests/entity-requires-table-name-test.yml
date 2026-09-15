@@ -1,0 +1,20 @@
+id: entity-requires-table-name
+valid:
+  - |
+    @Entity
+    @Table(name = "orders")
+    class GoodEntity {
+        @Id
+        private Long id;
+    }
+  - |
+    class PlainClass {
+        private Long id;
+    }
+invalid:
+  - |
+    @Entity
+    class MissingTableName {
+        @Id
+        private Long id;
+    }

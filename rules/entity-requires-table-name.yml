@@ -1,0 +1,26 @@
+id: entity-requires-table-name
+language: java
+severity: error
+message: >-
+  @Entity class is missing an explicit @Table(name = "...") annotation.
+  Without it, Hibernate derives the table name from the class name using
+  the active naming strategy, which silently breaks if that strategy ever
+  changes or differs between environments.
+rule:
+  kind: class_declaration
+  all:
+    - has:
+        kind: modifiers
+        has:
+          kind: marker_annotation
+          has:
+            field: name
+            regex: "^Entity$"
+    - not:
+        has:
+          kind: modifiers
+          has:
+            kind: annotation
+            has:
+              field: name
+              regex: "^Table$"
