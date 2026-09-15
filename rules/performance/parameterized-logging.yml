@@ -1,0 +1,25 @@
+id: parameterized-logging
+language: java
+severity: warning
+message: >-
+  Concatenating arguments into a log message builds the string on every
+  call, even when that log level is disabled. Use the parameterized form
+  log.debug("value={}", value) so the framework skips formatting entirely
+  when the level is off.
+metadata:
+  category: performance
+rule:
+  any:
+    - pattern: $LOG.trace($$$ARGS)
+    - pattern: $LOG.debug($$$ARGS)
+    - pattern: $LOG.info($$$ARGS)
+    - pattern: $LOG.warn($$$ARGS)
+    - pattern: $LOG.error($$$ARGS)
+  has:
+    field: arguments
+    has:
+      kind: binary_expression
+      has:
+        kind: string_literal
+        stopBy: end
+    stopBy: end

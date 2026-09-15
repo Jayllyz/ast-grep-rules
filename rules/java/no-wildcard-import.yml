@@ -1,0 +1,14 @@
+id: no-wildcard-import
+language: java
+severity: warning
+message: >-
+  Wildcard import hides exactly what's being pulled in, and silently
+  starts resolving to a new class if one is ever added upstream with a
+  name that collides with something already in scope. Import the
+  specific types you use instead.
+metadata:
+  category: java
+rule:
+  kind: import_declaration
+  has:
+    kind: asterisk

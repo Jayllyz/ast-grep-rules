@@ -1,0 +1,13 @@
+id: collectors-tolist-to-stream-tolist
+language: java
+severity: warning
+message: >-
+  Use Stream.toList() instead of .collect(Collectors.toList()). It's
+  shorter and, since Java 16, the standard idiom for materializing a
+  stream into a list.
+metadata:
+  category: performance
+rule:
+  any:
+    - pattern: $STREAM.collect(Collectors.toList())
+    - pattern: $STREAM.collect(java.util.stream.Collectors.toList())

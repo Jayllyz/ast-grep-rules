@@ -1,0 +1,24 @@
+id: no-return-in-finally
+language: java
+severity: error
+message: >-
+  A return or throw inside finally discards the exception or return value
+  propagating from the try (and any catch) block, silently hiding bugs.
+  Move the return/throw out of finally.
+metadata:
+  category: java
+rule:
+  kind: try_statement
+  has:
+    kind: finally_clause
+    has:
+      any:
+        - kind: return_statement
+        - kind: throw_statement
+      stopBy: end
+      not:
+        inside:
+          any:
+            - kind: lambda_expression
+            - kind: object_creation_expression
+          stopBy: end

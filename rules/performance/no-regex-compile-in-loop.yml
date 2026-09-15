@@ -1,0 +1,21 @@
+id: no-regex-compile-in-loop
+language: java
+severity: warning
+message: >-
+  Pattern.compile() inside a loop recompiles the regular expression on every
+  iteration, which costs far more than the match itself. Hoist it to a
+  static final Pattern field, or at least a local declared before the loop,
+  and reuse it.
+metadata:
+  category: performance
+rule:
+  any:
+    - pattern: Pattern.compile($$$ARGS)
+    - pattern: java.util.regex.Pattern.compile($$$ARGS)
+  inside:
+    any:
+      - kind: for_statement
+      - kind: enhanced_for_statement
+      - kind: while_statement
+      - kind: do_statement
+    stopBy: end

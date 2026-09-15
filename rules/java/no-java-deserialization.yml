@@ -1,0 +1,19 @@
+id: no-java-deserialization
+language: java
+severity: warning
+message: >-
+  ObjectInputStream.readObject()/readUnshared() reconstructs whatever classes
+  the stream names and runs their deserialization hooks. On attacker-controlled
+  bytes that is a remote-code-execution vector (gadget chains), even when the
+  JDK is patched. Deserialize untrusted data into explicit types (e.g. JSON),
+  or install a JEP 290 ObjectInputFilter allowlist on the stream. (Heuristic:
+  flags calls by method name, so it may fire on a readObject override calling
+  super.)
+metadata:
+  category: java
+rule:
+  any:
+    - pattern: $STREAM.readObject()
+    - pattern: $STREAM.readUnshared()
+    - pattern: readObject()
+    - pattern: readUnshared()

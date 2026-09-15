@@ -1,0 +1,19 @@
+id: no-raw-type-instantiation
+language: java
+severity: hint
+message: >-
+  Raw generic collection instantiated without type arguments. The compiler
+  can't check what goes in or what comes out, so an unchecked warning (or
+  a ClassCastException) is waiting downstream. Use a type argument or the
+  diamond, e.g. new ArrayList<String>() or new ArrayList<>().
+metadata:
+  category: java
+rule:
+  kind: object_creation_expression
+  has:
+    field: type
+    any:
+      - kind: type_identifier
+        regex: "^(ArrayList|LinkedList|HashMap|LinkedHashMap|TreeMap|HashSet|LinkedHashSet|TreeSet|ArrayDeque|PriorityQueue|ConcurrentHashMap|CopyOnWriteArrayList)$"
+      - kind: scoped_type_identifier
+        regex: "(^|\\.)(ArrayList|LinkedList|HashMap|LinkedHashMap|TreeMap|HashSet|LinkedHashSet|TreeSet|ArrayDeque|PriorityQueue|ConcurrentHashMap|CopyOnWriteArrayList)$"

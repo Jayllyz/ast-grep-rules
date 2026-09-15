@@ -4,52 +4,60 @@ A collection of [ast-grep](https://ast-grep.github.io/) rules for Java: JPA/Post
 
 ## Rules
 
-See [`rules/`](rules) for the full rule definitions.
+See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `performance/`, and `java/` subdirectories. Every rule also carries a `metadata.category` matching its directory.
 
-- [`entity-requires-table-name`](rules/entity-requires-table-name.yml): `@Entity` needs an explicit `@Table(name = "...")`.
-- [`postgres-identifier-case`](rules/postgres-identifier-case.yml): no mixed-case table/column/join-column names.
-- [`bigdecimal-requires-precision-scale`](rules/bigdecimal-requires-precision-scale.yml): `BigDecimal` fields need `@Column(precision, scale)`.
-- [`enumerated-requires-string`](rules/enumerated-requires-string.yml): `@Enumerated` needs `EnumType.STRING`.
-- [`to-many-requires-lazy-fetch`](rules/to-many-requires-lazy-fetch.yml): `@OneToMany`/`@ManyToMany` need explicit `fetch = FetchType.LAZY`.
-- [`to-one-requires-lazy-fetch`](rules/to-one-requires-lazy-fetch.yml): `@ManyToOne`/`@OneToOne` need explicit `fetch = FetchType.LAZY` (they default to `EAGER`).
-- [`require-instant-or-offsetdatetime`](rules/require-instant-or-offsetdatetime.yml): no `java.util.Date`/`LocalDateTime`, use `Instant`/`OffsetDateTime`.
-- [`find-by-id-requires-optional`](rules/find-by-id-requires-optional.yml): `findById`/`getById`-style repository methods must return `Optional<T>`.
-- [`no-lombok-data-on-entity`](rules/no-lombok-data-on-entity.yml): no Lombok `@Data`/bare `@EqualsAndHashCode` on a JPA `@Entity`.
-- [`no-primitive-jpa-id`](rules/no-primitive-jpa-id.yml): `@Id` fields must use a boxed type, not `long`/`int`.
-- [`generated-value-requires-strategy`](rules/generated-value-requires-strategy.yml): `@GeneratedValue` needs an explicit, non-`AUTO` strategy.
-- [`join-column-requires-name`](rules/join-column-requires-name.yml): `@JoinColumn` needs an explicit `name = "..."`.
-- [`no-query-string-concatenation`](rules/no-query-string-concatenation.yml): no `@Query("..." + x)`, use a constant query with parameters.
-- [`no-empty-catch-block`](rules/no-empty-catch-block.yml): no silently swallowed exceptions.
-- [`collectors-tolist-to-stream-tolist`](rules/collectors-tolist-to-stream-tolist.yml): use `Stream.toList()` instead of `.collect(Collectors.toList())`.
-- [`no-optional-field-or-parameter`](rules/no-optional-field-or-parameter.yml): `Optional` should only be used as a return type.
-- [`no-boxed-type-constructor`](rules/no-boxed-type-constructor.yml): no `new Integer(...)`/`new Boolean(...)`/etc., use `valueOf()` or autoboxing.
-- [`no-debug-print`](rules/no-debug-print.yml): no `System.out/err.println`/`printStackTrace()` outside test code, route through a logger instead.
-- [`no-wildcard-import`](rules/no-wildcard-import.yml): no `import java.util.*;`, import the specific types used.
-- [`no-public-mutable-field`](rules/no-public-mutable-field.yml): no public non-final fields on classes, encapsulate with an accessor.
-- [`no-field-injection`](rules/no-field-injection.yml): no `@Autowired`/`@Inject` directly on a field, use constructor injection.
-- [`sealed-switch-default-throw`](rules/sealed-switch-default-throw.yml): a pattern-matching `switch` with a throwing `default` usually means the type should be sealed.
-- [`instanceof-pattern-variable`](rules/instanceof-pattern-variable.yml): use `if (x instanceof Foo f)` instead of a separate `instanceof` check plus cast.
-- [`no-new-string`](rules/no-new-string.yml): no `new String(...)`, use the literal/argument directly.
-- [`no-system-gc`](rules/no-system-gc.yml): no `System.gc()`/`Runtime.getRuntime().gc()`.
-- [`no-optional-get`](rules/no-optional-get.yml): no bare `Optional.get()`, prefer `orElseThrow()`/`orElse()`.
-- [`prefer-isempty`](rules/prefer-isempty.yml): use `isEmpty()` instead of `size()/length() == 0` or `equals("")`.
-- [`no-return-in-finally`](rules/no-return-in-finally.yml): no `return`/`throw` inside a `finally` block.
-- [`no-catch-throwable`](rules/no-catch-throwable.yml): don't catch `Throwable`/`Error`.
-- [`no-legacy-synchronized-collection`](rules/no-legacy-synchronized-collection.yml): no `new Vector()`/`Stack()`/`Hashtable()`.
-- [`no-runtime-exec`](rules/no-runtime-exec.yml): no `Runtime.getRuntime().exec(...)`, use `ProcessBuilder`.
-- [`no-finalize-method`](rules/no-finalize-method.yml): no `Object.finalize()` overrides.
-- [`no-raw-type-instantiation`](rules/no-raw-type-instantiation.yml): no raw `new ArrayList()`/`HashMap()`/etc.
-- [`no-bigdecimal-double-constructor`](rules/no-bigdecimal-double-constructor.yml): no `new BigDecimal(double)`, use `valueOf` or the `String` ctor.
-- [`no-string-matches`](rules/no-string-matches.yml): no `String.matches`/`replaceAll`/`replaceFirst`/`split`, reuse a precompiled `Pattern`.
-- [`no-save-in-loop`](rules/no-save-in-loop.yml): no `save`/`saveAndFlush`/`persist`/`merge` per loop iteration, batch with `saveAll`.
-- [`no-nplus1-call-in-loop`](rules/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
-- [`prefer-exists-over-count`](rules/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
-- [`prefer-entryset-over-keyset`](rules/prefer-entryset-over-keyset.yml): no `keySet()` + `get(key)`, iterate `entrySet()` instead.
-- [`no-java-deserialization`](rules/no-java-deserialization.yml): no `ObjectInputStream.readObject()`/`readUnshared()` on untrusted bytes, a remote-code-execution vector.
-- [`no-regex-compile-in-loop`](rules/no-regex-compile-in-loop.yml): don't `Pattern.compile(...)` inside a loop, hoist it to a `static final` field.
-- [`no-stringbuffer`](rules/no-stringbuffer.yml): no `new StringBuffer(...)`, use `StringBuilder` to avoid per-operation synchronization.
-- [`parameterized-logging`](rules/parameterized-logging.yml): use `log.debug("x={}", x)` instead of concatenating arguments into a log message.
-- [`no-simpledateformat-in-loop`](rules/no-simpledateformat-in-loop.yml): don't build a `SimpleDateFormat` inside a loop, hoist it out.
+### JPA / persistence
+
+- [`entity-requires-table-name`](rules/jpa/entity-requires-table-name.yml): `@Entity` needs an explicit `@Table(name = "...")`.
+- [`postgres-identifier-case`](rules/jpa/postgres-identifier-case.yml): no mixed-case table/column/join-column names.
+- [`bigdecimal-requires-precision-scale`](rules/jpa/bigdecimal-requires-precision-scale.yml): `BigDecimal` fields need `@Column(precision, scale)`.
+- [`enumerated-requires-string`](rules/jpa/enumerated-requires-string.yml): `@Enumerated` needs `EnumType.STRING`.
+- [`to-many-requires-lazy-fetch`](rules/jpa/to-many-requires-lazy-fetch.yml): `@OneToMany`/`@ManyToMany` need explicit `fetch = FetchType.LAZY`.
+- [`to-one-requires-lazy-fetch`](rules/jpa/to-one-requires-lazy-fetch.yml): `@ManyToOne`/`@OneToOne` need explicit `fetch = FetchType.LAZY` (they default to `EAGER`).
+- [`require-instant-or-offsetdatetime`](rules/jpa/require-instant-or-offsetdatetime.yml): no `java.util.Date`/`LocalDateTime`, use `Instant`/`OffsetDateTime`.
+- [`no-primitive-jpa-id`](rules/jpa/no-primitive-jpa-id.yml): `@Id` fields must use a boxed type, not `long`/`int`.
+- [`generated-value-requires-strategy`](rules/jpa/generated-value-requires-strategy.yml): `@GeneratedValue` needs an explicit, non-`AUTO` strategy.
+- [`join-column-requires-name`](rules/jpa/join-column-requires-name.yml): `@JoinColumn` needs an explicit `name = "..."`.
+- [`find-by-id-requires-optional`](rules/jpa/find-by-id-requires-optional.yml): `findById`/`getById`-style repository methods must return `Optional<T>`.
+- [`no-lombok-data-on-entity`](rules/jpa/no-lombok-data-on-entity.yml): no Lombok `@Data`/bare `@EqualsAndHashCode` on a JPA `@Entity`.
+- [`no-query-string-concatenation`](rules/jpa/no-query-string-concatenation.yml): no `@Query("..." + x)`, use a constant query with parameters.
+- [`no-nplus1-call-in-loop`](rules/jpa/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
+- [`no-save-in-loop`](rules/jpa/no-save-in-loop.yml): no `save`/`saveAndFlush`/`persist`/`merge` per loop iteration, batch with `saveAll`.
+- [`prefer-exists-over-count`](rules/jpa/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
+
+### Performance
+
+- [`collectors-tolist-to-stream-tolist`](rules/performance/collectors-tolist-to-stream-tolist.yml): use `Stream.toList()` instead of `.collect(Collectors.toList())`.
+- [`prefer-entryset-over-keyset`](rules/performance/prefer-entryset-over-keyset.yml): no `keySet()` + `get(key)`, iterate `entrySet()` instead.
+- [`no-string-matches`](rules/performance/no-string-matches.yml): no `String.matches`/`replaceAll`/`replaceFirst`/`split`, reuse a precompiled `Pattern`.
+- [`no-regex-compile-in-loop`](rules/performance/no-regex-compile-in-loop.yml): don't `Pattern.compile(...)` inside a loop, hoist it to a `static final` field.
+- [`no-simpledateformat-in-loop`](rules/performance/no-simpledateformat-in-loop.yml): don't build a `SimpleDateFormat` inside a loop, hoist it out.
+- [`no-stringbuffer`](rules/performance/no-stringbuffer.yml): no `new StringBuffer(...)`, use `StringBuilder` to avoid per-operation synchronization.
+- [`parameterized-logging`](rules/performance/parameterized-logging.yml): use `log.debug("x={}", x)` instead of concatenating arguments into a log message.
+
+### Java hygiene & correctness
+
+- [`no-empty-catch-block`](rules/java/no-empty-catch-block.yml): no silently swallowed exceptions.
+- [`no-catch-throwable`](rules/java/no-catch-throwable.yml): don't catch `Throwable`/`Error`.
+- [`no-return-in-finally`](rules/java/no-return-in-finally.yml): no `return`/`throw` inside a `finally` block.
+- [`no-finalize-method`](rules/java/no-finalize-method.yml): no `Object.finalize()` overrides.
+- [`no-optional-get`](rules/java/no-optional-get.yml): no bare `Optional.get()`, prefer `orElseThrow()`/`orElse()`.
+- [`no-optional-field-or-parameter`](rules/java/no-optional-field-or-parameter.yml): `Optional` should only be used as a return type.
+- [`no-field-injection`](rules/java/no-field-injection.yml): no `@Autowired`/`@Inject` directly on a field, use constructor injection.
+- [`no-public-mutable-field`](rules/java/no-public-mutable-field.yml): no public non-final fields on classes, encapsulate with an accessor.
+- [`no-legacy-synchronized-collection`](rules/java/no-legacy-synchronized-collection.yml): no `new Vector()`/`Stack()`/`Hashtable()`.
+- [`no-raw-type-instantiation`](rules/java/no-raw-type-instantiation.yml): no raw `new ArrayList()`/`HashMap()`/etc.
+- [`no-boxed-type-constructor`](rules/java/no-boxed-type-constructor.yml): no `new Integer(...)`/`new Boolean(...)`/etc., use `valueOf()` or autoboxing.
+- [`no-new-string`](rules/java/no-new-string.yml): no `new String(...)`, use the literal/argument directly.
+- [`no-bigdecimal-double-constructor`](rules/java/no-bigdecimal-double-constructor.yml): no `new BigDecimal(double)`, use `valueOf` or the `String` ctor.
+- [`prefer-isempty`](rules/java/prefer-isempty.yml): use `isEmpty()` instead of `size()/length() == 0` or `equals("")`.
+- [`instanceof-pattern-variable`](rules/java/instanceof-pattern-variable.yml): use `if (x instanceof Foo f)` instead of a separate `instanceof` check plus cast.
+- [`sealed-switch-default-throw`](rules/java/sealed-switch-default-throw.yml): a pattern-matching `switch` with a throwing `default` usually means the type should be sealed.
+- [`no-wildcard-import`](rules/java/no-wildcard-import.yml): no `import java.util.*;`, import the specific types used.
+- [`no-debug-print`](rules/java/no-debug-print.yml): no `System.out/err.println`/`printStackTrace()` outside test code, route through a logger instead.
+- [`no-system-gc`](rules/java/no-system-gc.yml): no `System.gc()`/`Runtime.getRuntime().gc()`.
+- [`no-runtime-exec`](rules/java/no-runtime-exec.yml): no `Runtime.getRuntime().exec(...)`, use `ProcessBuilder`.
+- [`no-java-deserialization`](rules/java/no-java-deserialization.yml): no `ObjectInputStream.readObject()`/`readUnshared()` on untrusted bytes, a remote-code-execution vector.
 
 ## Using these rules in another repo
 

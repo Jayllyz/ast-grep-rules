@@ -1,0 +1,15 @@
+id: no-catch-throwable
+language: java
+severity: warning
+message: >-
+  Catching Throwable (or Error) also swallows JVM-level failures like
+  OutOfMemoryError and StackOverflowError, which shouldn't be handled as
+  ordinary exceptions. Catch the specific checked/runtime exceptions, or
+  Exception at an outermost boundary.
+metadata:
+  category: java
+rule:
+  kind: catch_formal_parameter
+  has:
+    kind: catch_type
+    regex: "\\b(Throwable|Error)\\b"

@@ -1,0 +1,11 @@
+id: no-optional-get
+language: java
+severity: hint
+message: >-
+  Optional.get() throws NoSuchElementException when empty and says nothing
+  about why. Prefer orElseThrow(...) to name the failure, or orElse(...)
+  for a default. (Heuristic: flags any no-argument get() call.)
+metadata:
+  category: java
+rule:
+  pattern: $OPT.get()

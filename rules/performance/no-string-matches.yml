@@ -1,0 +1,16 @@
+id: no-string-matches
+language: java
+severity: hint
+message: >-
+  String.matches/replaceAll/replaceFirst/split compile the regex on every
+  call. In a hot path, hoist the pattern into a static final Pattern and
+  reuse it: PATTERN.matcher(s).matches() or PATTERN.split(s). (Heuristic:
+  flags calls by name, so it may fire on a non-String receiver.)
+metadata:
+  category: performance
+rule:
+  any:
+    - pattern: $S.matches($R)
+    - pattern: $S.replaceAll($A, $B)
+    - pattern: $S.replaceFirst($A, $B)
+    - pattern: $S.split($R)

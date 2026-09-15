@@ -1,0 +1,16 @@
+id: require-instant-or-offsetdatetime
+language: java
+severity: error
+message: >-
+  Field uses java.util.Date or LocalDateTime. Both are timezone-naive:
+  java.util.Date has no zone semantics and LocalDateTime silently drops
+  the offset, which is the most common source of bugs when the value
+  round-trips through a Postgres timestamptz column. Use Instant or
+  OffsetDateTime instead, consistently across all entities.
+metadata:
+  category: jpa
+rule:
+  kind: field_declaration
+  has:
+    field: type
+    regex: "(^|\\.)(Date|LocalDateTime)$"

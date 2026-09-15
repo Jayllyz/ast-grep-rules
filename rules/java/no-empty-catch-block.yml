@@ -1,0 +1,16 @@
+id: no-empty-catch-block
+language: java
+severity: error
+message: >-
+  Empty catch block silently swallows the exception. At minimum log it,
+  or explain in a comment why it is safe to ignore.
+metadata:
+  category: java
+rule:
+  kind: catch_clause
+  has:
+    field: body
+    kind: block
+    not:
+      has:
+        pattern: $X

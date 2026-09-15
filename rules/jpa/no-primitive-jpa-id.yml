@@ -1,0 +1,28 @@
+id: no-primitive-jpa-id
+language: java
+severity: warning
+message: >-
+  @Id field uses a primitive type. A primitive id is 0 until the entity is
+  persisted, so it can't distinguish "new/unsaved" from a real key and
+  breaks Optional-style lookups and generated equals/hashCode. Use the
+  boxed wrapper (Long/Integer) so the id is null before save.
+metadata:
+  category: jpa
+rule:
+  kind: field_declaration
+  all:
+    - has:
+        kind: modifiers
+        has:
+          any:
+            - kind: marker_annotation
+              has:
+                field: name
+                regex: "^Id$"
+            - kind: annotation
+              has:
+                field: name
+                regex: "^Id$"
+    - has:
+        field: type
+        kind: integral_type

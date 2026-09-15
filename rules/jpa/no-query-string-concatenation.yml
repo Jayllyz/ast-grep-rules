@@ -1,0 +1,25 @@
+id: no-query-string-concatenation
+language: java
+severity: error
+message: >-
+  @Query is being built by concatenating strings, so the JPQL/SQL depends
+  on runtime values. That's the classic opening for injection and it also
+  prevents the provider from validating the query at startup. Use a
+  constant query with named or positional parameters instead.
+metadata:
+  category: jpa
+rule:
+  kind: annotation
+  all:
+    - has:
+        field: name
+        regex: "^Query$"
+    - has:
+        field: arguments
+        has:
+          any:
+            - kind: binary_expression
+            - kind: element_value_pair
+              has:
+                field: value
+                kind: binary_expression

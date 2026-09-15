@@ -1,0 +1,13 @@
+id: no-system-gc
+language: java
+severity: warning
+message: >-
+  System.gc() is only a suggestion to the JVM, so it guarantees nothing
+  and can cause long, unpredictable pauses. Reaching for it usually
+  signals a resource/lifecycle bug; let the collector decide when to run.
+metadata:
+  category: java
+rule:
+  any:
+    - pattern: System.gc()
+    - pattern: Runtime.getRuntime().gc()

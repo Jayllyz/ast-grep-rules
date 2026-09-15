@@ -1,0 +1,11 @@
+id: no-stringbuffer
+language: java
+severity: warning
+message: >-
+  StringBuffer synchronizes every append and read, even though the object is
+  almost always confined to one thread. Use StringBuilder for the same API
+  without the locking overhead.
+metadata:
+  category: performance
+rule:
+  pattern: new StringBuffer($$$ARGS)

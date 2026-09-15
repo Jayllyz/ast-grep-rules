@@ -1,0 +1,29 @@
+id: no-nplus1-call-in-loop
+language: java
+severity: warning
+message: >-
+  A repository query inside a loop runs one query per iteration (the N+1
+  problem). Fetch the batch in a single query up front (a findBy...In
+  derived query or a join fetch), then work through it in memory.
+metadata:
+  category: jpa
+rule:
+  kind: method_invocation
+  all:
+    - has:
+        field: name
+        regex: "^(find|get|exists|count|delete|read|query|search|fetch|load)[A-Z].*$"
+    - inside:
+        any:
+          - kind: enhanced_for_statement
+          - kind: for_statement
+          - kind: while_statement
+          - kind: do_statement
+        stopBy: end
+    - any:
+        - has:
+            field: object
+            regex: "(?i).*(repository|repo|dao)$"
+        - has:
+            field: name
+            regex: "^(find|get|exists|count|delete|read|query|search)By.*$"
