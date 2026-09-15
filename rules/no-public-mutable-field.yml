@@ -1,0 +1,22 @@
+id: no-public-mutable-field
+language: java
+severity: error
+message: >-
+  Public non-final field breaks encapsulation: any caller can mutate it
+  directly, bypassing invariants, validation, or change notification the
+  class might rely on. Make it private with an accessor, or final if it
+  shouldn't change after construction.
+rule:
+  kind: field_declaration
+  all:
+    - has:
+        kind: modifiers
+        regex: "\\bpublic\\b"
+    - not:
+        has:
+          kind: modifiers
+          regex: "\\bfinal\\b"
+  inside:
+    kind: class_body
+    inside:
+      kind: class_declaration

@@ -1,0 +1,56 @@
+id: no-public-mutable-field
+snapshots:
+  ? |
+    class Foo {
+        public int counter;
+    }
+  : labels:
+    - source: public int counter;
+      style: primary
+      start: 16
+      end: 35
+    - source: public
+      style: secondary
+      start: 16
+      end: 22
+    - source: |-
+        class Foo {
+            public int counter;
+        }
+      style: secondary
+      start: 0
+      end: 37
+    - source: |-
+        {
+            public int counter;
+        }
+      style: secondary
+      start: 10
+      end: 37
+  ? |
+    class Foo {
+        public static int shared;
+    }
+  : labels:
+    - source: public static int shared;
+      style: primary
+      start: 16
+      end: 41
+    - source: public static
+      style: secondary
+      start: 16
+      end: 29
+    - source: |-
+        class Foo {
+            public static int shared;
+        }
+      style: secondary
+      start: 0
+      end: 43
+    - source: |-
+        {
+            public static int shared;
+        }
+      style: secondary
+      start: 10
+      end: 43

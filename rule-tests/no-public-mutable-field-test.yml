@@ -1,0 +1,31 @@
+id: no-public-mutable-field
+valid:
+  - |
+    class Foo {
+        private int counter;
+    }
+  - |
+    class Foo {
+        public final int limit = 10;
+    }
+  - |
+    interface Foo {
+        int X = 5;
+    }
+  - |
+    interface Foo {
+        public int Y = 10;
+    }
+  - |
+    record Point(int x, int y) {
+        public static int counter = 0;
+    }
+invalid:
+  - |
+    class Foo {
+        public int counter;
+    }
+  - |
+    class Foo {
+        public static int shared;
+    }
