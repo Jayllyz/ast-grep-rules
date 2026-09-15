@@ -1,0 +1,25 @@
+id: find-by-id-requires-optional
+language: java
+severity: error
+message: >-
+  findById/getById-style repository methods must return Optional<T>, never
+  a raw entity or a collection. With a raw return type, Spring Data returns
+  null when no row matches, turning a missing entity into a silent NPE at
+  some unrelated call site instead of a compile-time-visible empty case.
+rule:
+  kind: method_declaration
+  all:
+    - has:
+        field: name
+        regex: "^(find|get|read|query)ById$"
+    - not:
+        has:
+          field: body
+          pattern: $X
+    - not:
+        has:
+          field: type
+          kind: generic_type
+          has:
+            kind: type_identifier
+            regex: "^Optional$"

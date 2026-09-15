@@ -1,0 +1,41 @@
+id: find-by-id-requires-optional
+snapshots:
+  ? |
+    interface CustomerRepository {
+        Customer findById(Long id);
+    }
+  : labels:
+    - source: Customer findById(Long id);
+      style: primary
+      start: 35
+      end: 62
+    - source: findById
+      style: secondary
+      start: 44
+      end: 52
+  ? |
+    interface CustomerRepository {
+        Customer getById(Long id);
+    }
+  : labels:
+    - source: Customer getById(Long id);
+      style: primary
+      start: 35
+      end: 61
+    - source: getById
+      style: secondary
+      start: 44
+      end: 51
+  ? |
+    interface CustomerRepository {
+        List<Customer> findById(Long id);
+    }
+  : labels:
+    - source: List<Customer> findById(Long id);
+      style: primary
+      start: 35
+      end: 68
+    - source: findById
+      style: secondary
+      start: 50
+      end: 58
