@@ -1,0 +1,40 @@
+id: sealed-switch-default-throw
+valid:
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                case Square s -> "square";
+            };
+        }
+    }
+  - |
+    class Foo {
+        String handle(Status status) {
+            return switch (status) {
+                case ACTIVE -> "active";
+                default -> throw new IllegalStateException("Unexpected value");
+            };
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                case Square s -> "square";
+                default -> throw new IllegalStateException("Unexpected value");
+            };
+        }
+    }
+  - |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                default -> throw new UnsupportedOperationException("Unexpected value");
+            };
+        }
+    }

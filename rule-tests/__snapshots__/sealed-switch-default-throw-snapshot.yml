@@ -1,0 +1,112 @@
+id: sealed-switch-default-throw
+snapshots:
+  ? |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                case Square s -> "square";
+                default -> throw new IllegalStateException("Unexpected value");
+            };
+        }
+    }
+  : labels:
+    - source: default -> throw new IllegalStateException("Unexpected value");
+      style: primary
+      start: 167
+      end: 230
+    - source: default
+      style: secondary
+      start: 167
+      end: 174
+    - source: IllegalStateException
+      style: secondary
+      start: 188
+      end: 209
+    - source: new IllegalStateException("Unexpected value")
+      style: secondary
+      start: 184
+      end: 229
+    - source: throw new IllegalStateException("Unexpected value");
+      style: secondary
+      start: 178
+      end: 230
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: case Circle c
+      style: secondary
+      start: 89
+      end: 102
+    - source: case Circle c -> "circle";
+      style: secondary
+      start: 89
+      end: 115
+    - source: |-
+        {
+                    case Circle c -> "circle";
+                    case Square s -> "square";
+                    default -> throw new IllegalStateException("Unexpected value");
+                }
+      style: secondary
+      start: 75
+      end: 240
+  ? |
+    class Foo {
+        String handle(Shape shape) {
+            return switch (shape) {
+                case Circle c -> "circle";
+                default -> throw new UnsupportedOperationException("Unexpected value");
+            };
+        }
+    }
+  : labels:
+    - source: default -> throw new UnsupportedOperationException("Unexpected value");
+      style: primary
+      start: 128
+      end: 199
+    - source: default
+      style: secondary
+      start: 128
+      end: 135
+    - source: UnsupportedOperationException
+      style: secondary
+      start: 149
+      end: 178
+    - source: new UnsupportedOperationException("Unexpected value")
+      style: secondary
+      start: 145
+      end: 198
+    - source: throw new UnsupportedOperationException("Unexpected value");
+      style: secondary
+      start: 139
+      end: 199
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: Circle c
+      style: secondary
+      start: 94
+      end: 102
+    - source: case Circle c
+      style: secondary
+      start: 89
+      end: 102
+    - source: case Circle c -> "circle";
+      style: secondary
+      start: 89
+      end: 115
+    - source: |-
+        {
+                    case Circle c -> "circle";
+                    default -> throw new UnsupportedOperationException("Unexpected value");
+                }
+      style: secondary
+      start: 75
+      end: 209
