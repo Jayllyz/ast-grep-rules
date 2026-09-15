@@ -1,0 +1,63 @@
+id: parameterized-logging
+valid:
+  - |
+    class Foo {
+        void bar(String value) {
+            log.debug("value={}", value);
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            log.info("plain message");
+        }
+    }
+  - |
+    class Foo {
+        void bar(Exception ex) {
+            log.error("failed", ex);
+        }
+    }
+  - |
+    class Foo {
+        void bar(int count, int total) {
+            log.debug(count + total);
+        }
+    }
+  - |
+    class Foo {
+        void bar(String value) {
+            System.out.println("value=" + value);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(String value) {
+            log.debug("value=" + value);
+        }
+    }
+  - |
+    class Foo {
+        void bar(int count) {
+            logger.info("count=" + count);
+        }
+    }
+  - |
+    class Foo {
+        void bar(int x, int y) {
+            log.warn("x=" + x + " y=" + y);
+        }
+    }
+  - |
+    class Foo {
+        void bar(Exception ex) {
+            log.error("failed: " + ex.getMessage(), ex);
+        }
+    }
+  - |
+    class Foo {
+        void bar(long id) {
+            LOG.trace("id=" + id);
+        }
+    }

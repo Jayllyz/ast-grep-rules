@@ -1,0 +1,43 @@
+id: no-simpledateformat-in-loop
+valid:
+  - |
+    class Foo {
+        private static final SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd");
+
+        String bar(Date d) {
+            return FMT.format(d);
+        }
+    }
+  - |
+    class Foo {
+        String bar(Date d) {
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            return fmt.format(d);
+        }
+    }
+  - |
+    class Foo {
+        String bar(LocalDate d) {
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(d);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(List<Date> dates) {
+            for (Date d : dates) {
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+                use(fmt.format(d));
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<Date> dates) {
+            int i = 0;
+            while (i < dates.size()) {
+                use(new SimpleDateFormat("yyyy-MM-dd").format(dates.get(i)));
+                i++;
+            }
+        }
+    }

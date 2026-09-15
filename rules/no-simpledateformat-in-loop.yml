@@ -1,0 +1,19 @@
+id: no-simpledateformat-in-loop
+language: java
+severity: warning
+message: >-
+  Constructing a SimpleDateFormat inside a loop allocates a new formatter,
+  parses the pattern and builds its internal state on every iteration.
+  Hoist it out of the loop, or use the immutable, thread-safe
+  DateTimeFormatter instead.
+rule:
+  any:
+    - pattern: new SimpleDateFormat($$$ARGS)
+    - pattern: new java.text.SimpleDateFormat($$$ARGS)
+  inside:
+    any:
+      - kind: for_statement
+      - kind: enhanced_for_statement
+      - kind: while_statement
+      - kind: do_statement
+    stopBy: end

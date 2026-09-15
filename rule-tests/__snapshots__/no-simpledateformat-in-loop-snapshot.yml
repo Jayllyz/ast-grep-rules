@@ -1,0 +1,47 @@
+id: no-simpledateformat-in-loop
+snapshots:
+  ? |
+    class Foo {
+        void bar(List<Date> dates) {
+            for (Date d : dates) {
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+                use(fmt.format(d));
+            }
+        }
+    }
+  : labels:
+    - source: new SimpleDateFormat("yyyy-MM-dd")
+      style: primary
+      start: 111
+      end: 145
+    - source: |-
+        for (Date d : dates) {
+                    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+                    use(fmt.format(d));
+                }
+      style: secondary
+      start: 53
+      end: 188
+  ? |
+    class Foo {
+        void bar(List<Date> dates) {
+            int i = 0;
+            while (i < dates.size()) {
+                use(new SimpleDateFormat("yyyy-MM-dd").format(dates.get(i)));
+                i++;
+            }
+        }
+    }
+  : labels:
+    - source: new SimpleDateFormat("yyyy-MM-dd")
+      style: primary
+      start: 115
+      end: 149
+    - source: |-
+        while (i < dates.size()) {
+                    use(new SimpleDateFormat("yyyy-MM-dd").format(dates.get(i)));
+                    i++;
+                }
+      style: secondary
+      start: 72
+      end: 199

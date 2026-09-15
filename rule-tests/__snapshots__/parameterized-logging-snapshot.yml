@@ -1,0 +1,117 @@
+id: parameterized-logging
+snapshots:
+  ? |
+    class Foo {
+        void bar(Exception ex) {
+            log.error("failed: " + ex.getMessage(), ex);
+        }
+    }
+  : labels:
+    - source: 'log.error("failed: " + ex.getMessage(), ex)'
+      style: primary
+      start: 49
+      end: 92
+    - source: '"failed: "'
+      style: secondary
+      start: 59
+      end: 69
+    - source: '"failed: " + ex.getMessage()'
+      style: secondary
+      start: 59
+      end: 87
+    - source: '"failed: " + ex.getMessage()'
+      style: secondary
+      start: 59
+      end: 87
+  ? |
+    class Foo {
+        void bar(String value) {
+            log.debug("value=" + value);
+        }
+    }
+  : labels:
+    - source: log.debug("value=" + value)
+      style: primary
+      start: 49
+      end: 76
+    - source: '"value="'
+      style: secondary
+      start: 59
+      end: 67
+    - source: '"value=" + value'
+      style: secondary
+      start: 59
+      end: 75
+    - source: '"value=" + value'
+      style: secondary
+      start: 59
+      end: 75
+  ? |
+    class Foo {
+        void bar(int count) {
+            logger.info("count=" + count);
+        }
+    }
+  : labels:
+    - source: logger.info("count=" + count)
+      style: primary
+      start: 46
+      end: 75
+    - source: '"count="'
+      style: secondary
+      start: 58
+      end: 66
+    - source: '"count=" + count'
+      style: secondary
+      start: 58
+      end: 74
+    - source: '"count=" + count'
+      style: secondary
+      start: 58
+      end: 74
+  ? |
+    class Foo {
+        void bar(int x, int y) {
+            log.warn("x=" + x + " y=" + y);
+        }
+    }
+  : labels:
+    - source: log.warn("x=" + x + " y=" + y)
+      style: primary
+      start: 49
+      end: 79
+    - source: '"x="'
+      style: secondary
+      start: 58
+      end: 62
+    - source: '"x=" + x + " y=" + y'
+      style: secondary
+      start: 58
+      end: 78
+    - source: '"x=" + x + " y=" + y'
+      style: secondary
+      start: 58
+      end: 78
+  ? |
+    class Foo {
+        void bar(long id) {
+            LOG.trace("id=" + id);
+        }
+    }
+  : labels:
+    - source: LOG.trace("id=" + id)
+      style: primary
+      start: 44
+      end: 65
+    - source: '"id="'
+      style: secondary
+      start: 54
+      end: 59
+    - source: '"id=" + id'
+      style: secondary
+      start: 54
+      end: 64
+    - source: '"id=" + id'
+      style: secondary
+      start: 54
+      end: 64

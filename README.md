@@ -46,6 +46,10 @@ See [`rules/`](rules) for the full rule definitions.
 - [`prefer-exists-over-count`](rules/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
 - [`prefer-entryset-over-keyset`](rules/prefer-entryset-over-keyset.yml): no `keySet()` + `get(key)`, iterate `entrySet()` instead.
 - [`no-java-deserialization`](rules/no-java-deserialization.yml): no `ObjectInputStream.readObject()`/`readUnshared()` on untrusted bytes, a remote-code-execution vector.
+- [`no-regex-compile-in-loop`](rules/no-regex-compile-in-loop.yml): don't `Pattern.compile(...)` inside a loop, hoist it to a `static final` field.
+- [`no-stringbuffer`](rules/no-stringbuffer.yml): no `new StringBuffer(...)`, use `StringBuilder` to avoid per-operation synchronization.
+- [`parameterized-logging`](rules/parameterized-logging.yml): use `log.debug("x={}", x)` instead of concatenating arguments into a log message.
+- [`no-simpledateformat-in-loop`](rules/no-simpledateformat-in-loop.yml): don't build a `SimpleDateFormat` inside a loop, hoist it out.
 
 ## Using these rules in another repo
 

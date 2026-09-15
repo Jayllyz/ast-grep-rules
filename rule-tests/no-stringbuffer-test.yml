@@ -1,0 +1,39 @@
+id: no-stringbuffer
+valid:
+  - |
+    class Foo {
+        String bar(String a, String b) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(a).append(b);
+            return sb.toString();
+        }
+    }
+  - |
+    class Foo {
+        String bar() {
+            return "constant";
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        String bar(String a, String b) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(a).append(b);
+            return sb.toString();
+        }
+    }
+  - |
+    class Foo {
+        StringBuffer bar(String a) {
+            StringBuffer sb = new StringBuffer(a);
+            return sb;
+        }
+    }
+  - |
+    class Foo {
+        String bar() {
+            StringBuffer sb = new StringBuffer(16);
+            return sb.toString();
+        }
+    }

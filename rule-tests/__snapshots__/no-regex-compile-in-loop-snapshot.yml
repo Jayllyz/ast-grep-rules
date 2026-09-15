@@ -1,0 +1,99 @@
+id: no-regex-compile-in-loop
+snapshots:
+  ? |
+    class Foo {
+        boolean bar(List<String> xs) {
+            for (String x : xs) {
+                if (Pattern.compile("[a-z]+").matcher(x).matches()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+  : labels:
+    - source: Pattern.compile("[a-z]+")
+      style: primary
+      start: 93
+      end: 118
+    - source: |-
+        for (String x : xs) {
+                    if (Pattern.compile("[a-z]+").matcher(x).matches()) {
+                        return true;
+                    }
+                }
+      style: secondary
+      start: 55
+      end: 195
+  ? |
+    class Foo {
+        boolean bar(List<String> xs) {
+            for (int i = 0; i < xs.size(); i++) {
+                if (Pattern.compile("[a-z]+").matcher(xs.get(i)).matches()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+  : labels:
+    - source: Pattern.compile("[a-z]+")
+      style: primary
+      start: 109
+      end: 134
+    - source: |-
+        for (int i = 0; i < xs.size(); i++) {
+                    if (Pattern.compile("[a-z]+").matcher(xs.get(i)).matches()) {
+                        return true;
+                    }
+                }
+      style: secondary
+      start: 55
+      end: 219
+  ? |
+    class Foo {
+        boolean bar(List<String> xs) {
+            int i = 0;
+            while (i < xs.size()) {
+                Pattern.compile("[a-z]+");
+                i++;
+            }
+            return false;
+        }
+    }
+  : labels:
+    - source: Pattern.compile("[a-z]+")
+      style: primary
+      start: 110
+      end: 135
+    - source: |-
+        while (i < xs.size()) {
+                    Pattern.compile("[a-z]+");
+                    i++;
+                }
+      style: secondary
+      start: 74
+      end: 163
+  ? |
+    class Foo {
+        void bar(List<String> xs) {
+            int i = 0;
+            do {
+                Pattern.compile("[a-z]+");
+                i++;
+            } while (i < xs.size());
+        }
+    }
+  : labels:
+    - source: Pattern.compile("[a-z]+")
+      style: primary
+      start: 88
+      end: 113
+    - source: |-
+        do {
+                    Pattern.compile("[a-z]+");
+                    i++;
+                } while (i < xs.size());
+      style: secondary
+      start: 71
+      end: 164

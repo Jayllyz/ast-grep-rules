@@ -1,0 +1,67 @@
+id: no-regex-compile-in-loop
+valid:
+  - |
+    class Foo {
+        private static final Pattern P = Pattern.compile("[a-z]+");
+
+        boolean bar(String s) {
+            return P.matcher(s).matches();
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(String s, String re) {
+            Pattern p = Pattern.compile(re);
+            return p.matcher(s).matches();
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(String s) {
+            return s.matches("[a-z]+");
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        boolean bar(List<String> xs) {
+            for (String x : xs) {
+                if (Pattern.compile("[a-z]+").matcher(x).matches()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(List<String> xs) {
+            for (int i = 0; i < xs.size(); i++) {
+                if (Pattern.compile("[a-z]+").matcher(xs.get(i)).matches()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(List<String> xs) {
+            int i = 0;
+            while (i < xs.size()) {
+                Pattern.compile("[a-z]+");
+                i++;
+            }
+            return false;
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<String> xs) {
+            int i = 0;
+            do {
+                Pattern.compile("[a-z]+");
+                i++;
+            } while (i < xs.size());
+        }
+    }
