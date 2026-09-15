@@ -1,0 +1,51 @@
+id: read-method-transactional-readonly
+valid:
+  - |
+    class CustomerService {
+        @Transactional(readOnly = true)
+        List<Customer> findCustomers() {
+            return repo.findAll();
+        }
+    }
+  - |
+    class CustomerService {
+        @Transactional
+        void save(Customer customer) {
+            repo.save(customer);
+        }
+    }
+  - |
+    class CustomerService {
+        List<Customer> findCustomers() {
+            return repo.findAll();
+        }
+    }
+invalid:
+  - |
+    class CustomerService {
+        @Transactional
+        List<Customer> findCustomers() {
+            return repo.findAll();
+        }
+    }
+  - |
+    class CustomerService {
+        @Transactional
+        Customer getById(Long id) {
+            return repo.getById(id);
+        }
+    }
+  - |
+    class CustomerService {
+        @Transactional
+        long countActive() {
+            return repo.count();
+        }
+    }
+  - |
+    class CustomerService {
+        @Transactional
+        boolean existsByEmail(String email) {
+            return repo.existsByEmail(email);
+        }
+    }

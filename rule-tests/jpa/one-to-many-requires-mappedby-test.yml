@@ -1,0 +1,34 @@
+id: one-to-many-requires-mappedby
+valid:
+  - |
+    class Customer {
+        @OneToMany(mappedBy = "customer")
+        private List<Order> orders;
+    }
+  - |
+    class Customer {
+        @ManyToMany
+        private List<Tag> tags;
+    }
+  - |
+    class Order {
+        @ManyToOne
+        @JoinColumn(name = "customer_id")
+        private Customer customer;
+    }
+invalid:
+  - |
+    class Customer {
+        @OneToMany
+        private List<Order> orders;
+    }
+  - |
+    class Customer {
+        @OneToMany(cascade = CascadeType.ALL)
+        private List<Order> orders;
+    }
+  - |
+    class Customer {
+        @OneToMany(orphanRemoval = true)
+        private List<Order> orders;
+    }

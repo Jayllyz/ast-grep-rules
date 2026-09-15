@@ -1,0 +1,18 @@
+id: no-thread-stop
+language: java
+severity: warning
+message: >-
+  Thread.stop(), suspend() and resume() are deprecated: they can leave
+  locks held and objects in an inconsistent state. Interrupt the thread
+  and have it exit cooperatively instead.
+metadata:
+  category: java
+rule:
+  any:
+    - pattern: $T.stop()
+    - pattern: $T.suspend()
+    - pattern: $T.resume()
+  has:
+    field: object
+    regex: "(?i).*(thread|worker).*$"
+    stopBy: end

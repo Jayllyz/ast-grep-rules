@@ -1,0 +1,24 @@
+id: no-locale-sensitive-case
+snapshots:
+  ? |
+    class Foo {
+        String bar(String s) {
+            return s.toLowerCase();
+        }
+    }
+  : labels:
+    - source: s.toLowerCase()
+      style: primary
+      start: 54
+      end: 69
+  ? |
+    class Foo {
+        String bar(String s) {
+            return s.toUpperCase();
+        }
+    }
+  : labels:
+    - source: s.toUpperCase()
+      style: primary
+      start: 54
+      end: 69

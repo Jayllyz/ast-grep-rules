@@ -1,0 +1,31 @@
+id: no-static-simpledateformat
+valid:
+  - |
+    class Foo {
+        private final SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+    }
+  - |
+    class Foo {
+        private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    }
+  - |
+    class Foo {
+        private static final ThreadLocal<SimpleDateFormat> FMT =
+            ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
+    }
+  - |
+    class Foo {
+        String bar(Date d) {
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            return fmt.format(d);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        private static final SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd");
+    }
+  - |
+    class Foo {
+        static SimpleDateFormat fmt;
+    }

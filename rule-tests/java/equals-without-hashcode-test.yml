@@ -1,0 +1,40 @@
+id: equals-without-hashcode
+valid:
+  - |
+    class Foo {
+        public boolean equals(Object o) {
+            return o instanceof Foo;
+        }
+        public int hashCode() {
+            return 31;
+        }
+    }
+  - |
+    class Foo {
+        public int hashCode() {
+            return 31;
+        }
+    }
+  - |
+    class Foo {
+        public boolean isEqual(Object o) {
+            return o instanceof Foo;
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        public boolean equals(Object o) {
+            return o instanceof Foo;
+        }
+    }
+  - |
+    class Foo {
+        private int id;
+        public boolean equals(Object o) {
+            return o instanceof Foo f && f.id == id;
+        }
+        public boolean equals(Foo other) {
+            return other.id == id;
+        }
+    }

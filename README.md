@@ -24,6 +24,8 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 - [`no-nplus1-call-in-loop`](rules/jpa/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
 - [`no-save-in-loop`](rules/jpa/no-save-in-loop.yml): no `save`/`saveAndFlush`/`persist`/`merge` per loop iteration, batch with `saveAll`.
 - [`prefer-exists-over-count`](rules/jpa/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
+- [`one-to-many-requires-mappedby`](rules/jpa/one-to-many-requires-mappedby.yml): `@OneToMany` needs `mappedBy`, otherwise JPA adds a join table.
+- [`read-method-transactional-readonly`](rules/jpa/read-method-transactional-readonly.yml): `@Transactional` read methods should set `readOnly = true`.
 
 ### Performance
 
@@ -34,6 +36,8 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 - [`no-simpledateformat-in-loop`](rules/performance/no-simpledateformat-in-loop.yml): don't build a `SimpleDateFormat` inside a loop, hoist it out.
 - [`no-stringbuffer`](rules/performance/no-stringbuffer.yml): no `new StringBuffer(...)`, use `StringBuilder` to avoid per-operation synchronization.
 - [`parameterized-logging`](rules/performance/parameterized-logging.yml): use `log.debug("x={}", x)` instead of concatenating arguments into a log message.
+- [`or-else-eager-default`](rules/performance/or-else-eager-default.yml): no `orElse(expensive())`, use `orElseGet(...)` so the default is lazy.
+- [`no-static-simpledateformat`](rules/performance/no-static-simpledateformat.yml): no static `SimpleDateFormat`, it is not thread-safe.
 
 ### Java hygiene & correctness
 
@@ -58,6 +62,10 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 - [`no-system-gc`](rules/java/no-system-gc.yml): no `System.gc()`/`Runtime.getRuntime().gc()`.
 - [`no-runtime-exec`](rules/java/no-runtime-exec.yml): no `Runtime.getRuntime().exec(...)`, use `ProcessBuilder`.
 - [`no-java-deserialization`](rules/java/no-java-deserialization.yml): no `ObjectInputStream.readObject()`/`readUnshared()` on untrusted bytes, a remote-code-execution vector.
+- [`equals-without-hashcode`](rules/java/equals-without-hashcode.yml): overriding `equals` requires a matching `hashCode`.
+- [`no-catch-nullpointer`](rules/java/no-catch-nullpointer.yml): don't catch `NullPointerException`, fix the null source.
+- [`no-thread-stop`](rules/java/no-thread-stop.yml): no `Thread.stop()`/`suspend()`/`resume()`, interrupt instead.
+- [`no-locale-sensitive-case`](rules/java/no-locale-sensitive-case.yml): `toLowerCase()`/`toUpperCase()` need an explicit `Locale`.
 
 ## Using these rules in another repo
 

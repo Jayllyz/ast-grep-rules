@@ -1,0 +1,64 @@
+id: equals-without-hashcode
+snapshots:
+  ? |
+    class Foo {
+        private int id;
+        public boolean equals(Object o) {
+            return o instanceof Foo f && f.id == id;
+        }
+        public boolean equals(Foo other) {
+            return other.id == id;
+        }
+    }
+  : labels:
+    - source: |-
+        class Foo {
+            private int id;
+            public boolean equals(Object o) {
+                return o instanceof Foo f && f.id == id;
+            }
+            public boolean equals(Foo other) {
+                return other.id == id;
+            }
+        }
+      style: primary
+      start: 0
+      end: 202
+    - source: equals
+      style: secondary
+      start: 51
+      end: 57
+    - source: |-
+        public boolean equals(Object o) {
+                return o instanceof Foo f && f.id == id;
+            }
+      style: secondary
+      start: 36
+      end: 124
+  ? |
+    class Foo {
+        public boolean equals(Object o) {
+            return o instanceof Foo;
+        }
+    }
+  : labels:
+    - source: |-
+        class Foo {
+            public boolean equals(Object o) {
+                return o instanceof Foo;
+            }
+        }
+      style: primary
+      start: 0
+      end: 90
+    - source: equals
+      style: secondary
+      start: 31
+      end: 37
+    - source: |-
+        public boolean equals(Object o) {
+                return o instanceof Foo;
+            }
+      style: secondary
+      start: 16
+      end: 88

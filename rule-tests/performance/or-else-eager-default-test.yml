@@ -1,0 +1,45 @@
+id: or-else-eager-default
+valid:
+  - |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse("default");
+        }
+    }
+  - |
+    class Foo {
+        String bar(Optional<String> opt, String ready) {
+            return opt.orElse(ready);
+        }
+    }
+  - |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElseGet(() -> computeDefault());
+        }
+    }
+  - |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElseThrow();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse(computeDefault());
+        }
+    }
+  - |
+    class Foo {
+        List<String> bar(Optional<List<String>> opt) {
+            return opt.orElse(new ArrayList<>());
+        }
+    }
+  - |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse(builder.build());
+        }
+    }

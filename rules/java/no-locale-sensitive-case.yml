@@ -1,0 +1,13 @@
+id: no-locale-sensitive-case
+language: java
+severity: hint
+message: >-
+  toLowerCase()/toUpperCase() without a Locale use the JVM default, so
+  results vary by machine (in Turkish, "I".toLowerCase() is a dotless "ı").
+  Pass Locale.ROOT, or the locale you actually mean, explicitly.
+metadata:
+  category: java
+rule:
+  any:
+    - pattern: $S.toLowerCase()
+    - pattern: $S.toUpperCase()

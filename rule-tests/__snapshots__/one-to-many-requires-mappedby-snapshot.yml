@@ -1,0 +1,80 @@
+id: one-to-many-requires-mappedby
+snapshots:
+  ? |
+    class Customer {
+        @OneToMany
+        private List<Order> orders;
+    }
+  : labels:
+    - source: |-
+        @OneToMany
+            private List<Order> orders;
+      style: primary
+      start: 21
+      end: 63
+    - source: OneToMany
+      style: secondary
+      start: 22
+      end: 31
+    - source: '@OneToMany'
+      style: secondary
+      start: 21
+      end: 31
+    - source: |-
+        @OneToMany
+            private
+      style: secondary
+      start: 21
+      end: 43
+  ? |
+    class Customer {
+        @OneToMany(cascade = CascadeType.ALL)
+        private List<Order> orders;
+    }
+  : labels:
+    - source: |-
+        @OneToMany(cascade = CascadeType.ALL)
+            private List<Order> orders;
+      style: primary
+      start: 21
+      end: 90
+    - source: OneToMany
+      style: secondary
+      start: 22
+      end: 31
+    - source: '@OneToMany(cascade = CascadeType.ALL)'
+      style: secondary
+      start: 21
+      end: 58
+    - source: |-
+        @OneToMany(cascade = CascadeType.ALL)
+            private
+      style: secondary
+      start: 21
+      end: 70
+  ? |
+    class Customer {
+        @OneToMany(orphanRemoval = true)
+        private List<Order> orders;
+    }
+  : labels:
+    - source: |-
+        @OneToMany(orphanRemoval = true)
+            private List<Order> orders;
+      style: primary
+      start: 21
+      end: 85
+    - source: OneToMany
+      style: secondary
+      start: 22
+      end: 31
+    - source: '@OneToMany(orphanRemoval = true)'
+      style: secondary
+      start: 21
+      end: 53
+    - source: |-
+        @OneToMany(orphanRemoval = true)
+            private
+      style: secondary
+      start: 21
+      end: 65

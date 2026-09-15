@@ -1,0 +1,54 @@
+id: no-catch-nullpointer
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (NullPointerException e) {
+                recover();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        catch (NullPointerException e) {
+                    recover();
+                }
+      style: primary
+      start: 72
+      end: 137
+    - source: NullPointerException
+      style: secondary
+      start: 79
+      end: 99
+    - source: NullPointerException e
+      style: secondary
+      start: 79
+      end: 101
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (java.lang.NullPointerException e) {
+                recover();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        catch (java.lang.NullPointerException e) {
+                    recover();
+                }
+      style: primary
+      start: 72
+      end: 147
+    - source: NullPointerException
+      style: secondary
+      start: 89
+      end: 109
+    - source: java.lang.NullPointerException e
+      style: secondary
+      start: 79
+      end: 111

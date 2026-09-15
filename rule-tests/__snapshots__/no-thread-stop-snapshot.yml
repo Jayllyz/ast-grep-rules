@@ -1,0 +1,62 @@
+id: no-thread-stop
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            Thread.currentThread().resume();
+        }
+    }
+  : labels:
+    - source: Thread.currentThread().resume()
+      style: primary
+      start: 37
+      end: 68
+    - source: Thread.currentThread()
+      style: secondary
+      start: 37
+      end: 59
+  ? |
+    class Foo {
+        void bar(Thread myThread) {
+            myThread.stop();
+        }
+    }
+  : labels:
+    - source: myThread.stop()
+      style: primary
+      start: 52
+      end: 67
+    - source: myThread
+      style: secondary
+      start: 52
+      end: 60
+  ? |
+    class Foo {
+        void bar(Thread thread) {
+            thread.stop();
+        }
+    }
+  : labels:
+    - source: thread.stop()
+      style: primary
+      start: 50
+      end: 63
+    - source: thread
+      style: secondary
+      start: 50
+      end: 56
+  ? |
+    class Foo {
+        void bar(Worker worker) {
+            worker.suspend();
+        }
+    }
+  : labels:
+    - source: worker.suspend()
+      style: primary
+      start: 50
+      end: 66
+    - source: worker
+      style: secondary
+      start: 50
+      end: 56

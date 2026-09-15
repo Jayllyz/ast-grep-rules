@@ -1,0 +1,130 @@
+id: read-method-transactional-readonly
+snapshots:
+  ? |
+    class CustomerService {
+        @Transactional
+        Customer getById(Long id) {
+            return repo.getById(id);
+        }
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            Customer getById(Long id) {
+                return repo.getById(id);
+            }
+      style: primary
+      start: 28
+      end: 113
+    - source: getById
+      style: secondary
+      start: 56
+      end: 63
+    - source: Transactional
+      style: secondary
+      start: 29
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+  ? |
+    class CustomerService {
+        @Transactional
+        List<Customer> findCustomers() {
+            return repo.findAll();
+        }
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            List<Customer> findCustomers() {
+                return repo.findAll();
+            }
+      style: primary
+      start: 28
+      end: 116
+    - source: findCustomers
+      style: secondary
+      start: 62
+      end: 75
+    - source: Transactional
+      style: secondary
+      start: 29
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+  ? |
+    class CustomerService {
+        @Transactional
+        boolean existsByEmail(String email) {
+            return repo.existsByEmail(email);
+        }
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            boolean existsByEmail(String email) {
+                return repo.existsByEmail(email);
+            }
+      style: primary
+      start: 28
+      end: 132
+    - source: existsByEmail
+      style: secondary
+      start: 55
+      end: 68
+    - source: Transactional
+      style: secondary
+      start: 29
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+  ? |
+    class CustomerService {
+        @Transactional
+        long countActive() {
+            return repo.count();
+        }
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            long countActive() {
+                return repo.count();
+            }
+      style: primary
+      start: 28
+      end: 102
+    - source: countActive
+      style: secondary
+      start: 52
+      end: 63
+    - source: Transactional
+      style: secondary
+      start: 29
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42
+    - source: '@Transactional'
+      style: secondary
+      start: 28
+      end: 42

@@ -1,0 +1,35 @@
+id: no-thread-stop
+valid:
+  - |
+    class Foo {
+        void bar(Server server, ExecutorService executor, Thread thread) {
+            server.stop();
+            executor.shutdown();
+            thread.interrupt();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(Thread thread) {
+            thread.stop();
+        }
+    }
+  - |
+    class Foo {
+        void bar(Worker worker) {
+            worker.suspend();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Thread.currentThread().resume();
+        }
+    }
+  - |
+    class Foo {
+        void bar(Thread myThread) {
+            myThread.stop();
+        }
+    }

@@ -1,0 +1,19 @@
+id: no-static-simpledateformat
+language: java
+severity: warning
+message: >-
+  A static SimpleDateFormat is shared mutable state: SimpleDateFormat is
+  not thread-safe, so concurrent format/parse calls can throw or return
+  wrong results. Use the immutable DateTimeFormatter, or keep the
+  formatter per-request or in a ThreadLocal.
+metadata:
+  category: performance
+rule:
+  kind: field_declaration
+  all:
+    - has:
+        kind: modifiers
+        regex: "\\bstatic\\b"
+    - has:
+        field: type
+        regex: "SimpleDateFormat$"

@@ -1,0 +1,36 @@
+id: no-static-simpledateformat
+snapshots:
+  ? |
+    class Foo {
+        private static final SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd");
+    }
+  : labels:
+    - source: private static final SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd");
+      style: primary
+      start: 16
+      end: 95
+    - source: private static final
+      style: secondary
+      start: 16
+      end: 36
+    - source: SimpleDateFormat
+      style: secondary
+      start: 37
+      end: 53
+  ? |
+    class Foo {
+        static SimpleDateFormat fmt;
+    }
+  : labels:
+    - source: static SimpleDateFormat fmt;
+      style: primary
+      start: 16
+      end: 44
+    - source: static
+      style: secondary
+      start: 16
+      end: 22
+    - source: SimpleDateFormat
+      style: secondary
+      start: 23
+      end: 39

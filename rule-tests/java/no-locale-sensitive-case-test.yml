@@ -1,0 +1,33 @@
+id: no-locale-sensitive-case
+valid:
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.toLowerCase(Locale.ROOT);
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.toUpperCase(Locale.ENGLISH);
+        }
+    }
+  - |
+    class Foo {
+        int bar(List<String> list) {
+            return list.size();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.toLowerCase();
+        }
+    }
+  - |
+    class Foo {
+        String bar(String s) {
+            return s.toUpperCase();
+        }
+    }

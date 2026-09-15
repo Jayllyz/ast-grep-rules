@@ -1,0 +1,26 @@
+id: equals-without-hashcode
+language: java
+severity: error
+message: >-
+  This class overrides equals() but not hashCode(), breaking the
+  equals/hashCode contract: equal instances will usually get different hash
+  codes, so HashMap/HashSet lookups can silently miss them. Add a matching
+  hashCode(), or let Lombok generate both.
+metadata:
+  category: java
+rule:
+  kind: class_declaration
+  all:
+    - has:
+        kind: method_declaration
+        has:
+          field: name
+          regex: "^equals$"
+        stopBy: end
+    - not:
+        has:
+          kind: method_declaration
+          has:
+            field: name
+            regex: "^hashCode$"
+          stopBy: end

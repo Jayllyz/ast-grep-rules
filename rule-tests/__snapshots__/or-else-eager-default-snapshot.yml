@@ -1,0 +1,47 @@
+id: or-else-eager-default
+snapshots:
+  ? |
+    class Foo {
+        List<String> bar(Optional<List<String>> opt) {
+            return opt.orElse(new ArrayList<>());
+        }
+    }
+  : labels:
+    - source: opt.orElse(new ArrayList<>())
+      style: primary
+      start: 78
+      end: 107
+    - source: new ArrayList<>()
+      style: secondary
+      start: 89
+      end: 106
+  ? |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse(builder.build());
+        }
+    }
+  : labels:
+    - source: opt.orElse(builder.build())
+      style: primary
+      start: 66
+      end: 93
+    - source: builder.build()
+      style: secondary
+      start: 77
+      end: 92
+  ? |
+    class Foo {
+        String bar(Optional<String> opt) {
+            return opt.orElse(computeDefault());
+        }
+    }
+  : labels:
+    - source: opt.orElse(computeDefault())
+      style: primary
+      start: 66
+      end: 94
+    - source: computeDefault()
+      style: secondary
+      start: 77
+      end: 93

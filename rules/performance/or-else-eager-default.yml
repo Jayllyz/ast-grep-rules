@@ -1,0 +1,18 @@
+id: or-else-eager-default
+language: java
+severity: warning
+message: >-
+  Optional.orElse(...) evaluates its argument eagerly, so an expensive
+  default (a method call or a constructor) runs even when the Optional is
+  present. Use orElseGet(() -> ...), or orElseThrow(), to compute the
+  fallback only when it is actually needed.
+metadata:
+  category: performance
+rule:
+  pattern: $OPT.orElse($ARG)
+  has:
+    field: arguments
+    any:
+      - kind: method_invocation
+      - kind: object_creation_expression
+    stopBy: end

@@ -1,0 +1,37 @@
+id: read-method-transactional-readonly
+language: java
+severity: hint
+message: >-
+  A read-style @Transactional method without readOnly = true still pays for
+  dirty checking and flush bookkeeping. Set readOnly = true so the provider
+  can skip that work and, on some stacks, route to a replica.
+metadata:
+  category: jpa
+rule:
+  kind: method_declaration
+  all:
+    - has:
+        field: name
+        regex: "^(find|get|read|query|count|exists|is|fetch|load|search)[A-Z].*$"
+    - has:
+        kind: modifiers
+        has:
+          any:
+            - kind: marker_annotation
+              has:
+                field: name
+                regex: "^Transactional$"
+            - kind: annotation
+              all:
+                - has:
+                    field: name
+                    regex: "^Transactional$"
+                - not:
+                    has:
+                      field: arguments
+                      has:
+                        kind: element_value_pair
+                        has:
+                          field: key
+                          regex: "^readOnly$"
+                      stopBy: end

@@ -1,0 +1,43 @@
+id: no-catch-nullpointer
+valid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (IllegalStateException e) {
+                recover();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (Exception e) {
+                recover();
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (NullPointerException e) {
+                recover();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                run();
+            } catch (java.lang.NullPointerException e) {
+                recover();
+            }
+        }
+    }

@@ -1,0 +1,34 @@
+id: one-to-many-requires-mappedby
+language: java
+severity: warning
+message: >-
+  @OneToMany without mappedBy is unidirectional, so JPA creates an extra
+  join table to hold the association and writes to it on every update.
+  Add mappedBy = "..." naming the owning field on the other side, unless a
+  unidirectional mapping (and its join table) is genuinely intended.
+metadata:
+  category: jpa
+rule:
+  kind: field_declaration
+  has:
+    kind: modifiers
+    has:
+      any:
+        - kind: marker_annotation
+          has:
+            field: name
+            regex: "^OneToMany$"
+        - kind: annotation
+          all:
+            - has:
+                field: name
+                regex: "^OneToMany$"
+            - not:
+                has:
+                  field: arguments
+                  has:
+                    kind: element_value_pair
+                    has:
+                      field: key
+                      regex: "^mappedBy$"
+                  stopBy: end
