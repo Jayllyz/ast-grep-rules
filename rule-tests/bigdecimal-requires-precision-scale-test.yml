@@ -1,0 +1,36 @@
+id: bigdecimal-requires-precision-scale
+valid:
+  - |
+    class Order {
+        @Column(name = "amount", precision = 12, scale = 2)
+        private BigDecimal amount;
+    }
+  - |
+    class Order {
+        @Column(precision = 19, scale = 4)
+        private BigDecimal total;
+    }
+  - |
+    class Order {
+        private Integer count;
+    }
+invalid:
+  - |
+    class Order {
+        private BigDecimal amount;
+    }
+  - |
+    class Order {
+        @Column(name = "amount")
+        private BigDecimal amount;
+    }
+  - |
+    class Order {
+        @Column(name = "amount", precision = 12)
+        private BigDecimal amount;
+    }
+  - |
+    class Order {
+        @Column(name = "amount", scale = 2)
+        private BigDecimal amount;
+    }
