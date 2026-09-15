@@ -1,0 +1,47 @@
+id: no-legacy-synchronized-collection
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            List<String> list = new Vector<>();
+        }
+    }
+  : labels:
+    - source: new Vector<>()
+      style: primary
+      start: 57
+      end: 71
+    - source: Vector<>
+      style: secondary
+      start: 61
+      end: 69
+  ? |
+    class Foo {
+        void bar() {
+            Map<String, String> map = new java.util.Hashtable<>();
+        }
+    }
+  : labels:
+    - source: new java.util.Hashtable<>()
+      style: primary
+      start: 63
+      end: 90
+    - source: java.util.Hashtable<>
+      style: secondary
+      start: 67
+      end: 88
+  ? |
+    class Foo {
+        void bar() {
+            Stack<String> stack = new Stack<>();
+        }
+    }
+  : labels:
+    - source: new Stack<>()
+      style: primary
+      start: 59
+      end: 72
+    - source: Stack<>
+      style: secondary
+      start: 63
+      end: 70

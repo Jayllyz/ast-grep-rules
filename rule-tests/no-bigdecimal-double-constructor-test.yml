@@ -1,0 +1,17 @@
+id: no-bigdecimal-double-constructor
+valid:
+  - |
+    class Foo {
+        BigDecimal a = new BigDecimal("0.1");
+        BigDecimal b = BigDecimal.valueOf(0.1);
+        BigDecimal c = new BigDecimal(10);
+    }
+invalid:
+  - |
+    class Foo {
+        BigDecimal a = new BigDecimal(0.1);
+    }
+  - |
+    class Foo {
+        BigDecimal b = new BigDecimal(0.1f);
+    }

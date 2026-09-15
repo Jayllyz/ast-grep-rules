@@ -16,6 +16,9 @@ See [`rules/`](rules) for the full rule definitions.
 - [`find-by-id-requires-optional`](rules/find-by-id-requires-optional.yml): `findById`/`getById`-style repository methods must return `Optional<T>`.
 - [`no-lombok-data-on-entity`](rules/no-lombok-data-on-entity.yml): no Lombok `@Data`/bare `@EqualsAndHashCode` on a JPA `@Entity`.
 - [`no-primitive-jpa-id`](rules/no-primitive-jpa-id.yml): `@Id` fields must use a boxed type, not `long`/`int`.
+- [`generated-value-requires-strategy`](rules/generated-value-requires-strategy.yml): `@GeneratedValue` needs an explicit, non-`AUTO` strategy.
+- [`join-column-requires-name`](rules/join-column-requires-name.yml): `@JoinColumn` needs an explicit `name = "..."`.
+- [`no-query-string-concatenation`](rules/no-query-string-concatenation.yml): no `@Query("..." + x)`, use a constant query with parameters.
 - [`no-empty-catch-block`](rules/no-empty-catch-block.yml): no silently swallowed exceptions.
 - [`collectors-tolist-to-stream-tolist`](rules/collectors-tolist-to-stream-tolist.yml): use `Stream.toList()` instead of `.collect(Collectors.toList())`.
 - [`no-optional-field-or-parameter`](rules/no-optional-field-or-parameter.yml): `Optional` should only be used as a return type.
@@ -32,6 +35,11 @@ See [`rules/`](rules) for the full rule definitions.
 - [`prefer-isempty`](rules/prefer-isempty.yml): use `isEmpty()` instead of `size()/length() == 0` or `equals("")`.
 - [`no-return-in-finally`](rules/no-return-in-finally.yml): no `return`/`throw` inside a `finally` block.
 - [`no-catch-throwable`](rules/no-catch-throwable.yml): don't catch `Throwable`/`Error`.
+- [`no-legacy-synchronized-collection`](rules/no-legacy-synchronized-collection.yml): no `new Vector()`/`Stack()`/`Hashtable()`.
+- [`no-runtime-exec`](rules/no-runtime-exec.yml): no `Runtime.getRuntime().exec(...)`, use `ProcessBuilder`.
+- [`no-finalize-method`](rules/no-finalize-method.yml): no `Object.finalize()` overrides.
+- [`no-raw-type-instantiation`](rules/no-raw-type-instantiation.yml): no raw `new ArrayList()`/`HashMap()`/etc.
+- [`no-bigdecimal-double-constructor`](rules/no-bigdecimal-double-constructor.yml): no `new BigDecimal(double)`, use `valueOf` or the `String` ctor.
 
 ## Using these rules in another repo
 

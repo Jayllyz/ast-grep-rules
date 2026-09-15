@@ -1,0 +1,25 @@
+id: no-finalize-method
+valid:
+  - |
+    class Foo {
+        void close() {
+        }
+    }
+  - |
+    class Foo {
+        void finalize(int value) {
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        protected void finalize() {
+        }
+    }
+  - |
+    class Foo {
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+        }
+    }

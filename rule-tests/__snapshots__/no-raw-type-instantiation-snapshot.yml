@@ -1,0 +1,47 @@
+id: no-raw-type-instantiation
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            List<String> a = new ArrayList();
+        }
+    }
+  : labels:
+    - source: new ArrayList()
+      style: primary
+      start: 54
+      end: 69
+    - source: ArrayList
+      style: secondary
+      start: 58
+      end: 67
+  ? |
+    class Foo {
+        void bar() {
+            Map<String, String> m = new HashMap();
+        }
+    }
+  : labels:
+    - source: new HashMap()
+      style: primary
+      start: 61
+      end: 74
+    - source: HashMap
+      style: secondary
+      start: 65
+      end: 72
+  ? |
+    class Foo {
+        void bar() {
+            Set<String> s = new java.util.HashSet();
+        }
+    }
+  : labels:
+    - source: new java.util.HashSet()
+      style: primary
+      start: 53
+      end: 76
+    - source: java.util.HashSet
+      style: secondary
+      start: 57
+      end: 74

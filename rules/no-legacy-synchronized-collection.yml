@@ -1,0 +1,14 @@
+id: no-legacy-synchronized-collection
+language: java
+severity: warning
+message: >-
+  Vector, Stack and Hashtable are legacy synchronized collections. Every
+  operation takes the monitor, so even single-threaded use pays for
+  locking, and iteration still needs external synchronization. Prefer
+  ArrayList, ArrayDeque and HashMap, or the concurrent collections when
+  you actually share state across threads.
+rule:
+  kind: object_creation_expression
+  has:
+    field: type
+    regex: "(^|\\.)(Vector|Stack|Hashtable)(<[\\s\\S]*>)?$"

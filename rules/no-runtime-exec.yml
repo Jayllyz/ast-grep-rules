@@ -1,0 +1,10 @@
+id: no-runtime-exec
+language: java
+severity: warning
+message: >-
+  Runtime.exec() takes a single string that gets split with a
+  platform-dependent tokenizer and offers no control over the working
+  directory, environment or I/O wiring. Use ProcessBuilder with an
+  explicit argument list instead.
+rule:
+  pattern: Runtime.getRuntime().exec($$$ARGS)

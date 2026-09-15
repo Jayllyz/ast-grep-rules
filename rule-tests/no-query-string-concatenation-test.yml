@@ -1,0 +1,23 @@
+id: no-query-string-concatenation
+valid:
+  - |
+    interface OrderRepository {
+        @Query("select o from Order o where o.id = :id")
+        Order findOne(Long id);
+    }
+  - |
+    interface OrderRepository {
+        @Query(value = "select * from orders where id = ?1", nativeQuery = true)
+        Order findOne(Long id);
+    }
+invalid:
+  - |
+    interface OrderRepository {
+        @Query("select o from Order o where o.status = " + STATUS)
+        List<Order> find();
+    }
+  - |
+    interface OrderRepository {
+        @Query(value = "select * from orders where status = '" + status + "'", nativeQuery = true)
+        List<Order> find(String status);
+    }

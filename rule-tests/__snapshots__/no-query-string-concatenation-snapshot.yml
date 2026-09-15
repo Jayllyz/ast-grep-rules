@@ -1,0 +1,50 @@
+id: no-query-string-concatenation
+snapshots:
+  ? |
+    interface OrderRepository {
+        @Query("select o from Order o where o.status = " + STATUS)
+        List<Order> find();
+    }
+  : labels:
+    - source: '@Query("select o from Order o where o.status = " + STATUS)'
+      style: primary
+      start: 32
+      end: 90
+    - source: Query
+      style: secondary
+      start: 33
+      end: 38
+    - source: '"select o from Order o where o.status = " + STATUS'
+      style: secondary
+      start: 39
+      end: 89
+    - source: '"select o from Order o where o.status = " + STATUS'
+      style: secondary
+      start: 39
+      end: 89
+  ? |
+    interface OrderRepository {
+        @Query(value = "select * from orders where status = '" + status + "'", nativeQuery = true)
+        List<Order> find(String status);
+    }
+  : labels:
+    - source: '@Query(value = "select * from orders where status = ''" + status + "''", nativeQuery = true)'
+      style: primary
+      start: 32
+      end: 122
+    - source: Query
+      style: secondary
+      start: 33
+      end: 38
+    - source: '"select * from orders where status = ''" + status + "''"'
+      style: secondary
+      start: 47
+      end: 101
+    - source: value = "select * from orders where status = '" + status + "'"
+      style: secondary
+      start: 39
+      end: 101
+    - source: value = "select * from orders where status = '" + status + "'"
+      style: secondary
+      start: 39
+      end: 101

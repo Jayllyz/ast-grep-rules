@@ -1,0 +1,26 @@
+id: join-column-requires-name
+valid:
+  - |
+    class Order {
+        @ManyToOne
+        @JoinColumn(name = "customer_id")
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @ManyToOne
+        private Customer customer;
+    }
+invalid:
+  - |
+    class Order {
+        @ManyToOne
+        @JoinColumn
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @ManyToOne
+        @JoinColumn(nullable = false)
+        private Customer customer;
+    }

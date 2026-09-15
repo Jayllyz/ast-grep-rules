@@ -1,0 +1,31 @@
+id: join-column-requires-name
+language: java
+severity: warning
+message: >-
+  @JoinColumn is missing an explicit name = "...". Without it the column
+  name is derived from the field/property through the active naming
+  strategy, so it silently changes if that strategy or the field name
+  changes, and it won't match hand-written migrations.
+rule:
+  kind: field_declaration
+  has:
+    kind: modifiers
+    has:
+      any:
+        - kind: marker_annotation
+          has:
+            field: name
+            regex: "^JoinColumn$"
+        - kind: annotation
+          all:
+            - has:
+                field: name
+                regex: "^JoinColumn$"
+            - not:
+                has:
+                  field: arguments
+                  has:
+                    kind: element_value_pair
+                    has:
+                      field: key
+                      regex: "^name$"

@@ -1,0 +1,24 @@
+id: no-runtime-exec
+snapshots:
+  ? |
+    class Foo {
+        Process bar() throws IOException {
+            return Runtime.getRuntime().exec("ls -la");
+        }
+    }
+  : labels:
+    - source: Runtime.getRuntime().exec("ls -la")
+      style: primary
+      start: 66
+      end: 101
+  ? |
+    class Foo {
+        Process bar(String cmd) throws IOException {
+            return Runtime.getRuntime().exec(cmd);
+        }
+    }
+  : labels:
+    - source: Runtime.getRuntime().exec(cmd)
+      style: primary
+      start: 76
+      end: 106

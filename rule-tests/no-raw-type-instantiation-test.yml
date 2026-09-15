@@ -1,0 +1,29 @@
+id: no-raw-type-instantiation
+valid:
+  - |
+    class Foo {
+        void bar() {
+            List<String> a = new ArrayList<String>();
+            List<String> b = new ArrayList<>();
+            Map<String, String> c = new HashMap<String, String>();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            List<String> a = new ArrayList();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Map<String, String> m = new HashMap();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Set<String> s = new java.util.HashSet();
+        }
+    }

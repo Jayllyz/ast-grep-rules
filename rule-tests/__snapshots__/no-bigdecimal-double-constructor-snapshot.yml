@@ -1,0 +1,44 @@
+id: no-bigdecimal-double-constructor
+snapshots:
+  ? |
+    class Foo {
+        BigDecimal a = new BigDecimal(0.1);
+    }
+  : labels:
+    - source: new BigDecimal(0.1)
+      style: primary
+      start: 31
+      end: 50
+    - source: BigDecimal
+      style: secondary
+      start: 35
+      end: 45
+    - source: '0.1'
+      style: secondary
+      start: 46
+      end: 49
+    - source: '0.1'
+      style: secondary
+      start: 46
+      end: 49
+  ? |
+    class Foo {
+        BigDecimal b = new BigDecimal(0.1f);
+    }
+  : labels:
+    - source: new BigDecimal(0.1f)
+      style: primary
+      start: 31
+      end: 51
+    - source: BigDecimal
+      style: secondary
+      start: 35
+      end: 45
+    - source: 0.1f
+      style: secondary
+      start: 46
+      end: 50
+    - source: 0.1f
+      style: secondary
+      start: 46
+      end: 50

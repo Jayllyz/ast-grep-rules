@@ -1,0 +1,116 @@
+id: generated-value-requires-strategy
+snapshots:
+  ? |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue
+            private Long id;
+      style: primary
+      start: 26
+      end: 70
+    - source: GeneratedValue
+      style: secondary
+      start: 35
+      end: 49
+    - source: '@GeneratedValue'
+      style: secondary
+      start: 34
+      end: 49
+    - source: |-
+        @Id
+            @GeneratedValue
+            private
+      style: secondary
+      start: 26
+      end: 61
+  ? |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(generator = "order_seq")
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue(generator = "order_seq")
+            private Long id;
+      style: primary
+      start: 26
+      end: 95
+    - source: GeneratedValue
+      style: secondary
+      start: 35
+      end: 49
+    - source: '@GeneratedValue(generator = "order_seq")'
+      style: secondary
+      start: 34
+      end: 74
+    - source: |-
+        @Id
+            @GeneratedValue(generator = "order_seq")
+            private
+      style: secondary
+      start: 26
+      end: 86
+  ? |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.AUTO)
+            private Long id;
+      style: primary
+      start: 26
+      end: 102
+    - source: GeneratedValue
+      style: secondary
+      start: 35
+      end: 49
+    - source: strategy
+      style: secondary
+      start: 50
+      end: 58
+    - source: GenerationType
+      style: secondary
+      start: 61
+      end: 75
+    - source: AUTO
+      style: secondary
+      start: 76
+      end: 80
+    - source: GenerationType.AUTO
+      style: secondary
+      start: 61
+      end: 80
+    - source: strategy = GenerationType.AUTO
+      style: secondary
+      start: 50
+      end: 80
+    - source: strategy = GenerationType.AUTO
+      style: secondary
+      start: 50
+      end: 80
+    - source: '@GeneratedValue(strategy = GenerationType.AUTO)'
+      style: secondary
+      start: 34
+      end: 81
+    - source: |-
+        @Id
+            @GeneratedValue(strategy = GenerationType.AUTO)
+            private
+      style: secondary
+      start: 26
+      end: 93

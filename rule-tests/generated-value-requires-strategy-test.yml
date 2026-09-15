@@ -1,0 +1,44 @@
+id: generated-value-requires-strategy
+valid:
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        private Long id;
+    }
+invalid:
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        @GeneratedValue(generator = "order_seq")
+        private Long id;
+    }

@@ -1,0 +1,60 @@
+id: join-column-requires-name
+snapshots:
+  ? |
+    class Order {
+        @ManyToOne
+        @JoinColumn
+        private Customer customer;
+    }
+  : labels:
+    - source: |-
+        @ManyToOne
+            @JoinColumn
+            private Customer customer;
+      style: primary
+      start: 18
+      end: 75
+    - source: JoinColumn
+      style: secondary
+      start: 34
+      end: 44
+    - source: '@JoinColumn'
+      style: secondary
+      start: 33
+      end: 44
+    - source: |-
+        @ManyToOne
+            @JoinColumn
+            private
+      style: secondary
+      start: 18
+      end: 56
+  ? |
+    class Order {
+        @ManyToOne
+        @JoinColumn(nullable = false)
+        private Customer customer;
+    }
+  : labels:
+    - source: |-
+        @ManyToOne
+            @JoinColumn(nullable = false)
+            private Customer customer;
+      style: primary
+      start: 18
+      end: 93
+    - source: JoinColumn
+      style: secondary
+      start: 34
+      end: 44
+    - source: '@JoinColumn(nullable = false)'
+      style: secondary
+      start: 33
+      end: 62
+    - source: |-
+        @ManyToOne
+            @JoinColumn(nullable = false)
+            private
+      style: secondary
+      start: 18
+      end: 74

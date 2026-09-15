@@ -1,0 +1,29 @@
+id: no-legacy-synchronized-collection
+valid:
+  - |
+    class Foo {
+        void bar() {
+            List<String> list = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            Deque<String> deque = new ArrayDeque<>();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            List<String> list = new Vector<>();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Stack<String> stack = new Stack<>();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Map<String, String> map = new java.util.Hashtable<>();
+        }
+    }

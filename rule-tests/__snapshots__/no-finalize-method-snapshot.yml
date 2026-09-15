@@ -1,0 +1,46 @@
+id: no-finalize-method
+snapshots:
+  ? |
+    class Foo {
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+        }
+    }
+  : labels:
+    - source: |-
+        @Override
+            protected void finalize() throws Throwable {
+                super.finalize();
+            }
+      style: primary
+      start: 16
+      end: 106
+    - source: finalize
+      style: secondary
+      start: 45
+      end: 53
+    - source: ()
+      style: secondary
+      start: 53
+      end: 55
+  ? |
+    class Foo {
+        protected void finalize() {
+        }
+    }
+  : labels:
+    - source: |-
+        protected void finalize() {
+            }
+      style: primary
+      start: 16
+      end: 49
+    - source: finalize
+      style: secondary
+      start: 31
+      end: 39
+    - source: ()
+      style: secondary
+      start: 39
+      end: 41

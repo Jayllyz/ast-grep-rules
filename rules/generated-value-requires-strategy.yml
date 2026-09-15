@@ -1,0 +1,50 @@
+id: generated-value-requires-strategy
+language: java
+severity: warning
+message: >-
+  @GeneratedValue without an explicit strategy (or with strategy = AUTO)
+  lets the provider pick how ids are produced, which can differ between
+  Hibernate versions and database dialects. Name the strategy (IDENTITY
+  or SEQUENCE on Postgres) so the generated SQL is predictable.
+rule:
+  kind: field_declaration
+  has:
+    kind: modifiers
+    has:
+      any:
+        - kind: marker_annotation
+          has:
+            field: name
+            regex: "^GeneratedValue$"
+        - kind: annotation
+          all:
+            - has:
+                field: name
+                regex: "^GeneratedValue$"
+            - any:
+                - not:
+                    has:
+                      field: arguments
+                      has:
+                        kind: element_value_pair
+                        has:
+                          field: key
+                          regex: "^strategy$"
+                - has:
+                    field: arguments
+                    has:
+                      kind: element_value_pair
+                      all:
+                        - has:
+                            field: key
+                            regex: "^strategy$"
+                        - has:
+                            field: value
+                            kind: field_access
+                            all:
+                              - has:
+                                  field: object
+                                  regex: "^GenerationType$"
+                              - has:
+                                  field: field
+                                  regex: "^AUTO$"
