@@ -4,12 +4,14 @@ A collection of [ast-grep](https://ast-grep.github.io/) rules for enforcing JPA 
 
 ## Rules
 
-- **entity-requires-table-name** — flags `@Entity` classes missing an explicit `@Table(name = "...")` annotation.
-- **postgres-identifier-case** — flags mixed-case string literals in `@Table`, `@Column`, or `@JoinColumn` names, since Postgres folds unquoted identifiers to lowercase.
-- **bigdecimal-requires-precision-scale** — flags `BigDecimal` fields missing `@Column(precision = ..., scale = ...)`, since Hibernate otherwise falls back to a default scale that can round differently than the Postgres `numeric(p,s)` column.
-- **enumerated-requires-string** — flags `@Enumerated` without `EnumType.STRING`, since the default `EnumType.ORDINAL` persists the declaration order as an integer and silently corrupts data if enum constants are ever reordered, inserted, or removed.
-- **to-many-requires-lazy-fetch** — flags `@OneToMany`/`@ManyToMany` without an explicit `fetch = FetchType.LAZY`, to avoid confusion with `@ManyToOne`/`@OneToOne`, whose spec default is EAGER and a classic N+1 trap.
-- **require-instant-or-offsetdatetime** — flags fields typed `java.util.Date` or `LocalDateTime`, both timezone-naive, in favor of `Instant`/`OffsetDateTime`, since mixing naive datetimes with Postgres `timestamptz` is a common source of timezone bugs.
+See [`rules/`](rules) for the full rule definitions.
+
+- [`entity-requires-table-name`](rules/entity-requires-table-name.yml) — `@Entity` needs an explicit `@Table(name = "...")`.
+- [`postgres-identifier-case`](rules/postgres-identifier-case.yml) — no mixed-case table/column/join-column names.
+- [`bigdecimal-requires-precision-scale`](rules/bigdecimal-requires-precision-scale.yml) — `BigDecimal` fields need `@Column(precision, scale)`.
+- [`enumerated-requires-string`](rules/enumerated-requires-string.yml) — `@Enumerated` needs `EnumType.STRING`.
+- [`to-many-requires-lazy-fetch`](rules/to-many-requires-lazy-fetch.yml) — `@OneToMany`/`@ManyToMany` need explicit `fetch = FetchType.LAZY`.
+- [`require-instant-or-offsetdatetime`](rules/require-instant-or-offsetdatetime.yml) — no `java.util.Date`/`LocalDateTime`, use `Instant`/`OffsetDateTime`.
 
 ## Using these rules in another repo
 
