@@ -1,0 +1,23 @@
+id: no-optional-field-or-parameter
+language: java
+severity: warning
+message: >-
+  Optional should only be used as a method return type, not as a field or
+  parameter type. It isn't Serializable, and using it here just pushes an
+  extra unwrap onto every caller instead of solving anything.
+rule:
+  any:
+    - kind: field_declaration
+      has:
+        field: type
+        kind: generic_type
+        has:
+          kind: type_identifier
+          regex: "^Optional$"
+    - kind: formal_parameter
+      has:
+        field: type
+        kind: generic_type
+        has:
+          kind: type_identifier
+          regex: "^Optional$"

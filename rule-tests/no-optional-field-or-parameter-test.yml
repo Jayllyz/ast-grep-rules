@@ -1,0 +1,21 @@
+id: no-optional-field-or-parameter
+valid:
+  - |
+    class Foo {
+        Optional<String> name() {
+            return Optional.empty();
+        }
+    }
+  - |
+    class Foo {
+        private String name;
+    }
+invalid:
+  - |
+    class Foo {
+        private Optional<String> name;
+    }
+  - |
+    class Foo {
+        void bar(Optional<String> name) {}
+    }

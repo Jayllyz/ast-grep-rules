@@ -1,0 +1,36 @@
+id: no-optional-field-or-parameter
+snapshots:
+  ? |
+    class Foo {
+        private Optional<String> name;
+    }
+  : labels:
+    - source: private Optional<String> name;
+      style: primary
+      start: 16
+      end: 46
+    - source: Optional
+      style: secondary
+      start: 24
+      end: 32
+    - source: Optional<String>
+      style: secondary
+      start: 24
+      end: 40
+  ? |
+    class Foo {
+        void bar(Optional<String> name) {}
+    }
+  : labels:
+    - source: Optional<String> name
+      style: primary
+      start: 25
+      end: 46
+    - source: Optional
+      style: secondary
+      start: 25
+      end: 33
+    - source: Optional<String>
+      style: secondary
+      start: 25
+      end: 41
