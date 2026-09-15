@@ -1,0 +1,43 @@
+id: no-catch-throwable
+valid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Exception e) {
+                handle(e);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (IllegalStateException | IllegalArgumentException e) {
+                handle(e);
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Throwable t) {
+                handle(t);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Error e) {
+                handle(e);
+            }
+        }
+    }

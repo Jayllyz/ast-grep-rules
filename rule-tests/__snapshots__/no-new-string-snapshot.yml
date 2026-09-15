@@ -1,0 +1,32 @@
+id: no-new-string
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            String s = new String("hello");
+        }
+    }
+  : labels:
+    - source: new String("hello")
+      style: primary
+      start: 48
+      end: 67
+    - source: String
+      style: secondary
+      start: 52
+      end: 58
+  ? |
+    class Foo {
+        void bar(byte[] bytes) {
+            String s = new String(bytes);
+        }
+    }
+  : labels:
+    - source: new String(bytes)
+      style: primary
+      start: 60
+      end: 77
+    - source: String
+      style: secondary
+      start: 64
+      end: 70

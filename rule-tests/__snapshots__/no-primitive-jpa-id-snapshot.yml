@@ -1,0 +1,64 @@
+id: no-primitive-jpa-id
+snapshots:
+  ? |
+    @Entity
+    class Order {
+        @Id
+        private int id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            private int id;
+      style: primary
+      start: 26
+      end: 49
+    - source: Id
+      style: secondary
+      start: 27
+      end: 29
+    - source: '@Id'
+      style: secondary
+      start: 26
+      end: 29
+    - source: |-
+        @Id
+            private
+      style: secondary
+      start: 26
+      end: 41
+    - source: int
+      style: secondary
+      start: 42
+      end: 45
+  ? |
+    @Entity
+    class Order {
+        @Id
+        private long id;
+    }
+  : labels:
+    - source: |-
+        @Id
+            private long id;
+      style: primary
+      start: 26
+      end: 50
+    - source: Id
+      style: secondary
+      start: 27
+      end: 29
+    - source: '@Id'
+      style: secondary
+      start: 26
+      end: 29
+    - source: |-
+        @Id
+            private
+      style: secondary
+      start: 26
+      end: 41
+    - source: long
+      style: secondary
+      start: 42
+      end: 46

@@ -1,0 +1,35 @@
+id: no-lombok-data-on-entity
+valid:
+  - |
+    @Entity
+    @Getter
+    @Setter
+    class Order {
+    }
+  - |
+    @Data
+    class OrderDto {
+    }
+  - |
+    @Entity
+    @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+    class Order {
+        @EqualsAndHashCode.Include
+        private Long id;
+    }
+invalid:
+  - |
+    @Entity
+    @Data
+    class Order {
+    }
+  - |
+    @Data
+    @Entity
+    class Order {
+    }
+  - |
+    @Entity
+    @EqualsAndHashCode
+    class Order {
+    }

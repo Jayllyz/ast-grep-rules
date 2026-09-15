@@ -1,0 +1,40 @@
+id: no-catch-throwable
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Error e) {
+                handle(e);
+            }
+        }
+    }
+  : labels:
+    - source: Error e
+      style: primary
+      start: 83
+      end: 90
+    - source: Error
+      style: secondary
+      start: 83
+      end: 88
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Throwable t) {
+                handle(t);
+            }
+        }
+    }
+  : labels:
+    - source: Throwable t
+      style: primary
+      start: 83
+      end: 94
+    - source: Throwable
+      style: secondary
+      start: 83
+      end: 92

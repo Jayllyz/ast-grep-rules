@@ -1,0 +1,33 @@
+id: no-new-string
+valid:
+  - |
+    class Foo {
+        void bar() {
+            String s = "hello";
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object o) {
+            String s = o.toString();
+        }
+    }
+  - |
+    class Foo {
+        void bar(int i) {
+            String s = String.valueOf(i);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            String s = new String("hello");
+        }
+    }
+  - |
+    class Foo {
+        void bar(byte[] bytes) {
+            String s = new String(bytes);
+        }
+    }

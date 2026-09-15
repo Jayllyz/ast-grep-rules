@@ -1,0 +1,32 @@
+id: no-primitive-jpa-id
+valid:
+  - |
+    @Entity
+    class Order {
+        @Id
+        private Long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        private Integer id;
+    }
+  - |
+    @Entity
+    class Order {
+        private long count;
+    }
+invalid:
+  - |
+    @Entity
+    class Order {
+        @Id
+        private long id;
+    }
+  - |
+    @Entity
+    class Order {
+        @Id
+        private int id;
+    }

@@ -1,0 +1,105 @@
+id: no-return-in-finally
+snapshots:
+  ? |
+    class Foo {
+        int bar() {
+            try {
+                return compute();
+            } finally {
+                return -1;
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        try {
+                    return compute();
+                } finally {
+                    return -1;
+                }
+      style: primary
+      start: 36
+      end: 124
+    - source: return -1;
+      style: secondary
+      start: 104
+      end: 114
+    - source: |-
+        finally {
+                    return -1;
+                }
+      style: secondary
+      start: 82
+      end: 124
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Exception e) {
+                handle(e);
+            } finally {
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        try {
+                    compute();
+                } catch (Exception e) {
+                    handle(e);
+                } finally {
+                    throw new IllegalStateException(e);
+                }
+      style: primary
+      start: 37
+      end: 198
+    - source: throw new IllegalStateException(e);
+      style: secondary
+      start: 153
+      end: 188
+    - source: |-
+        finally {
+                    throw new IllegalStateException(e);
+                }
+      style: secondary
+      start: 131
+      end: 198
+  ? |
+    class Foo {
+        void bar(boolean flag) {
+            try {
+                compute();
+            } finally {
+                if (flag) {
+                    return;
+                }
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        try {
+                    compute();
+                } finally {
+                    if (flag) {
+                        return;
+                    }
+                }
+      style: primary
+      start: 49
+      end: 169
+    - source: return;
+      style: secondary
+      start: 138
+      end: 145
+    - source: |-
+        finally {
+                    if (flag) {
+                        return;
+                    }
+                }
+      style: secondary
+      start: 88
+      end: 169

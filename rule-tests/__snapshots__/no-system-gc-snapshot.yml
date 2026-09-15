@@ -1,0 +1,24 @@
+id: no-system-gc
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            Runtime.getRuntime().gc();
+        }
+    }
+  : labels:
+    - source: Runtime.getRuntime().gc()
+      style: primary
+      start: 37
+      end: 62
+  ? |
+    class Foo {
+        void bar() {
+            System.gc();
+        }
+    }
+  : labels:
+    - source: System.gc()
+      style: primary
+      start: 37
+      end: 48

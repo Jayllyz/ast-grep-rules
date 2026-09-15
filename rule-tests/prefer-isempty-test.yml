@@ -1,0 +1,54 @@
+id: prefer-isempty
+valid:
+  - |
+    class Foo {
+        void bar(List<String> list, String s) {
+            if (list.isEmpty()) {
+                return;
+            }
+            if (s.isBlank()) {
+                return;
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(List<String> list) {
+            if (list.size() == 0) {
+                return;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<String> list) {
+            if (list.size() > 0) {
+                return;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(String s) {
+            if (s.length() != 0) {
+                return;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(String s) {
+            if (s.equals("")) {
+                return;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(List<String> list) {
+            if (0 == list.size()) {
+                return;
+            }
+        }
+    }

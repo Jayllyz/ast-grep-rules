@@ -1,0 +1,59 @@
+id: no-return-in-finally
+valid:
+  - |
+    class Foo {
+        int bar() {
+            try {
+                return compute();
+            } catch (Exception e) {
+                return -1;
+            } finally {
+                cleanup();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } finally {
+                cleanup();
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        int bar() {
+            try {
+                return compute();
+            } finally {
+                return -1;
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                compute();
+            } catch (Exception e) {
+                handle(e);
+            } finally {
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(boolean flag) {
+            try {
+                compute();
+            } finally {
+                if (flag) {
+                    return;
+                }
+            }
+        }
+    }

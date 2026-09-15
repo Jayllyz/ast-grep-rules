@@ -1,0 +1,12 @@
+id: no-new-string
+language: java
+severity: warning
+message: >-
+  new String(...) eagerly copies its argument, and new String("...") is a
+  pointless duplicate of an interned literal. Use the literal/argument
+  directly, or String.valueOf() when a conversion is actually needed.
+rule:
+  kind: object_creation_expression
+  has:
+    field: type
+    regex: "^String$"

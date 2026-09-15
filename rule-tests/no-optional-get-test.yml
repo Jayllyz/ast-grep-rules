@@ -1,0 +1,35 @@
+id: no-optional-get
+valid:
+  - |
+    class Foo {
+        void bar(Optional<String> opt) {
+            String s = opt.orElseThrow();
+        }
+    }
+  - |
+    class Foo {
+        void bar(Optional<String> opt) {
+            String s = opt.orElse("default");
+        }
+    }
+  - |
+    class Foo {
+        void bar(Map<String, String> map) {
+            String s = map.get("key");
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(Optional<String> opt) {
+            String s = opt.get();
+        }
+    }
+  - |
+    class Foo {
+        void bar(Optional<String> opt) {
+            if (opt.get().isEmpty()) {
+                return;
+            }
+        }
+    }

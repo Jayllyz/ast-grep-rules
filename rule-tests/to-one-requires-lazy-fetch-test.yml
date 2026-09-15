@@ -1,0 +1,38 @@
+id: to-one-requires-lazy-fetch
+valid:
+  - |
+    class Order {
+        @ManyToOne(fetch = FetchType.LAZY)
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @OneToOne(fetch = FetchType.LAZY, optional = false)
+        private Invoice invoice;
+    }
+  - |
+    class Order {
+        @OneToMany(mappedBy = "order")
+        private List<Item> items;
+    }
+invalid:
+  - |
+    class Order {
+        @ManyToOne
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @ManyToOne(optional = false)
+        private Customer customer;
+    }
+  - |
+    class Order {
+        @OneToOne
+        private Invoice invoice;
+    }
+  - |
+    class Order {
+        @ManyToOne(fetch = FetchType.EAGER)
+        private Customer customer;
+    }

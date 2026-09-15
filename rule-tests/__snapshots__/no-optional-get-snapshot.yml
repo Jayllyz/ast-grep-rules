@@ -1,0 +1,26 @@
+id: no-optional-get
+snapshots:
+  ? |
+    class Foo {
+        void bar(Optional<String> opt) {
+            String s = opt.get();
+        }
+    }
+  : labels:
+    - source: opt.get()
+      style: primary
+      start: 68
+      end: 77
+  ? |
+    class Foo {
+        void bar(Optional<String> opt) {
+            if (opt.get().isEmpty()) {
+                return;
+            }
+        }
+    }
+  : labels:
+    - source: opt.get()
+      style: primary
+      start: 61
+      end: 70

@@ -1,0 +1,21 @@
+id: no-system-gc
+valid:
+  - |
+    class Foo {
+        void bar() {
+            long t = System.currentTimeMillis();
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            System.gc();
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            Runtime.getRuntime().gc();
+        }
+    }

@@ -1,0 +1,106 @@
+id: to-one-requires-lazy-fetch
+snapshots:
+  ? |
+    class Order {
+        @ManyToOne
+        private Customer customer;
+    }
+  : labels:
+    - source: |-
+        @ManyToOne
+            private Customer customer;
+      style: primary
+      start: 18
+      end: 59
+    - source: ManyToOne
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@ManyToOne'
+      style: secondary
+      start: 18
+      end: 28
+    - source: |-
+        @ManyToOne
+            private
+      style: secondary
+      start: 18
+      end: 40
+  ? |
+    class Order {
+        @ManyToOne(fetch = FetchType.EAGER)
+        private Customer customer;
+    }
+  : labels:
+    - source: |-
+        @ManyToOne(fetch = FetchType.EAGER)
+            private Customer customer;
+      style: primary
+      start: 18
+      end: 84
+    - source: ManyToOne
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@ManyToOne(fetch = FetchType.EAGER)'
+      style: secondary
+      start: 18
+      end: 53
+    - source: |-
+        @ManyToOne(fetch = FetchType.EAGER)
+            private
+      style: secondary
+      start: 18
+      end: 65
+  ? |
+    class Order {
+        @ManyToOne(optional = false)
+        private Customer customer;
+    }
+  : labels:
+    - source: |-
+        @ManyToOne(optional = false)
+            private Customer customer;
+      style: primary
+      start: 18
+      end: 77
+    - source: ManyToOne
+      style: secondary
+      start: 19
+      end: 28
+    - source: '@ManyToOne(optional = false)'
+      style: secondary
+      start: 18
+      end: 46
+    - source: |-
+        @ManyToOne(optional = false)
+            private
+      style: secondary
+      start: 18
+      end: 58
+  ? |
+    class Order {
+        @OneToOne
+        private Invoice invoice;
+    }
+  : labels:
+    - source: |-
+        @OneToOne
+            private Invoice invoice;
+      style: primary
+      start: 18
+      end: 56
+    - source: OneToOne
+      style: secondary
+      start: 19
+      end: 27
+    - source: '@OneToOne'
+      style: secondary
+      start: 18
+      end: 27
+    - source: |-
+        @OneToOne
+            private
+      style: secondary
+      start: 18
+      end: 39
