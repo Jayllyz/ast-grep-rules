@@ -1,0 +1,52 @@
+id: instanceof-pattern-variable
+snapshots:
+  ? |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        if (x instanceof Bar) {
+                    Bar b = (Bar) x;
+                    b.run();
+                }
+      style: primary
+      start: 45
+      end: 128
+    - source: x
+      style: secondary
+      start: 49
+      end: 50
+    - source: Bar
+      style: secondary
+      start: 62
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: x instanceof Bar
+      style: secondary
+      start: 49
+      end: 65
+    - source: Bar
+      style: secondary
+      start: 90
+      end: 93
+    - source: x
+      style: secondary
+      start: 95
+      end: 96
+    - source: (Bar) x
+      style: secondary
+      start: 89
+      end: 96
+    - source: (Bar) x
+      style: secondary
+      start: 89
+      end: 96

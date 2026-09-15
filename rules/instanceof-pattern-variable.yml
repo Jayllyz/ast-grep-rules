@@ -1,0 +1,38 @@
+id: instanceof-pattern-variable
+language: java
+severity: hint
+message: >-
+  Use a pattern variable instead of a separate instanceof check plus
+  cast: `if (x instanceof Foo f)` binds f directly, stable since Java 16,
+  and removes the redundant cast.
+rule:
+  kind: if_statement
+  all:
+    - has:
+        field: condition
+        has:
+          kind: instanceof_expression
+          all:
+            - not:
+                has:
+                  field: name
+                  pattern: $X
+            - has:
+                field: left
+                pattern: $VAR
+            - has:
+                field: right
+                pattern: $TYPE
+    - has:
+        field: consequence
+        stopBy: end
+        has:
+          kind: cast_expression
+          stopBy: end
+          all:
+            - has:
+                field: type
+                pattern: $TYPE
+            - has:
+                field: value
+                pattern: $VAR

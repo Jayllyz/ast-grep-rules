@@ -1,0 +1,28 @@
+id: instanceof-pattern-variable
+valid:
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar b) {
+                b.run();
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar) {
+                doSomethingElse();
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar(Object x) {
+            if (x instanceof Bar) {
+                Bar b = (Bar) x;
+                b.run();
+            }
+        }
+    }
