@@ -54,6 +54,16 @@ You can also run a single rule ad hoc without a config file:
 ast-grep scan --rule path/to/rules/entity-requires-table-name.yml .
 ```
 
+## Running only on staged files
+
+To scan just the Java files staged for commit (e.g. from a pre-commit hook), pass their paths straight from `git diff`:
+
+```bash
+git diff --staged --name-only --diff-filter=ACM -- '*.java' | xargs -r ast-grep scan --config sgconfig.yml
+```
+
+`--diff-filter=ACM` skips deleted/renamed files so `ast-grep` isn't asked to scan a path that no longer exists, and `xargs -r` avoids running `ast-grep` at all when nothing staged matches.
+
 ## Testing rules in this repo
 
 Rule tests live in `rule-tests/` and are run with:
