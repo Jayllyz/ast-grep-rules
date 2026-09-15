@@ -1,0 +1,39 @@
+id: no-debug-print
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            System.err.println("debug");
+        }
+    }
+  : labels:
+    - source: System.err.println("debug")
+      style: primary
+      start: 37
+      end: 64
+  ? |
+    class Foo {
+        void bar() {
+            System.out.println("debug");
+        }
+    }
+  : labels:
+    - source: System.out.println("debug")
+      style: primary
+      start: 37
+      end: 64
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+  : labels:
+    - source: e.printStackTrace()
+      style: primary
+      start: 110
+      end: 129

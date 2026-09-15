@@ -1,0 +1,47 @@
+id: no-debug-print
+valid:
+  - |
+    class Foo {
+        void bar() {
+            logger.info("debug");
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            System.out.print("no newline");
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+                logger.error("failed", e);
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            System.out.println("debug");
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            System.err.println("debug");
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }

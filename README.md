@@ -17,6 +17,7 @@ See [`rules/`](rules) for the full rule definitions.
 - [`collectors-tolist-to-stream-tolist`](rules/collectors-tolist-to-stream-tolist.yml) — use `Stream.toList()` instead of `.collect(Collectors.toList())`.
 - [`no-optional-field-or-parameter`](rules/no-optional-field-or-parameter.yml) — `Optional` should only be used as a return type.
 - [`no-boxed-type-constructor`](rules/no-boxed-type-constructor.yml) — no `new Integer(...)`/`new Boolean(...)`/etc., use `valueOf()` or autoboxing.
+- [`no-debug-print`](rules/no-debug-print.yml) — no `System.out/err.println`/`printStackTrace()` outside test code, route through a logger instead.
 
 ## Using these rules in another repo
 
