@@ -1,6 +1,6 @@
 # ast-grep-rules
 
-A collection of [ast-grep](https://ast-grep.github.io/) rules for Java: JPA/Postgres entity conventions, general Java hygiene, and a few performance gotchas.
+A collection of [ast-grep](https://ast-grep.github.io/) rules for Java.
 
 ## Rules
 
@@ -94,8 +94,12 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 You can also run a single rule ad hoc without a config file:
 
 ```bash
-ast-grep scan --rule path/to/rules/entity-requires-table-name.yml .
+ast-grep scan --rule rules/jpa/entity-requires-table-name.yml .
 ```
+
+## Running with an agent
+
+This repo ships an agent skill at [`.agents/skills/run-ast-grep-rules`](.agents/skills/run-ast-grep-rules/SKILL.md), using the cross-tool `.agents/skills/` convention. When the repo is present (or its rules are copied into a project alongside `.agents/`), an agent can run the rules over a codebase: it asks which categories to run (all by default) and returns a minimal report.
 
 ## Running only on staged files
 
