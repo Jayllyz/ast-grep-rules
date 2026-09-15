@@ -1,0 +1,56 @@
+id: controller-endpoint-requires-operation
+valid:
+  - |
+    class FooController {
+        @GetMapping("/x")
+        @Operation(summary = "Get x")
+        public String get() { return "x"; }
+    }
+  - |
+    class FooController {
+        @PostMapping
+        @Operation
+        public String post() { return "x"; }
+    }
+  - |
+    class FooController {
+        @DeleteMapping("/{id}")
+        @ApiOperation(value = "Delete")
+        public void delete() {}
+    }
+  - |
+    class Foo {
+        public String plain() { return "x"; }
+    }
+  - |
+    class FooController {
+        @org.springframework.web.bind.annotation.PostMapping("/y")
+        @io.swagger.v3.oas.annotations.Operation(summary = "y")
+        public String post() { return "x"; }
+    }
+invalid:
+  - |
+    class FooController {
+        @GetMapping("/x")
+        public String get() { return "x"; }
+    }
+  - |
+    class FooController {
+        @PostMapping
+        public String post() { return "x"; }
+    }
+  - |
+    class FooController {
+        @PutMapping("/{id}")
+        public void put() {}
+    }
+  - |
+    class FooController {
+        @RequestMapping("/legacy")
+        public void legacy() {}
+    }
+  - |
+    class FooController {
+        @org.springframework.web.bind.annotation.GetMapping("/x")
+        public String get() { return "x"; }
+    }

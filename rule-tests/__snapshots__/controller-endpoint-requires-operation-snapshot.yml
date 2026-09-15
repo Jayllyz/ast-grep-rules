@@ -1,0 +1,132 @@
+id: controller-endpoint-requires-operation
+snapshots:
+  ? |
+    class FooController {
+        @GetMapping("/x")
+        public String get() { return "x"; }
+    }
+  : labels:
+    - source: |-
+        @GetMapping("/x")
+            public String get() { return "x"; }
+      style: primary
+      start: 26
+      end: 83
+    - source: GetMapping
+      style: secondary
+      start: 27
+      end: 37
+    - source: '@GetMapping("/x")'
+      style: secondary
+      start: 26
+      end: 43
+    - source: |-
+        @GetMapping("/x")
+            public
+      style: secondary
+      start: 26
+      end: 54
+  ? |
+    class FooController {
+        @PostMapping
+        public String post() { return "x"; }
+    }
+  : labels:
+    - source: |-
+        @PostMapping
+            public String post() { return "x"; }
+      style: primary
+      start: 26
+      end: 79
+    - source: PostMapping
+      style: secondary
+      start: 27
+      end: 38
+    - source: '@PostMapping'
+      style: secondary
+      start: 26
+      end: 38
+    - source: |-
+        @PostMapping
+            public
+      style: secondary
+      start: 26
+      end: 49
+  ? |
+    class FooController {
+        @PutMapping("/{id}")
+        public void put() {}
+    }
+  : labels:
+    - source: |-
+        @PutMapping("/{id}")
+            public void put() {}
+      style: primary
+      start: 26
+      end: 71
+    - source: PutMapping
+      style: secondary
+      start: 27
+      end: 37
+    - source: '@PutMapping("/{id}")'
+      style: secondary
+      start: 26
+      end: 46
+    - source: |-
+        @PutMapping("/{id}")
+            public
+      style: secondary
+      start: 26
+      end: 57
+  ? |
+    class FooController {
+        @RequestMapping("/legacy")
+        public void legacy() {}
+    }
+  : labels:
+    - source: |-
+        @RequestMapping("/legacy")
+            public void legacy() {}
+      style: primary
+      start: 26
+      end: 80
+    - source: RequestMapping
+      style: secondary
+      start: 27
+      end: 41
+    - source: '@RequestMapping("/legacy")'
+      style: secondary
+      start: 26
+      end: 52
+    - source: |-
+        @RequestMapping("/legacy")
+            public
+      style: secondary
+      start: 26
+      end: 63
+  ? |
+    class FooController {
+        @org.springframework.web.bind.annotation.GetMapping("/x")
+        public String get() { return "x"; }
+    }
+  : labels:
+    - source: |-
+        @org.springframework.web.bind.annotation.GetMapping("/x")
+            public String get() { return "x"; }
+      style: primary
+      start: 26
+      end: 123
+    - source: org.springframework.web.bind.annotation.GetMapping
+      style: secondary
+      start: 27
+      end: 77
+    - source: '@org.springframework.web.bind.annotation.GetMapping("/x")'
+      style: secondary
+      start: 26
+      end: 83
+    - source: |-
+        @org.springframework.web.bind.annotation.GetMapping("/x")
+            public
+      style: secondary
+      start: 26
+      end: 94

@@ -1,0 +1,31 @@
+id: controller-endpoint-requires-operation
+language: java
+severity: warning
+message: >-
+  Controller endpoint is missing API documentation. Add
+  @Operation(summary = "...") (SpringDoc) or @ApiOperation (Springfox) to the
+  handler so the generated OpenAPI spec describes the endpoint.
+metadata:
+  category: java
+rule:
+  kind: method_declaration
+  all:
+    - has:
+        kind: modifiers
+        has:
+          any:
+            - kind: marker_annotation
+            - kind: annotation
+          has:
+            field: name
+            regex: "(^|\\.)(Get|Post|Put|Delete|Patch|Request)Mapping$"
+    - not:
+        has:
+          kind: modifiers
+          has:
+            any:
+              - kind: marker_annotation
+              - kind: annotation
+            has:
+              field: name
+              regex: "(^|\\.)(Operation|ApiOperation)$"
