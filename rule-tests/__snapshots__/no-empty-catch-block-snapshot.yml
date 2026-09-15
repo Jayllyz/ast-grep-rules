@@ -1,0 +1,41 @@
+id: no-empty-catch-block
+snapshots:
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+            }
+        }
+    }
+  : labels:
+    - source: |-
+        catch (Exception e) {
+                }
+      style: primary
+      start: 76
+      end: 107
+    - source: |-
+        {
+                }
+      style: secondary
+      start: 96
+      end: 107
+  ? |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {}
+        }
+    }
+  : labels:
+    - source: catch (Exception e) {}
+      style: primary
+      start: 76
+      end: 98
+    - source: '{}'
+      style: secondary
+      start: 96
+      end: 98

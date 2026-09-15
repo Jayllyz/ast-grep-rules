@@ -1,0 +1,30 @@
+id: no-empty-catch-block
+valid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+                log.warn("failed", e);
+            }
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {
+            }
+        }
+    }
+  - |
+    class Foo {
+        void bar() {
+            try {
+                doThing();
+            } catch (Exception e) {}
+        }
+    }
