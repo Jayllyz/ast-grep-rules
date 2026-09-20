@@ -1,0 +1,426 @@
+id: sort-by-requires-typed-property
+snapshots:
+  ? |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.Direction.ASC, "name");
+        }
+    }
+  : labels:
+    - source: PageRequest.of(0, 10, Sort.Direction.ASC, "name")
+      style: primary
+      start: 48
+      end: 97
+    - source: PageRequest
+      style: secondary
+      start: 48
+      end: 59
+    - source: of
+      style: secondary
+      start: 60
+      end: 62
+    - source: '"name"'
+      style: secondary
+      start: 90
+      end: 96
+    - source: '"name"'
+      style: secondary
+      start: 90
+      end: 96
+  ? |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.Direction.DESC, "name", "id");
+        }
+    }
+  : labels:
+    - source: PageRequest.of(0, 10, Sort.Direction.DESC, "name", "id")
+      style: primary
+      start: 48
+      end: 104
+    - source: PageRequest
+      style: secondary
+      start: 48
+      end: 59
+    - source: of
+      style: secondary
+      start: 60
+      end: 62
+    - source: '"name"'
+      style: secondary
+      start: 91
+      end: 97
+    - source: '"name"'
+      style: secondary
+      start: 91
+      end: 97
+  ? |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.by("name"));
+        }
+    }
+  : labels:
+    - source: Sort.by("name")
+      style: primary
+      start: 70
+      end: 85
+    - source: Sort
+      style: secondary
+      start: 70
+      end: 74
+    - source: by
+      style: secondary
+      start: 75
+      end: 77
+    - source: '"name"'
+      style: secondary
+      start: 78
+      end: 84
+    - source: '"name"'
+      style: secondary
+      start: 78
+      end: 84
+  ? |
+    class Foo {
+        Sort bar() {
+            return Sort.by("a").and(Sort.by("b"));
+        }
+    }
+  : labels:
+    - source: Sort.by("a")
+      style: primary
+      start: 44
+      end: 56
+    - source: Sort
+      style: secondary
+      start: 44
+      end: 48
+    - source: by
+      style: secondary
+      start: 49
+      end: 51
+    - source: '"a"'
+      style: secondary
+      start: 52
+      end: 55
+    - source: '"a"'
+      style: secondary
+      start: 52
+      end: 55
+  ? |
+    class Foo {
+        Sort bar() {
+            return Sort.by("name");
+        }
+    }
+  : labels:
+    - source: Sort.by("name")
+      style: primary
+      start: 44
+      end: 59
+    - source: Sort
+      style: secondary
+      start: 44
+      end: 48
+    - source: by
+      style: secondary
+      start: 49
+      end: 51
+    - source: '"name"'
+      style: secondary
+      start: 52
+      end: 58
+    - source: '"name"'
+      style: secondary
+      start: 52
+      end: 58
+  ? |
+    class Foo {
+        Sort bar() {
+            return Sort.by("name", "createdAt");
+        }
+    }
+  : labels:
+    - source: Sort.by("name", "createdAt")
+      style: primary
+      start: 44
+      end: 72
+    - source: Sort
+      style: secondary
+      start: 44
+      end: 48
+    - source: by
+      style: secondary
+      start: 49
+      end: 51
+    - source: '"name"'
+      style: secondary
+      start: 52
+      end: 58
+    - source: '"name"'
+      style: secondary
+      start: 52
+      end: 58
+  ? |
+    class Foo {
+        Sort bar() {
+            return Sort.by(Sort.Direction.DESC, "name");
+        }
+    }
+  : labels:
+    - source: Sort.by(Sort.Direction.DESC, "name")
+      style: primary
+      start: 44
+      end: 80
+    - source: Sort
+      style: secondary
+      start: 44
+      end: 48
+    - source: by
+      style: secondary
+      start: 49
+      end: 51
+    - source: '"name"'
+      style: secondary
+      start: 73
+      end: 79
+    - source: '"name"'
+      style: secondary
+      start: 73
+      end: 79
+  ? |
+    class Foo {
+        Sort bar() {
+            return Sort.by(Sort.Order.asc("name"), Sort.Order.desc("id"));
+        }
+    }
+  : labels:
+    - source: Sort.Order.asc("name")
+      style: primary
+      start: 52
+      end: 74
+    - source: Sort.Order
+      style: secondary
+      start: 52
+      end: 62
+    - source: asc
+      style: secondary
+      start: 63
+      end: 66
+    - source: '"name"'
+      style: secondary
+      start: 67
+      end: 73
+    - source: '"name"'
+      style: secondary
+      start: 67
+      end: 73
+  ? |
+    class Foo {
+        Sort bar(Sort.Direction dir) {
+            return Sort.by(dir, "name", "createdAt");
+        }
+    }
+  : labels:
+    - source: Sort.by(dir, "name", "createdAt")
+      style: primary
+      start: 62
+      end: 95
+    - source: Sort
+      style: secondary
+      start: 62
+      end: 66
+    - source: by
+      style: secondary
+      start: 67
+      end: 69
+    - source: '"name"'
+      style: secondary
+      start: 75
+      end: 81
+    - source: '"name"'
+      style: secondary
+      start: 75
+      end: 81
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return Order.asc("name");
+        }
+    }
+  : labels:
+    - source: Order.asc("name")
+      style: primary
+      start: 50
+      end: 67
+    - source: Order
+      style: secondary
+      start: 50
+      end: 55
+    - source: asc
+      style: secondary
+      start: 56
+      end: 59
+    - source: '"name"'
+      style: secondary
+      start: 60
+      end: 66
+    - source: '"name"'
+      style: secondary
+      start: 60
+      end: 66
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.asc("name").ignoreCase();
+        }
+    }
+  : labels:
+    - source: Sort.Order.asc("name")
+      style: primary
+      start: 50
+      end: 72
+    - source: Sort.Order
+      style: secondary
+      start: 50
+      end: 60
+    - source: asc
+      style: secondary
+      start: 61
+      end: 64
+    - source: '"name"'
+      style: secondary
+      start: 65
+      end: 71
+    - source: '"name"'
+      style: secondary
+      start: 65
+      end: 71
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.asc("name");
+        }
+    }
+  : labels:
+    - source: Sort.Order.asc("name")
+      style: primary
+      start: 50
+      end: 72
+    - source: Sort.Order
+      style: secondary
+      start: 50
+      end: 60
+    - source: asc
+      style: secondary
+      start: 61
+      end: 64
+    - source: '"name"'
+      style: secondary
+      start: 65
+      end: 71
+    - source: '"name"'
+      style: secondary
+      start: 65
+      end: 71
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.by("name");
+        }
+    }
+  : labels:
+    - source: Sort.Order.by("name")
+      style: primary
+      start: 50
+      end: 71
+    - source: Sort.Order
+      style: secondary
+      start: 50
+      end: 60
+    - source: by
+      style: secondary
+      start: 61
+      end: 63
+    - source: '"name"'
+      style: secondary
+      start: 64
+      end: 70
+    - source: '"name"'
+      style: secondary
+      start: 64
+      end: 70
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.desc("name");
+        }
+    }
+  : labels:
+    - source: Sort.Order.desc("name")
+      style: primary
+      start: 50
+      end: 73
+    - source: Sort.Order
+      style: secondary
+      start: 50
+      end: 60
+    - source: desc
+      style: secondary
+      start: 61
+      end: 65
+    - source: '"name"'
+      style: secondary
+      start: 66
+      end: 72
+    - source: '"name"'
+      style: secondary
+      start: 66
+      end: 72
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return new Order(Sort.Direction.DESC, "name");
+        }
+    }
+  : labels:
+    - source: new Order(Sort.Direction.DESC, "name")
+      style: primary
+      start: 50
+      end: 88
+    - source: Order
+      style: secondary
+      start: 54
+      end: 59
+    - source: '"name"'
+      style: secondary
+      start: 81
+      end: 87
+    - source: '"name"'
+      style: secondary
+      start: 81
+      end: 87
+  ? |
+    class Foo {
+        Sort.Order bar() {
+            return new Sort.Order(Sort.Direction.ASC, "name");
+        }
+    }
+  : labels:
+    - source: new Sort.Order(Sort.Direction.ASC, "name")
+      style: primary
+      start: 50
+      end: 92
+    - source: Sort.Order
+      style: secondary
+      start: 54
+      end: 64
+    - source: '"name"'
+      style: secondary
+      start: 85
+      end: 91
+    - source: '"name"'
+      style: secondary
+      start: 85
+      end: 91

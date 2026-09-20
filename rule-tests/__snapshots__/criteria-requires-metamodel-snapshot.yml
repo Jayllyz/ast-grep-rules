@@ -1,0 +1,464 @@
+id: criteria-requires-metamodel
+snapshots:
+  ? |
+    import jakarta.persistence.criteria.*;
+    class Foo {
+        Object bar(Join<Order, Item> itemJoin) {
+            return itemJoin.get("sku");
+        }
+    }
+  : labels:
+    - source: itemJoin.get("sku")
+      style: primary
+      start: 111
+      end: 130
+    - source: get
+      style: secondary
+      start: 120
+      end: 123
+    - source: itemJoin
+      style: secondary
+      start: 111
+      end: 119
+    - source: '"sku"'
+      style: secondary
+      start: 124
+      end: 129
+    - source: '"sku"'
+      style: secondary
+      start: 124
+      end: 129
+    - source: import jakarta.persistence.criteria.*;
+      style: secondary
+      start: 0
+      end: 38
+    - source: |
+        import jakarta.persistence.criteria.*;
+        class Foo {
+            Object bar(Join<Order, Item> itemJoin) {
+                return itemJoin.get("sku");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 140
+  ? |
+    import jakarta.persistence.criteria.Path;
+    class Foo {
+        Object bar(Path<Order> path) {
+            return path.get("status");
+        }
+    }
+  : labels:
+    - source: path.get("status")
+      style: primary
+      start: 104
+      end: 122
+    - source: get
+      style: secondary
+      start: 109
+      end: 112
+    - source: path
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"status"'
+      style: secondary
+      start: 113
+      end: 121
+    - source: '"status"'
+      style: secondary
+      start: 113
+      end: 121
+    - source: import jakarta.persistence.criteria.Path;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Path;
+        class Foo {
+            Object bar(Path<Order> path) {
+                return path.get("status");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 132
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> orderRoot) {
+            return orderRoot.get("status");
+        }
+    }
+  : labels:
+    - source: orderRoot.get("status")
+      style: primary
+      start: 109
+      end: 132
+    - source: get
+      style: secondary
+      start: 119
+      end: 122
+    - source: orderRoot
+      style: secondary
+      start: 109
+      end: 118
+    - source: '"status"'
+      style: secondary
+      start: 123
+      end: 131
+    - source: '"status"'
+      style: secondary
+      start: 123
+      end: 131
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> orderRoot) {
+                return orderRoot.get("status");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 142
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.fetch("items");
+        }
+    }
+  : labels:
+    - source: root.fetch("items")
+      style: primary
+      start: 104
+      end: 123
+    - source: fetch
+      style: secondary
+      start: 109
+      end: 114
+    - source: root
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"items"'
+      style: secondary
+      start: 115
+      end: 122
+    - source: '"items"'
+      style: secondary
+      start: 115
+      end: 122
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.fetch("items");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 133
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get("customer").get("name");
+        }
+    }
+  : labels:
+    - source: root.get("customer")
+      style: primary
+      start: 104
+      end: 124
+    - source: get
+      style: secondary
+      start: 109
+      end: 112
+    - source: root
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"customer"'
+      style: secondary
+      start: 113
+      end: 123
+    - source: '"customer"'
+      style: secondary
+      start: 113
+      end: 123
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.get("customer").get("name");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 146
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.join("items").get("sku");
+        }
+    }
+  : labels:
+    - source: root.join("items")
+      style: primary
+      start: 104
+      end: 122
+    - source: join
+      style: secondary
+      start: 109
+      end: 113
+    - source: root
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"items"'
+      style: secondary
+      start: 114
+      end: 121
+    - source: '"items"'
+      style: secondary
+      start: 114
+      end: 121
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.join("items").get("sku");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 143
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.join("items");
+        }
+    }
+  : labels:
+    - source: root.join("items")
+      style: primary
+      start: 104
+      end: 122
+    - source: join
+      style: secondary
+      start: 109
+      end: 113
+    - source: root
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"items"'
+      style: secondary
+      start: 114
+      end: 121
+    - source: '"items"'
+      style: secondary
+      start: 114
+      end: 121
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.join("items");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 132
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.joinList("items");
+        }
+    }
+  : labels:
+    - source: root.joinList("items")
+      style: primary
+      start: 104
+      end: 126
+    - source: joinList
+      style: secondary
+      start: 109
+      end: 117
+    - source: root
+      style: secondary
+      start: 104
+      end: 108
+    - source: '"items"'
+      style: secondary
+      start: 118
+      end: 125
+    - source: '"items"'
+      style: secondary
+      start: 118
+      end: 125
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.joinList("items");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 136
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Predicate bar(Root<Order> root, CriteriaBuilder cb) {
+            return cb.equal(root.get("status"), "NEW");
+        }
+    }
+  : labels:
+    - source: root.get("status")
+      style: primary
+      start: 136
+      end: 154
+    - source: get
+      style: secondary
+      start: 141
+      end: 144
+    - source: root
+      style: secondary
+      start: 136
+      end: 140
+    - source: '"status"'
+      style: secondary
+      start: 145
+      end: 153
+    - source: '"status"'
+      style: secondary
+      start: 145
+      end: 153
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Predicate bar(Root<Order> root, CriteriaBuilder cb) {
+                return cb.equal(root.get("status"), "NEW");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 172
+  ? |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Specification<Order> bar() {
+            return (root, query, cb) -> cb.equal(root.get("status"), "NEW");
+        }
+    }
+  : labels:
+    - source: root.get("status")
+      style: primary
+      start: 132
+      end: 150
+    - source: get
+      style: secondary
+      start: 137
+      end: 140
+    - source: root
+      style: secondary
+      start: 132
+      end: 136
+    - source: '"status"'
+      style: secondary
+      start: 141
+      end: 149
+    - source: '"status"'
+      style: secondary
+      start: 141
+      end: 149
+    - source: import jakarta.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 41
+    - source: |
+        import jakarta.persistence.criteria.Root;
+        class Foo {
+            Specification<Order> bar() {
+                return (root, query, cb) -> cb.equal(root.get("status"), "NEW");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 168
+  ? |
+    import javax.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get("status");
+        }
+    }
+  : labels:
+    - source: root.get("status")
+      style: primary
+      start: 102
+      end: 120
+    - source: get
+      style: secondary
+      start: 107
+      end: 110
+    - source: root
+      style: secondary
+      start: 102
+      end: 106
+    - source: '"status"'
+      style: secondary
+      start: 111
+      end: 119
+    - source: '"status"'
+      style: secondary
+      start: 111
+      end: 119
+    - source: import javax.persistence.criteria.Root;
+      style: secondary
+      start: 0
+      end: 39
+    - source: |
+        import javax.persistence.criteria.Root;
+        class Foo {
+            Object bar(Root<Order> root) {
+                return root.get("status");
+            }
+        }
+      style: secondary
+      start: 0
+      end: 130
