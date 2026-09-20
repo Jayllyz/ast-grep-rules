@@ -1,0 +1,60 @@
+id: sort-by-requires-typed-property
+language: java
+severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
+message: >-
+  Sorting by a string property name (Sort.by("x"), Sort.Order.asc("x"),
+  new Sort.Order(dir, "x"), PageRequest.of(p, s, dir, "x")) only fails at
+  runtime after a rename or typo. Use the type-safe Spring Data API instead:
+  Sort.sort(Entity.class).by(Entity::getProperty).
+metadata:
+  category: jpa
+rule:
+  any:
+    - kind: method_invocation
+      has:
+        field: arguments
+        has:
+          kind: string_literal
+      any:
+        - all:
+            - has:
+                field: object
+                regex: "^Sort$"
+            - has:
+                field: name
+                regex: "^by$"
+        - all:
+            - has:
+                field: object
+                regex: "^(Sort\\.)?Order$"
+            - has:
+                field: name
+                regex: "^(asc|desc|by)$"
+        - all:
+            - has:
+                field: object
+                regex: "^PageRequest$"
+            - has:
+                field: name
+                regex: "^of$"
+    - kind: object_creation_expression
+      all:
+        - has:
+            field: type
+            regex: "^(Sort\\.)?Order$"
+        - has:
+            field: arguments
+            has:
+              kind: string_literal
