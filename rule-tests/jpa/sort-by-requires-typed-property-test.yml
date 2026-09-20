@@ -1,0 +1,183 @@
+id: sort-by-requires-typed-property
+valid:
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.sort(Order.class).by(Order::getName);
+        }
+    }
+  - |
+    class Foo {
+        Sort bar(String field) {
+            return Sort.by(field);
+        }
+    }
+  - |
+    class Foo {
+        Sort bar(List<Sort.Order> orders) {
+            return Sort.by(orders);
+        }
+    }
+  - |
+    class Foo {
+        Sort bar(Sort.Direction dir, String field) {
+            return Sort.by(dir, field);
+        }
+    }
+  - |
+    class Foo {
+        String bar(Map<String, String> m) {
+            return m.by("name");
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10);
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar(Sort sort) {
+            return PageRequest.of(0, 10, sort);
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar(Sort.Direction dir, String field) {
+            return PageRequest.of(0, 10, dir, field);
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar(String field) {
+            return Sort.Order.asc(field);
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar(Sort.Direction dir, String field) {
+            return new Sort.Order(dir, field);
+        }
+    }
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.sort(Order.class).by(Order::getName).descending();
+        }
+    }
+  - |
+    class Foo {
+        Other bar() {
+            return Other.of("name");
+        }
+    }
+  - |
+    class Foo {
+        Widget bar() {
+            return new Widget("name");
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.sort(Order.class).by(Order::getName));
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.by("name");
+        }
+    }
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.by("name", "createdAt");
+        }
+    }
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.by(Sort.Direction.DESC, "name");
+        }
+    }
+  - |
+    class Foo {
+        Sort bar(Sort.Direction dir) {
+            return Sort.by(dir, "name", "createdAt");
+        }
+    }
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.by("a").and(Sort.by("b"));
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.by("name"));
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.Direction.ASC, "name");
+        }
+    }
+  - |
+    class Foo {
+        Pageable bar() {
+            return PageRequest.of(0, 10, Sort.Direction.DESC, "name", "id");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.asc("name");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.desc("name");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.by("name");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return Order.asc("name");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return Sort.Order.asc("name").ignoreCase();
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return new Sort.Order(Sort.Direction.ASC, "name");
+        }
+    }
+  - |
+    class Foo {
+        Sort.Order bar() {
+            return new Order(Sort.Direction.DESC, "name");
+        }
+    }
+  - |
+    class Foo {
+        Sort bar() {
+            return Sort.by(Sort.Order.asc("name"), Sort.Order.desc("id"));
+        }
+    }

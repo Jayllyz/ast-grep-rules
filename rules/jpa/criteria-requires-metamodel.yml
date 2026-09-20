@@ -1,0 +1,41 @@
+id: criteria-requires-metamodel
+language: java
+severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
+message: >-
+  Criteria API attribute "name" is a string, so a rename or typo only
+  fails at runtime. Use the JPA static metamodel instead:
+  root.get(Order_.name). (Only flags root/join/from/path-shaped receivers
+  in files that import jakarta.persistence or javax.persistence.)
+metadata:
+  category: jpa
+rule:
+  kind: method_invocation
+  all:
+    - has:
+        field: name
+        regex: "^(get|join|fetch|joinList|joinSet|joinMap)$"
+    - has:
+        field: object
+        regex: "(?i)(root|join|from|path|fetch)$"
+    - has:
+        field: arguments
+        has:
+          kind: string_literal
+    - inside:
+        kind: program
+        stopBy: end
+        has:
+          kind: import_declaration
+          regex: "(jakarta|javax)\\.persistence"

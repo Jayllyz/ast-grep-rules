@@ -1,0 +1,135 @@
+id: criteria-requires-metamodel
+valid:
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Predicate bar(Root<Order> root, CriteriaBuilder cb) {
+            return cb.equal(root.get(Order_.status), "NEW");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.join(Order_.items);
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root, String attr) {
+            return root.get(attr);
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Map<String, Object> map) {
+            return map.get("name");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Cache cache) {
+            return cache.get("name");
+        }
+    }
+  - |
+    import com.fasterxml.jackson.databind.JsonNode;
+    class Foo {
+        JsonNode bar(JsonNode root) {
+            return root.get("name");
+        }
+    }
+  - |
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get("status");
+        }
+    }
+  - |
+    import javax.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get(Order_.status);
+        }
+    }
+invalid:
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Predicate bar(Root<Order> root, CriteriaBuilder cb) {
+            return cb.equal(root.get("status"), "NEW");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.join("items");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.fetch("items");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.joinList("items");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> orderRoot) {
+            return orderRoot.get("status");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.*;
+    class Foo {
+        Object bar(Join<Order, Item> itemJoin) {
+            return itemJoin.get("sku");
+        }
+    }
+  - |
+    import javax.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get("status");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.get("customer").get("name");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Object bar(Root<Order> root) {
+            return root.join("items").get("sku");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Path;
+    class Foo {
+        Object bar(Path<Order> path) {
+            return path.get("status");
+        }
+    }
+  - |
+    import jakarta.persistence.criteria.Root;
+    class Foo {
+        Specification<Order> bar() {
+            return (root, query, cb) -> cb.equal(root.get("status"), "NEW");
+        }
+    }
