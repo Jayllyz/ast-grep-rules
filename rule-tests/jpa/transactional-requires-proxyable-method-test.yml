@@ -1,0 +1,96 @@
+id: transactional-requires-proxyable-method
+valid:
+  - |
+    class Foo {
+        @Transactional
+        public void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional(readOnly = true)
+        public Order find() { return null; }
+    }
+  - |
+    class Foo {
+        @Transactional
+        protected void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional
+        void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional(rollbackFor = Exception.class)
+        public void bar() throws Exception {}
+    }
+  - |
+    class Foo {
+        private void bar() {}
+    }
+  - |
+    class Foo {
+        public static void bar() {}
+    }
+  - |
+    class Foo {
+        @Deprecated
+        private void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional
+        public void bar() {
+            helper();
+        }
+        private void helper() {}
+    }
+invalid:
+  - |
+    class Foo {
+        @Transactional
+        private void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional(readOnly = true)
+        private Order find() { return null; }
+    }
+  - |
+    class Foo {
+        @Transactional
+        public static void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional
+        public final void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional(rollbackFor = Exception.class)
+        private void bar() throws Exception {}
+    }
+  - |
+    class Foo {
+        @Transactional
+        private static void bar() {}
+    }
+  - |
+    class Foo {
+        @Transactional
+        @Override
+        private void bar() {}
+    }
+  - |
+    class Foo {
+        @org.springframework.transaction.annotation.Transactional
+        private void bar() {}
+    }
+  - |
+    class Foo {
+        private void bar() {}
+        @Transactional
+        private final void baz() {}
+    }

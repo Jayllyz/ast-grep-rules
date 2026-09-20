@@ -1,0 +1,213 @@
+id: many-to-many-requires-set
+snapshots:
+  ? |
+    class Foo {
+        @ManyToMany
+        @JoinTable(name = "user_role")
+        private List<Role> roles;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany
+            @JoinTable(name = "user_role")
+            private List<Role> roles;
+      style: primary
+      start: 16
+      end: 92
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany'
+      style: secondary
+      start: 16
+      end: 27
+    - source: |-
+        @ManyToMany
+            @JoinTable(name = "user_role")
+            private
+      style: secondary
+      start: 16
+      end: 74
+    - source: List<Role>
+      style: secondary
+      start: 75
+      end: 85
+  ? |
+    class Foo {
+        @ManyToMany
+        List<Role> roles;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany
+            List<Role> roles;
+      style: primary
+      start: 16
+      end: 49
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany'
+      style: secondary
+      start: 16
+      end: 27
+    - source: '@ManyToMany'
+      style: secondary
+      start: 16
+      end: 27
+    - source: List<Role>
+      style: secondary
+      start: 32
+      end: 42
+  ? |
+    class Foo {
+        @ManyToMany
+        private ArrayList<Role> roles;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany
+            private ArrayList<Role> roles;
+      style: primary
+      start: 16
+      end: 62
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany'
+      style: secondary
+      start: 16
+      end: 27
+    - source: |-
+        @ManyToMany
+            private
+      style: secondary
+      start: 16
+      end: 39
+    - source: ArrayList<Role>
+      style: secondary
+      start: 40
+      end: 55
+  ? |
+    class Foo {
+        @ManyToMany
+        private List<Role> roles;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany
+            private List<Role> roles;
+      style: primary
+      start: 16
+      end: 57
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany'
+      style: secondary
+      start: 16
+      end: 27
+    - source: |-
+        @ManyToMany
+            private
+      style: secondary
+      start: 16
+      end: 39
+    - source: List<Role>
+      style: secondary
+      start: 40
+      end: 50
+  ? |
+    class Foo {
+        @ManyToMany(cascade = CascadeType.PERSIST)
+        protected List<Role> roles;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany(cascade = CascadeType.PERSIST)
+            protected List<Role> roles;
+      style: primary
+      start: 16
+      end: 90
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany(cascade = CascadeType.PERSIST)'
+      style: secondary
+      start: 16
+      end: 58
+    - source: |-
+        @ManyToMany(cascade = CascadeType.PERSIST)
+            protected
+      style: secondary
+      start: 16
+      end: 72
+    - source: List<Role>
+      style: secondary
+      start: 73
+      end: 83
+  ? |
+    class Foo {
+        @ManyToMany(fetch = FetchType.LAZY)
+        private List<Role> roles = new ArrayList<>();
+    }
+  : labels:
+    - source: |-
+        @ManyToMany(fetch = FetchType.LAZY)
+            private List<Role> roles = new ArrayList<>();
+      style: primary
+      start: 16
+      end: 101
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany(fetch = FetchType.LAZY)'
+      style: secondary
+      start: 16
+      end: 51
+    - source: |-
+        @ManyToMany(fetch = FetchType.LAZY)
+            private
+      style: secondary
+      start: 16
+      end: 63
+    - source: List<Role>
+      style: secondary
+      start: 64
+      end: 74
+  ? |
+    class Foo {
+        @ManyToMany(mappedBy = "roles")
+        private Collection<User> users;
+    }
+  : labels:
+    - source: |-
+        @ManyToMany(mappedBy = "roles")
+            private Collection<User> users;
+      style: primary
+      start: 16
+      end: 83
+    - source: ManyToMany
+      style: secondary
+      start: 17
+      end: 27
+    - source: '@ManyToMany(mappedBy = "roles")'
+      style: secondary
+      start: 16
+      end: 47
+    - source: |-
+        @ManyToMany(mappedBy = "roles")
+            private
+      style: secondary
+      start: 16
+      end: 59
+    - source: Collection<User>
+      style: secondary
+      start: 60
+      end: 76

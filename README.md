@@ -24,6 +24,10 @@ See [`rules/`](rules) for the full rule definitions, grouped into `jpa/`, `perfo
 - [`no-nplus1-call-in-loop`](rules/jpa/no-nplus1-call-in-loop.yml): no repository query inside a loop (the N+1 problem), fetch the batch up front.
 - [`no-save-in-loop`](rules/jpa/no-save-in-loop.yml): no `save`/`saveAndFlush`/`persist`/`merge` per loop iteration, batch with `saveAll`.
 - [`prefer-exists-over-count`](rules/jpa/prefer-exists-over-count.yml): no `count(...) > 0` existence checks, use `exists(...)`/`existsBy...`.
+- [`no-findall-for-count-or-filter`](rules/jpa/no-findall-for-count-or-filter.yml): no `findAll().size()`/`isEmpty()`/`stream().filter(...)`, use `count()`/`existsBy...`/a derived query.
+- [`many-to-many-requires-set`](rules/jpa/many-to-many-requires-set.yml): `@ManyToMany` needs a `Set`, a `List` makes Hibernate rewrite the whole join table.
+- [`transactional-requires-proxyable-method`](rules/jpa/transactional-requires-proxyable-method.yml): `@Transactional` on a `private`/`static`/`final` method is silently ignored.
+- [`no-repository-or-else-null`](rules/jpa/no-repository-or-else-null.yml): no `repo.findX(...).orElse(null)`, use `orElseThrow(...)` or handle the `Optional`.
 - [`sort-by-requires-typed-property`](rules/jpa/sort-by-requires-typed-property.yml): no `Sort.by("field")` string properties, use `Sort.sort(Entity.class).by(Entity::getField)`.
 - [`criteria-requires-metamodel`](rules/jpa/criteria-requires-metamodel.yml): no string attributes in Criteria API `root.get("x")`/`join("x")`, use the static metamodel (`Order_.x`).
 - [`one-to-many-requires-mappedby`](rules/jpa/one-to-many-requires-mappedby.yml): `@OneToMany` needs `mappedBy`, otherwise JPA adds a join table.

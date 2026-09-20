@@ -1,0 +1,29 @@
+id: no-repository-or-else-null
+language: java
+severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
+message: >-
+  Optional from a repository lookup followed by orElse(null) pushes a
+  silent null to the caller. Use orElseThrow(...) when the row must exist,
+  or keep the Optional and handle the empty case explicitly. (Only flags
+  find... calls on a repository-shaped receiver.)
+metadata:
+  category: jpa
+rule:
+  pattern: $R.$M($$$A).orElse(null)
+constraints:
+  R:
+    regex: "(?i).*(repository|repo|dao)$"
+  M:
+    regex: "^find[A-Z].*$"
