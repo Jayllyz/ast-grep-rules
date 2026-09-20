@@ -1,0 +1,240 @@
+id: transactional-requires-proxyable-method
+snapshots:
+  ? |
+    class Foo {
+        @Transactional
+        @Override
+        private void bar() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            @Override
+            private void bar() {}
+      style: primary
+      start: 16
+      end: 70
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional'
+      style: secondary
+      start: 16
+      end: 30
+    - source: |-
+        @Transactional
+            @Override
+            private
+      style: secondary
+      start: 16
+      end: 56
+  ? |
+    class Foo {
+        @Transactional
+        private static void bar() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            private static void bar() {}
+      style: primary
+      start: 16
+      end: 63
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional'
+      style: secondary
+      start: 16
+      end: 30
+    - source: |-
+        @Transactional
+            private static
+      style: secondary
+      start: 16
+      end: 49
+  ? |
+    class Foo {
+        @Transactional
+        private void bar() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            private void bar() {}
+      style: primary
+      start: 16
+      end: 56
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional'
+      style: secondary
+      start: 16
+      end: 30
+    - source: |-
+        @Transactional
+            private
+      style: secondary
+      start: 16
+      end: 42
+  ? |
+    class Foo {
+        @Transactional
+        public final void bar() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            public final void bar() {}
+      style: primary
+      start: 16
+      end: 61
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional'
+      style: secondary
+      start: 16
+      end: 30
+    - source: |-
+        @Transactional
+            public final
+      style: secondary
+      start: 16
+      end: 47
+  ? |
+    class Foo {
+        @Transactional
+        public static void bar() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            public static void bar() {}
+      style: primary
+      start: 16
+      end: 62
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional'
+      style: secondary
+      start: 16
+      end: 30
+    - source: |-
+        @Transactional
+            public static
+      style: secondary
+      start: 16
+      end: 48
+  ? |
+    class Foo {
+        @Transactional(readOnly = true)
+        private Order find() { return null; }
+    }
+  : labels:
+    - source: |-
+        @Transactional(readOnly = true)
+            private Order find() { return null; }
+      style: primary
+      start: 16
+      end: 89
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional(readOnly = true)'
+      style: secondary
+      start: 16
+      end: 47
+    - source: |-
+        @Transactional(readOnly = true)
+            private
+      style: secondary
+      start: 16
+      end: 59
+  ? |
+    class Foo {
+        @Transactional(rollbackFor = Exception.class)
+        private void bar() throws Exception {}
+    }
+  : labels:
+    - source: |-
+        @Transactional(rollbackFor = Exception.class)
+            private void bar() throws Exception {}
+      style: primary
+      start: 16
+      end: 104
+    - source: Transactional
+      style: secondary
+      start: 17
+      end: 30
+    - source: '@Transactional(rollbackFor = Exception.class)'
+      style: secondary
+      start: 16
+      end: 61
+    - source: |-
+        @Transactional(rollbackFor = Exception.class)
+            private
+      style: secondary
+      start: 16
+      end: 73
+  ? |
+    class Foo {
+        @org.springframework.transaction.annotation.Transactional
+        private void bar() {}
+    }
+  : labels:
+    - source: |-
+        @org.springframework.transaction.annotation.Transactional
+            private void bar() {}
+      style: primary
+      start: 16
+      end: 99
+    - source: org.springframework.transaction.annotation.Transactional
+      style: secondary
+      start: 17
+      end: 73
+    - source: '@org.springframework.transaction.annotation.Transactional'
+      style: secondary
+      start: 16
+      end: 73
+    - source: |-
+        @org.springframework.transaction.annotation.Transactional
+            private
+      style: secondary
+      start: 16
+      end: 85
+  ? |
+    class Foo {
+        private void bar() {}
+        @Transactional
+        private final void baz() {}
+    }
+  : labels:
+    - source: |-
+        @Transactional
+            private final void baz() {}
+      style: primary
+      start: 42
+      end: 88
+    - source: Transactional
+      style: secondary
+      start: 43
+      end: 56
+    - source: '@Transactional'
+      style: secondary
+      start: 42
+      end: 56
+    - source: |-
+        @Transactional
+            private final
+      style: secondary
+      start: 42
+      end: 74

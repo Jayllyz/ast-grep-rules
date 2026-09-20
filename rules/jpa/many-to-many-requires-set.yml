@@ -1,0 +1,26 @@
+id: many-to-many-requires-set
+language: java
+severity: warning
+message: >-
+  @ManyToMany on a List/Collection makes Hibernate delete and re-insert
+  every row of the join table on any change. Use a Set instead.
+metadata:
+  category: jpa
+rule:
+  kind: field_declaration
+  all:
+    - has:
+        kind: modifiers
+        has:
+          any:
+            - kind: marker_annotation
+              has:
+                field: name
+                regex: "^ManyToMany$"
+            - kind: annotation
+              has:
+                field: name
+                regex: "^ManyToMany$"
+    - has:
+        field: type
+        regex: "^(List|Collection|ArrayList|LinkedList)(<.*)?$"

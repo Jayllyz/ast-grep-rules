@@ -1,0 +1,38 @@
+id: transactional-requires-proxyable-method
+language: java
+severity: error
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
+message: >-
+  @Transactional on a private, static or final method is silently ignored:
+  Spring applies it through a proxy that cannot intercept these methods, so
+  no transaction is ever started. Make the method public (or protected/
+  package-private) and non-final, and call it through the bean.
+metadata:
+  category: jpa
+rule:
+  kind: method_declaration
+  has:
+    kind: modifiers
+    all:
+      - has:
+          any:
+            - kind: marker_annotation
+              has:
+                field: name
+                regex: "(^|\\.)Transactional$"
+            - kind: annotation
+              has:
+                field: name
+                regex: "(^|\\.)Transactional$"
+      - regex: "(^|\\s)(private|static|final)(\\s|$)"

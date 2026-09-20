@@ -1,0 +1,69 @@
+id: no-repository-or-else-null
+snapshots:
+  ? |
+    class Foo {
+        Order bar() {
+            return orderDao.findById(1L).orElse(null);
+        }
+    }
+  : labels:
+    - source: orderDao.findById(1L).orElse(null)
+      style: primary
+      start: 45
+      end: 79
+  ? |
+    class Foo {
+        Order bar() {
+            return this.orderRepo.findOne(spec).orElse(null);
+        }
+    }
+  : labels:
+    - source: this.orderRepo.findOne(spec).orElse(null)
+      style: primary
+      start: 45
+      end: 86
+  ? |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            Order o = repo.findById(id).orElse(null);
+            return o;
+        }
+    }
+  : labels:
+    - source: repo.findById(id).orElse(null)
+      style: primary
+      start: 77
+      end: 107
+  ? |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.findById(id).orElse(null);
+        }
+    }
+  : labels:
+    - source: repo.findById(id).orElse(null)
+      style: primary
+      start: 74
+      end: 104
+  ? |
+    class Foo {
+        Order bar(OrderRepository repo, String ref) {
+            return repo.findByRef(ref).orElse(null);
+        }
+    }
+  : labels:
+    - source: repo.findByRef(ref).orElse(null)
+      style: primary
+      start: 77
+      end: 109
+  ? |
+    class Foo {
+        Order bar(OrderRepository repo, String ref) {
+            return repo.findFirstByStatusOrderByIdDesc(ref).orElse(null);
+        }
+    }
+  : labels:
+    - source: repo.findFirstByStatusOrderByIdDesc(ref).orElse(null)
+      style: primary
+      start: 77
+      end: 130

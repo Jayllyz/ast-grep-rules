@@ -1,0 +1,88 @@
+id: no-repository-or-else-null
+valid:
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.findById(id).orElseThrow();
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.findById(id).orElseThrow(() -> new NotFoundException(id));
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.findById(id).orElse(DEFAULT);
+        }
+    }
+  - |
+    class Foo {
+        Optional<Order> bar(OrderRepository repo, Long id) {
+            return repo.findById(id);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(Optional<Order> order) {
+            return order.orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        String bar(Map<String, String> m) {
+            return Optional.ofNullable(m.get("k")).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(Cache cache, Long id) {
+            return cache.findById(id).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.getById(id);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            return repo.findById(id).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, String ref) {
+            return repo.findByRef(ref).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, String ref) {
+            return repo.findFirstByStatusOrderByIdDesc(ref).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar() {
+            return orderDao.findById(1L).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar() {
+            return this.orderRepo.findOne(spec).orElse(null);
+        }
+    }
+  - |
+    class Foo {
+        Order bar(OrderRepository repo, Long id) {
+            Order o = repo.findById(id).orElse(null);
+            return o;
+        }
+    }

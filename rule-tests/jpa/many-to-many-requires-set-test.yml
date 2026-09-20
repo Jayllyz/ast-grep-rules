@@ -1,0 +1,73 @@
+id: many-to-many-requires-set
+valid:
+  - |
+    class Foo {
+        @ManyToMany
+        private Set<Role> roles;
+    }
+  - |
+    class Foo {
+        @ManyToMany(fetch = FetchType.LAZY)
+        private Set<Role> roles = new HashSet<>();
+    }
+  - |
+    class Foo {
+        @ManyToMany(mappedBy = "roles")
+        private Set<User> users;
+    }
+  - |
+    class Foo {
+        @OneToMany(mappedBy = "order")
+        private List<Item> items;
+    }
+  - |
+    class Foo {
+        private List<String> tags;
+    }
+  - |
+    class Foo {
+        @ElementCollection
+        private List<String> nicknames;
+    }
+  - |
+    class Foo {
+        @ManyToMany
+        private SortedSet<Role> roles;
+    }
+invalid:
+  - |
+    class Foo {
+        @ManyToMany
+        private List<Role> roles;
+    }
+  - |
+    class Foo {
+        @ManyToMany(fetch = FetchType.LAZY)
+        private List<Role> roles = new ArrayList<>();
+    }
+  - |
+    class Foo {
+        @ManyToMany(mappedBy = "roles")
+        private Collection<User> users;
+    }
+  - |
+    class Foo {
+        @ManyToMany
+        @JoinTable(name = "user_role")
+        private List<Role> roles;
+    }
+  - |
+    class Foo {
+        @ManyToMany
+        private ArrayList<Role> roles;
+    }
+  - |
+    class Foo {
+        @ManyToMany(cascade = CascadeType.PERSIST)
+        protected List<Role> roles;
+    }
+  - |
+    class Foo {
+        @ManyToMany
+        List<Role> roles;
+    }

@@ -1,0 +1,101 @@
+id: no-findall-for-count-or-filter
+snapshots:
+  ? |
+    class Foo {
+        List<Order> bar(OrderRepository repo) {
+            return repo.findAll().stream().filter(o -> o.isOpen()).toList();
+        }
+    }
+  : labels:
+    - source: repo.findAll().stream().filter(o -> o.isOpen())
+      style: primary
+      start: 71
+      end: 118
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().isEmpty();
+        }
+    }
+  : labels:
+    - source: repo.findAll().isEmpty()
+      style: primary
+      start: 67
+      end: 91
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().stream().anyMatch(Order::isOpen);
+        }
+    }
+  : labels:
+    - source: repo.findAll().stream().anyMatch(Order::isOpen)
+      style: primary
+      start: 67
+      end: 114
+  ? |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().stream().noneMatch(Order::isOpen);
+        }
+    }
+  : labels:
+    - source: repo.findAll().stream().noneMatch(Order::isOpen)
+      style: primary
+      start: 67
+      end: 115
+  ? |
+    class Foo {
+        int bar() {
+            return orderDao.findAll().size();
+        }
+    }
+  : labels:
+    - source: orderDao.findAll().size()
+      style: primary
+      start: 43
+      end: 68
+  ? |
+    class Foo {
+        int bar() {
+            return this.orderRepo.findAll().size();
+        }
+    }
+  : labels:
+    - source: this.orderRepo.findAll().size()
+      style: primary
+      start: 43
+      end: 74
+  ? |
+    class Foo {
+        int bar(OrderRepository repo) {
+            return repo.findAll().size();
+        }
+    }
+  : labels:
+    - source: repo.findAll().size()
+      style: primary
+      start: 63
+      end: 84
+  ? |
+    class Foo {
+        int bar(OrderRepository repo, Sort sort) {
+            return repo.findAll(sort).size();
+        }
+    }
+  : labels:
+    - source: repo.findAll(sort).size()
+      style: primary
+      start: 74
+      end: 99
+  ? |
+    class Foo {
+        long bar(OrderRepository repo) {
+            return repo.findAll().stream().count();
+        }
+    }
+  : labels:
+    - source: repo.findAll().stream().count()
+      style: primary
+      start: 64
+      end: 95

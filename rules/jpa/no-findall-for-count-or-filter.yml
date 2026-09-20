@@ -1,0 +1,33 @@
+id: no-findall-for-count-or-filter
+language: java
+severity: warning
+ignores:
+  - "**/src/test/**"
+  - "**/src/testFixtures/**"
+  - "**/src/tests/**"
+  - "**/*-tests/**"
+  - "**/jmh-benchmarks/**"
+  - "**/*testlib*/**"
+  - "**/*Test.java"
+  - "**/*Tests.java"
+  - "**/*IT.java"
+  - "**/*ITCase.java"
+  - "**/*Benchmark.java"
+message: >-
+  findAll() loads every row just to count or filter them in memory. Use
+  count()/existsBy... for sizes and emptiness, and a derived query or
+  Specification for filtering. (A plain findAll() is fine and not flagged;
+  only flags calls on a repository-shaped receiver.)
+metadata:
+  category: jpa
+rule:
+  any:
+    - pattern: $R.findAll($$$A).size()
+    - pattern: $R.findAll($$$A).isEmpty()
+    - pattern: $R.findAll($$$A).stream().count()
+    - pattern: $R.findAll($$$A).stream().filter($$$B)
+    - pattern: $R.findAll($$$A).stream().anyMatch($$$B)
+    - pattern: $R.findAll($$$A).stream().noneMatch($$$B)
+constraints:
+  R:
+    regex: "(?i).*(repository|repo|dao)$"

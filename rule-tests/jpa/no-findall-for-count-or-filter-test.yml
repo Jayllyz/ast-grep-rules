@@ -1,0 +1,117 @@
+id: no-findall-for-count-or-filter
+valid:
+  - |
+    class Foo {
+        List<Order> bar(OrderRepository repo) {
+            return repo.findAll();
+        }
+    }
+  - |
+    class Foo {
+        List<Order> bar(OrderRepository repo, Sort sort) {
+            return repo.findAll(sort);
+        }
+    }
+  - |
+    class Foo {
+        Page<Order> bar(OrderRepository repo, Pageable pageable) {
+            return repo.findAll(pageable);
+        }
+    }
+  - |
+    class Foo {
+        long bar(OrderRepository repo) {
+            return repo.count();
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.existsByStatus("NEW");
+        }
+    }
+  - |
+    class Foo {
+        int bar(List<Order> orders) {
+            return orders.size();
+        }
+    }
+  - |
+    class Foo {
+        int bar(Cache cache) {
+            return cache.findAll().size();
+        }
+    }
+  - |
+    class Foo {
+        List<String> bar(OrderRepository repo) {
+            return repo.findAll().stream().map(Order::getName).toList();
+        }
+    }
+  - |
+    class Foo {
+        void bar(OrderRepository repo) {
+            repo.findAll().forEach(this::process);
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(List<Order> orders) {
+            return orders.stream().anyMatch(Order::isOpen);
+        }
+    }
+invalid:
+  - |
+    class Foo {
+        int bar(OrderRepository repo) {
+            return repo.findAll().size();
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().isEmpty();
+        }
+    }
+  - |
+    class Foo {
+        long bar(OrderRepository repo) {
+            return repo.findAll().stream().count();
+        }
+    }
+  - |
+    class Foo {
+        List<Order> bar(OrderRepository repo) {
+            return repo.findAll().stream().filter(o -> o.isOpen()).toList();
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().stream().anyMatch(Order::isOpen);
+        }
+    }
+  - |
+    class Foo {
+        boolean bar(OrderRepository repo) {
+            return repo.findAll().stream().noneMatch(Order::isOpen);
+        }
+    }
+  - |
+    class Foo {
+        int bar(OrderRepository repo, Sort sort) {
+            return repo.findAll(sort).size();
+        }
+    }
+  - |
+    class Foo {
+        int bar() {
+            return orderDao.findAll().size();
+        }
+    }
+  - |
+    class Foo {
+        int bar() {
+            return this.orderRepo.findAll().size();
+        }
+    }
