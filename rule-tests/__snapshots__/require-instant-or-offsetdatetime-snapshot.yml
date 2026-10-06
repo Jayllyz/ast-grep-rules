@@ -1,6 +1,254 @@
 id: require-instant-or-offsetdatetime
 snapshots:
   ? |
+    @Embeddable
+    class Audit {
+        private LocalDateTime changedAt;
+    }
+  : labels:
+    - source: private LocalDateTime changedAt;
+      style: primary
+      start: 30
+      end: 62
+    - source: Embeddable
+      style: secondary
+      start: 1
+      end: 11
+    - source: '@Embeddable'
+      style: secondary
+      start: 0
+      end: 11
+    - source: '@Embeddable'
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        @Embeddable
+        class Audit {
+            private LocalDateTime changedAt;
+        }
+      style: secondary
+      start: 0
+      end: 64
+    - source: |-
+        {
+            private LocalDateTime changedAt;
+        }
+      style: secondary
+      start: 24
+      end: 64
+    - source: LocalDateTime
+      style: secondary
+      start: 38
+      end: 51
+  ? |
+    @Entity
+    class Order {
+        private Date createdAt;
+    }
+  : labels:
+    - source: private Date createdAt;
+      style: primary
+      start: 26
+      end: 49
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        class Order {
+            private Date createdAt;
+        }
+      style: secondary
+      start: 0
+      end: 51
+    - source: |-
+        {
+            private Date createdAt;
+        }
+      style: secondary
+      start: 20
+      end: 51
+    - source: Date
+      style: secondary
+      start: 34
+      end: 38
+  ? |
+    @Entity
+    class Order {
+        private LocalDateTime placedAt;
+    }
+  : labels:
+    - source: private LocalDateTime placedAt;
+      style: primary
+      start: 26
+      end: 57
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        class Order {
+            private LocalDateTime placedAt;
+        }
+      style: secondary
+      start: 0
+      end: 59
+    - source: |-
+        {
+            private LocalDateTime placedAt;
+        }
+      style: secondary
+      start: 20
+      end: 59
+    - source: LocalDateTime
+      style: secondary
+      start: 34
+      end: 47
+  ? |
+    @Entity
+    class Order {
+        private java.time.LocalDateTime placedAt;
+    }
+  : labels:
+    - source: private java.time.LocalDateTime placedAt;
+      style: primary
+      start: 26
+      end: 67
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        class Order {
+            private java.time.LocalDateTime placedAt;
+        }
+      style: secondary
+      start: 0
+      end: 69
+    - source: |-
+        {
+            private java.time.LocalDateTime placedAt;
+        }
+      style: secondary
+      start: 20
+      end: 69
+    - source: java.time.LocalDateTime
+      style: secondary
+      start: 34
+      end: 57
+  ? |
+    @Entity
+    class Order {
+        private java.util.Date createdAt;
+    }
+  : labels:
+    - source: private java.util.Date createdAt;
+      style: primary
+      start: 26
+      end: 59
+    - source: Entity
+      style: secondary
+      start: 1
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: '@Entity'
+      style: secondary
+      start: 0
+      end: 7
+    - source: |-
+        @Entity
+        class Order {
+            private java.util.Date createdAt;
+        }
+      style: secondary
+      start: 0
+      end: 61
+    - source: |-
+        {
+            private java.util.Date createdAt;
+        }
+      style: secondary
+      start: 20
+      end: 61
+    - source: java.util.Date
+      style: secondary
+      start: 34
+      end: 48
+  ? |
+    @MappedSuperclass
+    abstract class Base {
+        private Date createdAt;
+    }
+  : labels:
+    - source: private Date createdAt;
+      style: primary
+      start: 44
+      end: 67
+    - source: MappedSuperclass
+      style: secondary
+      start: 1
+      end: 17
+    - source: '@MappedSuperclass'
+      style: secondary
+      start: 0
+      end: 17
+    - source: |-
+        @MappedSuperclass
+        abstract
+      style: secondary
+      start: 0
+      end: 26
+    - source: |-
+        @MappedSuperclass
+        abstract class Base {
+            private Date createdAt;
+        }
+      style: secondary
+      start: 0
+      end: 69
+    - source: |-
+        {
+            private Date createdAt;
+        }
+      style: secondary
+      start: 38
+      end: 69
+    - source: Date
+      style: secondary
+      start: 52
+      end: 56
+  ? |
     class Order {
         private Date createdAt;
     }

@@ -18,6 +18,11 @@ valid:
     class PlainClass {
         private Long id;
     }
+  - |
+    @Entity
+    @DiscriminatorValue("Component")
+    class ComponentLinkStorage extends LinkStorage {
+    }
 invalid:
   - |
     @Entity

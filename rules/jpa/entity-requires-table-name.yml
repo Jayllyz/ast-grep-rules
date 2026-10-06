@@ -34,3 +34,14 @@ rule:
                     has:
                       field: key
                       regex: "^name$"
+    # Single-table subclasses share the parent's table.
+    - not:
+        has:
+          kind: modifiers
+          has:
+            any:
+              - kind: annotation
+              - kind: marker_annotation
+            has:
+              field: name
+              regex: "^DiscriminatorValue$"

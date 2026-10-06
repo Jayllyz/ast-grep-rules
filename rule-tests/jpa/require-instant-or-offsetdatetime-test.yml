@@ -1,37 +1,60 @@
 id: require-instant-or-offsetdatetime
 valid:
   - |
+    @Entity
     class Order {
         private Instant createdAt;
     }
   - |
+    @Entity
     class Order {
         private OffsetDateTime placedAt;
     }
   - |
+    @Entity
     class Order {
         private String updatedDateRange;
     }
   - |
+    @Entity
     class Order {
         private LocalDate businessDay;
         private ZonedDateTime scheduledAt;
         private Instant createdAt;
     }
+  - |
+    class ResponseDto {
+        private Date createdAt;
+        private LocalDateTime placedAt;
+    }
 invalid:
   - |
+    @Entity
     class Order {
         private Date createdAt;
     }
   - |
+    @Entity
     class Order {
         private java.util.Date createdAt;
     }
   - |
+    @Entity
     class Order {
         private LocalDateTime placedAt;
     }
   - |
+    @Entity
     class Order {
         private java.time.LocalDateTime placedAt;
+    }
+  - |
+    @Embeddable
+    class Audit {
+        private LocalDateTime changedAt;
+    }
+  - |
+    @MappedSuperclass
+    abstract class Base {
+        private Date createdAt;
     }

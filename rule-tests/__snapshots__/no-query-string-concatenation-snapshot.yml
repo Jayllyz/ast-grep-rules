@@ -2,6 +2,32 @@ id: no-query-string-concatenation
 snapshots:
   ? |
     interface OrderRepository {
+        @Query("select o from Order o " + "where o.status = " + STATUS + " order by o.id")
+        List<Order> find();
+    }
+  : labels:
+    - source: '@Query("select o from Order o " + "where o.status = " + STATUS + " order by o.id")'
+      style: primary
+      start: 32
+      end: 114
+    - source: Query
+      style: secondary
+      start: 33
+      end: 38
+    - source: STATUS
+      style: secondary
+      start: 88
+      end: 94
+    - source: '"select o from Order o " + "where o.status = " + STATUS'
+      style: secondary
+      start: 39
+      end: 94
+    - source: '"select o from Order o " + "where o.status = " + STATUS'
+      style: secondary
+      start: 39
+      end: 94
+  ? |
+    interface OrderRepository {
         @Query("select o from Order o where o." + FIELD + " = :value order by o." + ORDER)
         List<Order> find(String field, String order);
     }
@@ -14,6 +40,10 @@ snapshots:
       style: secondary
       start: 33
       end: 38
+    - source: ORDER
+      style: secondary
+      start: 108
+      end: 113
     - source: '"select o from Order o where o." + FIELD + " = :value order by o." + ORDER'
       style: secondary
       start: 39
@@ -36,6 +66,10 @@ snapshots:
       style: secondary
       start: 33
       end: 38
+    - source: STATUS
+      style: secondary
+      start: 83
+      end: 89
     - source: '"select o from Order o where o.status = " + STATUS'
       style: secondary
       start: 39
@@ -58,15 +92,15 @@ snapshots:
       style: secondary
       start: 33
       end: 38
-    - source: '"select * from orders where status = ''" + status + "''"'
+    - source: status
+      style: secondary
+      start: 89
+      end: 95
+    - source: '"select * from orders where status = ''" + status'
       style: secondary
       start: 47
-      end: 101
-    - source: value = "select * from orders where status = '" + status + "'"
+      end: 95
+    - source: '"select * from orders where status = ''" + status'
       style: secondary
-      start: 39
-      end: 101
-    - source: value = "select * from orders where status = '" + status + "'"
-      style: secondary
-      start: 39
-      end: 101
+      start: 47
+      end: 95
