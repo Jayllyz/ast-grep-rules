@@ -14,3 +14,17 @@ rule:
   has:
     field: type
     regex: "(^|\\.)(Date|LocalDateTime)$"
+  # Only persisted classes map to a timestamptz column, not DTOs.
+  inside:
+    kind: class_body
+    inside:
+      kind: class_declaration
+      has:
+        kind: modifiers
+        has:
+          any:
+            - kind: annotation
+            - kind: marker_annotation
+          has:
+            field: name
+            regex: "^(Entity|Embeddable|MappedSuperclass)$"

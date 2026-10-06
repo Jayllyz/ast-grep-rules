@@ -17,9 +17,19 @@ rule:
     - has:
         field: arguments
         has:
-          any:
-            - kind: binary_expression
-            - kind: element_value_pair
-              has:
-                field: value
-                kind: binary_expression
+          stopBy: end
+          matches: runtime-concat
+utils:
+  # Literal-only concatenation is a compile-time constant, so only flag
+  # a binary_expression with an operand that is not a literal or a nested
+  # concatenation (nested ones are checked on their own).
+  runtime-concat:
+    kind: binary_expression
+    has:
+      any:
+        - kind: identifier
+        - kind: method_invocation
+        - kind: field_access
+        - kind: parenthesized_expression
+        - kind: array_access
+        - kind: ternary_expression
