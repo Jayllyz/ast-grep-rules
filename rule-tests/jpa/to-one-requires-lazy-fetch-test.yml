@@ -15,6 +15,11 @@ valid:
         @OneToMany(mappedBy = "order")
         private List<Item> items;
     }
+  - |
+    class Order {
+        @ManyToOne(fetch = FetchType.EAGER)
+        private Customer customer;
+    }
 invalid:
   - |
     class Order {
@@ -30,9 +35,4 @@ invalid:
     class Order {
         @OneToOne
         private Invoice invoice;
-    }
-  - |
-    class Order {
-        @ManyToOne(fetch = FetchType.EAGER)
-        private Customer customer;
     }
