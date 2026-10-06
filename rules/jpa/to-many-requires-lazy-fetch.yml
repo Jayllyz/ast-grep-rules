@@ -28,17 +28,6 @@ rule:
                   field: arguments
                   has:
                     kind: element_value_pair
-                    all:
-                      - has:
-                          field: key
-                          regex: "^fetch$"
-                      - has:
-                          field: value
-                          kind: field_access
-                          all:
-                            - has:
-                                field: object
-                                regex: "^FetchType$"
-                            - has:
-                                field: field
-                                regex: "^LAZY$"
+                    has:
+                      field: key
+                      regex: "^fetch$"

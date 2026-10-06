@@ -15,6 +15,11 @@ valid:
         @ManyToOne
         private Customer customer;
     }
+  - |
+    class Order {
+        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+        private List<Item> items;
+    }
 invalid:
   - |
     class Order {
@@ -30,9 +35,4 @@ invalid:
     class Order {
         @ManyToMany
         private List<Tag> tags;
-    }
-  - |
-    class Order {
-        @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-        private List<Item> items;
     }
